@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate AI Study Milestone Dashboard</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #070a12 0%, #0c1322 50%, #1a103c 100%);
+            --card-bg: rgba(23, 32, 51, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --top-bar-bg: rgba(12, 19, 34, 0.92);
+            --item-bg: rgba(255, 255, 255, 0.02);
+            --item-border: rgba(255, 255, 255, 0.05);
+            
+            /* Neon Highlights */
+            --math-color: #38bdf8;
+            --english-color: #a78bfa;
+            --reasoning-color: #f472b6;
+            --coding-color: #2dd4bf;
+            --calendar-color: #fb923c;
+            --ssc-color: #f59e0b;
+            --hindi-color: #ff6b6b;
+            --book-color: #a3e635;
+            --rbook-color: #06b6d4;
+            --omr-color: #818cf8;
+            --special-color: #ec4899;
+            --success-color: #4ade80;
+            --success-bg: rgba(34, 197, 94, 0.2);
+            --success-border: rgba(74, 222, 128, 0.5);
+            --timetable-color: #10b981;
+            --quote-color: #fb7185;
+            --ai-mentor-color: #c084fc;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            margin: 0;
+            padding: 220px 15px 50px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Responsive Top Control Bar */
+        .top-control-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: var(--top-bar-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 12px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .control-row { display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 12px; }
+        .widget-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        
+        .timer-widget, .analytics-widget, .goal-widget, .ai-score-widget, .ai-greetings-widget, .clock-widget {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.85rem;
+        }
+
+        .clock-widget {
+            border-color: var(--math-color);
+            color: var(--math-color);
+            font-weight: 700;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        .ai-greetings-widget { border-color: var(--ai-mentor-color); color: #fff; background: rgba(192, 132, 252, 0.12); font-weight: 700; }
+        .ai-score-widget { border-color: var(--ssc-color); color: var(--ssc-color); font-weight: 800; }
+
+        .timer-display { font-family: monospace; font-size: 1.15rem; font-weight: 700; color: var(--coding-color); }
+        .timer-btn {
+            background: var(--coding-color); color: #0f172a; border: none;
+            padding: 5px 14px; border-radius: 20px; font-weight: 700;
+            cursor: pointer; font-size: 0.8rem; transition: all 0.2s ease;
+        }
+        .timer-btn:hover { transform: scale(1.05); box-shadow: 0 0 10px var(--coding-color); }
+
+        .goal-input {
+            width: 45px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; text-align: center; border-radius: 6px; font-weight: 700; padding: 3px;
+        }
+
+        /* Navigation Shortcuts */
+        .nav-shortcuts { display: flex; gap: 6px; flex-wrap: wrap; }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.04); color: var(--text-sub);
+            border: 1px solid rgba(255, 255, 255, 0.08); padding: 7px 12px;
+            border-radius: 10px; cursor: pointer; text-decoration: none;
+            font-size: 0.8rem; font-weight: 600; transition: all 0.2s ease;
+        }
+        .nav-btn:hover { color: #fff; border-color: var(--text-sub); background: rgba(255,255,255,0.1); }
+
+        /* Mobile Hamburger Button (Three Lines) */
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Quotes Container */
+        .quotes-container { width: 100%; max-width: 1400px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; align-items: center; }
+        .quote-banner {
+            width: 100%; background: rgba(251, 113, 133, 0.05); backdrop-filter: blur(12px);
+            border: 1px solid rgba(251, 113, 133, 0.2); border-radius: 14px; padding: 14px 20px; text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); box-sizing: border-box; transition: all 0.3s ease;
+        }
+        .quote-banner:hover { border-color: var(--quote-color); box-shadow: 0 0 15px rgba(251, 113, 133, 0.3); }
+        .quote-text { font-size: 1.15rem; font-weight: 700; font-style: italic; color: var(--quote-color); text-shadow: 0 0 10px rgba(251, 113, 133, 0.2); margin: 0; }
+
+        /* Timetable Layouts */
+        .timetable-section { width: 100%; max-width: 1400px; margin-bottom: 50px; }
+        .timetable-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px 0; }
+        .time-slot-card {
+            background: var(--card-bg); backdrop-filter: blur(12px);
+            border-radius: 14px; padding: 15px; border: 1px solid var(--card-border);
+            display: flex; flex-direction: column; gap: 5px; position: relative; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .time-slot-card .time-range { font-size: 0.8rem; color: var(--text-sub); font-weight: 600; }
+        .time-slot-card .subject-name { font-size: 1.1rem; font-weight: 700; }
+        
+        .live-dot {
+            position: absolute; top: 12px; right: 12px; width: 9px; height: 9px;
+            background-color: var(--success-color); border-radius: 50%;
+            box-shadow: 0 0 12px var(--success-color); display: none;
+            animation: pulseGlow 1.5s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+        }
+
+        /* Subject Sections */
+        .subject-section { width: 100%; max-width: 1400px; margin-bottom: 65px; scroll-margin-top: 220px; }
+        .header-container { text-align: center; margin-bottom: 20px; }
+        .main-title { font-size: 3rem; font-weight: 900; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 2px; }
+        .ssc-subtitle { font-size: 1.8rem; font-weight: 800; text-align: left; margin: 35px 0 15px 0; border-bottom: 2px dashed rgba(255,255,255,0.1); padding-bottom: 8px; }
+
+        /* Progress Framework */
+        .subject-progress-container {
+            width: 100%; max-width: 400px; background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px; height: 8px; margin: 10px auto 0 auto; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .subject-progress-bar { height: 100%; width: 0%; border-radius: 10px; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .progress-text { display: block; font-size: 0.85rem; font-weight: 700; margin-top: 6px; color: var(--text-sub); }
+
+        /* Theme Accent Mapping */
+        .math-sec .main-title { color: var(--math-color); }
+        .math-sec .subject-progress-bar { background: var(--math-color); box-shadow: 0 0 8px var(--math-color); }
+
+        .english-sec .main-title { color: var(--english-color); }
+        .english-sec .subject-progress-bar { background: var(--english-color); box-shadow: 0 0 8px var(--english-color); }
+
+        .reasoning-sec .main-title { color: var(--reasoning-color); }
+        .reasoning-sec .subject-progress-bar { background: var(--reasoning-color); box-shadow: 0 0 8px var(--reasoning-color); }
+
+        .coding-sec .main-title { color: var(--coding-color); }
+        .coding-sec .subject-progress-bar { background: var(--coding-color); box-shadow: 0 0 8px var(--coding-color); }
+
+        .calendar-sec .main-title { color: var(--calendar-color); }
+        .calendar-sec .subject-progress-bar { background: var(--calendar-color); box-shadow: 0 0 8px var(--calendar-color); }
+
+        .ssc-sec .main-title { color: var(--ssc-color); text-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+        .ssc-sec .subject-progress-bar { background: var(--ssc-color); box-shadow: 0 0 8px var(--ssc-color); }
+
+        .book-sec .main-title { color: var(--book-color); text-shadow: 0 0 20px rgba(163, 230, 53, 0.3); }
+        .book-sec .subject-progress-bar { background: var(--book-color); box-shadow: 0 0 8px var(--book-color); }
+
+        .rbook-sec .main-title { color: var(--rbook-color); text-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
+        .rbook-sec .subject-progress-bar { background: var(--rbook-color); box-shadow: 0 0 8px var(--rbook-color); }
+
+        .omr-sec .main-title { color: var(--omr-color); text-shadow: 0 0 20px rgba(129, 140, 248, 0.3); }
+        .omr-sec .subject-progress-bar { background: var(--omr-color); box-shadow: 0 0 8px var(--omr-color); }
+
+        .tracker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; padding: 10px 0; }
+        .coding-grid-special { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; padding: 10px 0; }
+
+        /* Card Framework */
+        .milestone-card {
+            background: var(--card-bg); backdrop-filter: blur(12px);
+            border-radius: 18px; padding: 20px; border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; height: 380px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .milestone-card:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.2); }
+
+        .coding-item-card, .ssc-item-card {
+            background: var(--card-bg); backdrop-filter: blur(12px);
+            border-radius: 14px; padding: 18px 20px; border: 1px solid var(--card-border);
+            display: flex; align-items: center; justify-content: space-between;
+            cursor: pointer; transition: all 0.2s ease; user-select: none; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .coding-item-card:hover, .ssc-item-card:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.3); }
+        .coding-item-card span, .ssc-item-card span { font-size: 1.05rem; font-weight: 600; }
+
+        .card-header {
+            font-size: 1.15rem; font-weight: 700; padding-bottom: 10px; margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center;
+        }
+        .class-counter { font-size: 0.75rem; padding: 3px 10px; border-radius: 20px; font-weight: 600; background: rgba(255, 255, 255, 0.05); }
+
+        .list-container { overflow-y: auto; flex-grow: 1; padding-right: 5px; }
+        .list-container::-webkit-scrollbar { width: 5px; }
+        .list-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+        .list-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 10px; }
+
+        .item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 12px; margin-bottom: 8px; border-radius: 10px;
+            background: var(--item-bg); border: 1px solid var(--item-border);
+            cursor: pointer; transition: all 0.15s ease; user-select: none;
+        }
+        .item:hover { background: rgba(255, 255, 255, 0.05); }
+        .item span { font-size: 0.9rem; font-weight: 500; }
+        .item .sub-desc { font-size: 0.75rem; color: var(--text-sub); font-weight: 600; }
+
+        /* Checkbox Mechanism */
+        .checkbox-wrapper { position: relative; display: block; width: 22px; height: 22px; }
+        .checkbox-wrapper input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+        .checkmark {
+            position: absolute; top: 0; left: 0; height: 22px; width: 22px;
+            background-color: rgba(255, 255, 255, 0.04); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 7px;
+        }
+        
+        .checkbox-wrapper input:checked ~ .checkmark {
+            background-color: var(--success-color); border-color: var(--success-color);
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+        }
+        .checkmark:after { content: ""; position: absolute; display: none; }
+        .checkbox-wrapper input:checked ~ .checkmark:after { display: block; }
+        .checkbox-wrapper .checkmark:after {
+            left: 7px; top: 3px; width: 5px; height: 10px;
+            border: solid #0f172a; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg);
+        }
+
+        /* Completed Status Styles */
+        .item.completed, .coding-item-card.completed, .ssc-item-card.completed { background: var(--success-bg) !important; border-color: var(--success-border) !important; }
+        .item.completed span, .coding-item-card.completed span, .ssc-item-card.completed span { text-decoration: line-through; opacity: 0.5; }
+
+        /* OMR STYLES */
+        .omr-card-stats { font-size: 0.75rem; color: var(--omr-color); font-weight: 700; background: rgba(129, 140, 248, 0.1); padding: 3px 8px; border-radius: 6px; }
+        .omr-row {
+            background: var(--item-bg); border: 1px solid var(--item-border);
+            border-radius: 10px; padding: 7px 10px; margin-bottom: 8px;
+            display: flex; align-items: center; justify-content: space-between; gap: 6px; transition: all 0.15s ease;
+        }
+        .omr-row:hover { border-color: rgba(129, 140, 248, 0.4); background: rgba(129, 140, 248, 0.05); }
+        .omr-q-num { font-weight: 800; font-size: 0.8rem; min-width: 30px; }
+        .omr-bubbles { display: flex; gap: 4px; }
+        .omr-bubble-label {
+            width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.25);
+            display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700;
+            cursor: pointer; user-select: none; transition: all 0.15s ease;
+        }
+        .omr-bubble-label input { display: none; }
+        .omr-bubble-label:has(input:checked) {
+            background-color: #3b82f6; border-color: #60a5fa; color: #ffffff; box-shadow: 0 0 6px rgba(59, 130, 246, 0.6);
+        }
+        .omr-eval-boxes { display: flex; gap: 6px; align-items: center; border-left: 1px solid rgba(255, 255, 255, 0.1); padding-left: 6px; }
+        .eval-box {
+            width: 20px; height: 20px; border-radius: 5px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 0.7rem; user-select: none; border: 1.5px solid rgba(255, 255, 255, 0.2); transition: all 0.15s ease;
+        }
+        .eval-box input { display: none; }
+        .eval-box-right:has(input:checked) { background-color: #16a34a; border-color: #4ade80; color: #fff; box-shadow: 0 0 6px rgba(74, 222, 128, 0.5); }
+        .eval-box-wrong:has(input:checked) { background-color: #dc2626; border-color: #f87171; color: #fff; box-shadow: 0 0 6px rgba(248, 113, 113, 0.5); }
+
+        /* Media Queries for Mobile Responsiveness & Hamburger Menu */
+        @media (max-width: 900px) {
+            body { padding-top: 220px; }
+            .main-title { font-size: 2.2rem; }
+            .control-row { justify-content: center; text-align: center; }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            .nav-shortcuts {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 8px;
+                background: rgba(15, 23, 42, 0.98);
+                padding: 15px;
+                border-radius: 12px;
+                border: 1px solid rgba(255,255,255,0.1);
+                margin-top: 5px;
+            }
+            .nav-shortcuts.active { display: flex; }
+            .nav-btn { text-align: center; width: 100%; box-sizing: border-box; }
+            .control-row { justify-content: space-between; }
+        }
+
+        @media (max-width: 600px) {
+            body { padding-top: 250px; }
+            .tracker-grid, .coding-grid-special { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- STICKY CONTROL & MULTI-WIDGET DASHBOARD BAR -->
+    <div class="top-control-bar">
+        <div class="control-row">
+            <div class="widget-group">
+                <!-- LIVE TIME & DATE DISPLAY -->
+                <div class="clock-widget" id="live-clock-box">📅 Mon, Aug 10 | 🕒 09:00:00 PM</div>
+                <div class="ai-greetings-widget" id="ai-greetings-box">🤖 AI Mentor: Booting System...</div>
+                <div class="ai-score-widget" id="ai-score-box">⭐ Study Score: 600</div>
+            </div>
+            <div class="widget-group">
+                <div class="analytics-widget">
+                    <span>📊 <strong>Global Tasks:</strong></span>
+                    <span style="color:var(--math-color)" id="global-total">Total: 0</span> | 
+                    <span style="color:var(--success-color)" id="global-done">Done: 0</span> | 
+                    <span style="color:var(--reasoning-color)" id="global-pending">Left: 0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-row">
+            <div class="widget-group">
+                <div class="timer-widget">
+                    <span>⏱️ <strong>Timer:</strong></span>
+                    <div class="timer-display" id="timer-display">00:00:00</div>
+                    <button class="timer-btn" id="timer-toggle-btn" onclick="toggleStudyTimer()">Start</button>
+                    <button class="timer-btn" style="background: rgba(255,255,255,0.1); color:inherit;" onclick="resetStudyTimer()">Reset</button>
+                </div>
+                
+                <div class="goal-widget">
+                    <span>🎯 <strong>Daily Goal:</strong></span>
+                    <input type="number" id="daily-goal-input" class="goal-input" value="5" min="1" onchange="updateDailyGoal()">
+                    <span id="goal-progress-text">Classes (Done: 0/5)</span>
+                </div>
+            </div>
+
+            <!-- Hamburger Button for Mobile -->
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰ Navigation</button>
+
+            <!-- Collapsible Shortcuts -->
+            <div class="widget-group">
+                <div class="nav-shortcuts" id="mobile-nav-menu">
+                    <a href="#timetable-section" class="nav-btn" style="color: #cbd5e1" onclick="closeMobileMenu()">📅 Schedule</a>
+                    <a href="#math-section" class="nav-btn" onclick="closeMobileMenu()">🔢 Math</a>
+                    <a href="#english-section" class="nav-btn" onclick="closeMobileMenu()">🔤 English</a>
+                    <a href="#reasoning-section" class="nav-btn" onclick="closeMobileMenu()">🧠 Reasoning</a>
+                    <a href="#coding-section" class="nav-btn" onclick="closeMobileMenu()">💻 Coding</a>
+                    <a href="#calendar-section" class="nav-btn" onclick="closeMobileMenu()">📆 Tracker</a>
+                    <a href="#ssc-section" class="nav-btn" onclick="closeMobileMenu()">🎖️ SSC GD</a>
+                    <a href="#book-section" class="nav-btn" style="color: var(--book-color)" onclick="closeMobileMenu()">📚 M-Book</a>
+                    <a href="#rbook-section" class="nav-btn" style="color: var(--rbook-color)" onclick="closeMobileMenu()">📚 R-Book</a>
+                    <a href="#omr-section" class="nav-btn" style="color: var(--omr-color)" onclick="closeMobileMenu()">📝 OMR Sheets</a>
+                    <a href="#night-schedule-section" class="nav-btn" style="color: var(--timetable-color)" onclick="closeMobileMenu()">🌙 Night Timetable</a>
+                    <a href="#special-schedule-section" class="nav-btn" style="color: var(--special-color)" onclick="closeMobileMenu()">🔥 Special Day</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOTIVATIONAL QUOTES -->
+    <div class="quotes-container">
+        <div class="quote-banner"><p class="quote-text">"If you want to become a king, learn by working hard like a slave."</p></div>
+        <div class="quote-banner"><p class="quote-text">"If you want to become a king, learn by working hard like a slave."</p></div>
+    </div>
+
+    <!-- ================= TIMETABLE SECTION ================= -->
+    <div class="timetable-section" id="timetable-section">
+        <div class="header-container">
+            <h1 class="main-title" style="color: var(--timetable-color); text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);">Daily Timetable</h1>
+            <h2 class="sub-title">Your Study Routine</h2>
+        </div>
+        <div class="timetable-grid">
+            <div class="time-slot-card" data-title="Math" data-start="20:00" data-end="21:20"><div class="live-dot"></div><span class="time-range">08:00 PM - 09:20 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+            <div class="time-slot-card" data-title="English" data-start="21:20" data-end="22:30"><div class="live-dot"></div><span class="time-range">09:20 PM - 10:30 PM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
+            <div class="time-slot-card" data-title="Reasoning" data-start="22:30" data-end="23:00"><div class="live-dot"></div><span class="time-range">10:30 PM - 11:00 PM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
+            <div class="time-slot-card" data-title="Self Study" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: #e2e8f0;">Self Study</span></div>
+            <div class="time-slot-card" data-title="Programming" data-start="00:00" data-end="02:00"><div class="live-dot"></div><span class="time-range">12:00 AM - 02:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming</span></div>
+            <div class="time-slot-card" data-title="College Work" data-start="02:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">02:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--calendar-color);">College Work</span></div>
+        </div>
+    </div>
+
+    <!-- ================= SUBJECT SECTIONS ================= -->
+    <div class="subject-section math-sec" id="math-section">
+        <div class="header-container">
+            <h1 class="main-title">Math</h1>
+            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-math"></div></div>
+            <span class="progress-text" id="progress-text-math">Progress: 0%</span>
+        </div>
+        <div class="tracker-grid" id="math-grid"></div>
+    </div>
+
+    <div class="subject-section english-sec" id="english-section">
+        <div class="header-container">
+            <h1 class="main-title">English</h1>
+            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-english"></div></div>
+            <span class="progress-text" id="progress-text-english">Progress: 0%</span>
+        </div>
+        <div class="tracker-grid" id="english-grid"></div>
+    </div>
+
+    <div class="subject-section reasoning-sec" id="reasoning-section">
+        <div class="header-container">
+            <h1 class="main-title">Reasoning</h1>
+            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-reasoning"></div></div>
+            <span class="progress-text" id="progress-text-reasoning">Progress: 0%</span>
+        </div>
+        <div class="tracker-grid" id="reasoning-grid"></div>
+    </div>
+
+    <div class="subject-section coding-sec" id="coding-section">
+        <div class="header-container">
+            <h1 class="main-title">Coding</h1>
+            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-coding"></div></div>
+            <span class="progress-text" id="progress-text-coding">Progress: 0%</span>
+        </div>
+        <div class="coding-grid-special" id="coding-grid"></div>
+    </div>
+
+    <div class="subject-section calendar-sec" id="calendar-section">
+        <div class="header-container">
+            <h1 class="main-title">Monthly Tracker</h1>
+            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-calendar"></div></div>
+            <span class="progress-text" id="progress-text-calendar">Progress: 0%</span>
+        </div>
+        <div class="tracker-grid" id="calendar-grid"></div>
+    </div>
+
+    <div class="subject-section ssc-sec" id="ssc-section">
+        <div class="header-container">
+            <h1 class="main-title">SSC GD 2027</h1>
+            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-ssc"></div></div>
+            <span class="progress-text" id="progress-text-ssc">Progress: 0%</span>
+        </div>
+        <h3 class="ssc-subtitle" style="color: var(--math-color);">⚡ Math Syllabus</h3>
+        <div class="coding-grid-special" id="ssc-math-grid"></div>
+        <h3 class="ssc-subtitle" style="color: var(--reasoning-color);">⚡ Reasoning Syllabus</h3>
+        <div class="coding-grid-special" id="ssc-reasoning-grid"></div>
+        <h3 class="ssc-subtitle" style="color: var(--hindi-color);">⚡ Hindi Syllabus</h3>
+        <div class="coding-grid-special" id="ssc-hindi-grid"></div>
+    </div>
+
+    <div class="subject-section book-sec" id="book-section">
+        <div class="header-container">
+            <h1 class="main-title">Math Book Tracker</h1>
+            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-book"></div></div>
+            <span class="progress-text" id="progress-text-book">Progress: 0%</span>
+        </div>
+        <div class="tracker-grid" id="book-grid"></div>
+    </div>
+
+    <div class="subject-section rbook-sec" id="rbook-section">
+        <div class="header-container">
+            <h1 class="main-title">Reasoning Book Tracker</h1>
+            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-rbook"></div></div>
+            <span class="progress-text" id="progress-text-rbook">Progress: 0%</span>
+        </div>
+        <div class="tracker-grid" id="rbook-grid"></div>
+    </div>
+
+    <!-- ================= ALL CHAPTERS OMR PRACTICE SHEETS SECTION ================= -->
+    <div class="subject-section omr-sec" id="omr-section">
+        <div class="header-container">
+            <h1 class="main-title">OMR Practice Sheets</h1>
+            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-omr"></div></div>
+            <span class="progress-text" id="progress-text-omr">Progress: 0%</span>
+        </div>
+
+        <h3 class="ssc-subtitle" style="color: var(--math-color);">⚡ Math OMR Sheets</h3>
+        <div class="tracker-grid" id="omr-math-grid"></div>
+
+        <h3 class="ssc-subtitle" style="color: var(--reasoning-color);">⚡ Reasoning OMR Sheets</h3>
+        <div class="tracker-grid" id="omr-reasoning-grid"></div>
+    </div>
+
+    <!-- ================= NIGHT STUDY TIMETABLE SECTION ================= -->
+    <div class="timetable-section" id="night-schedule-section">
+        <div class="header-container">
+            <h1 class="main-title" style="color: var(--timetable-color); text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);">
+                Night Study Timetable
+            </h1>
+            <h2 class="sub-title">Daily Night Intensive Schedule</h2>
+        </div>
+        <div class="timetable-grid">
+            <div class="time-slot-card" data-title="Math" data-start="20:00" data-end="21:30"><div class="live-dot"></div><span class="time-range">08:00 PM - 09:30 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+            <div class="time-slot-card" data-title="Operating System" data-start="22:00" data-end="23:00"><div class="live-dot"></div><span class="time-range">10:00 PM - 11:00 PM</span><span class="subject-name" style="color: #38bdf8;">Operating System</span></div>
+            <div class="time-slot-card" data-title="Programming Language" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming Language</span></div>
+            <div class="time-slot-card" data-title="English" data-start="00:00" data-end="01:30"><div class="live-dot"></div><span class="time-range">12:00 AM - 01:30 AM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
+            <div class="time-slot-card" data-title="Math" data-start="01:30" data-end="03:00"><div class="live-dot"></div><span class="time-range">01:30 AM - 03:00 AM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+            <div class="time-slot-card" data-title="Reasoning" data-start="03:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">03:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
+            <div class="time-slot-card" data-title="BYPASS Reasoning" data-start="07:00" data-end="09:00"><div class="live-dot"></div><span class="time-range">07:00 AM - 09:00 AM</span><span class="subject-name" style="color: var(--ssc-color);">BYPASS Reasoning</span></div>
+        </div>
+    </div>
+
+    <!-- ================= SPECIAL DAY (SUNDAY OFF) SECTION ================= -->
+    <div class="timetable-section" id="special-schedule-section">
+        <div class="header-container">
+            <h1 class="main-title" style="color: var(--special-color); text-shadow: 0 0 20px rgba(236, 72, 153, 0.4);">
+                Special Day Schedule
+            </h1>
+            <h2 class="sub-title" id="special-day-subtitle">Sunday Off Day Routine (Active Only On Sundays)</h2>
+        </div>
+        <div class="timetable-grid" id="special-day-grid">
+            <div class="time-slot-card special-slot" data-title="Special Math" data-start="09:30" data-end="12:00"><div class="live-dot"></div><span class="time-range">09:30 AM - 12:00 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+            <div class="time-slot-card special-slot" data-title="Special Reasoning" data-start="12:00" data-end="14:30"><div class="live-dot"></div><span class="time-range">12:00 PM - 02:30 PM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
+            <div class="time-slot-card special-slot" data-title="Special BYPASS" data-start="15:30" data-end="17:00"><div class="live-dot"></div><span class="time-range">03:30 PM - 05:00 PM</span><span class="subject-name" style="color: var(--ssc-color);">BYPASS</span></div>
+            <div class="time-slot-card special-slot" data-title="Special Math Evening" data-start="17:30" data-end="19:30"><div class="live-dot"></div><span class="time-range">05:30 PM - 07:30 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+            <div class="time-slot-card special-slot" data-title="Special OS" data-start="19:30" data-end="21:00"><div class="live-dot"></div><span class="time-range">07:30 PM - 09:00 PM</span><span class="subject-name" style="color: #38bdf8;">Operating System</span></div>
+            <div class="time-slot-card special-slot" data-title="Special Programming" data-start="21:30" data-end="00:00"><div class="live-dot"></div><span class="time-range">09:30 PM - 12:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming Language</span></div>
+            <div class="time-slot-card special-slot" data-title="Special English" data-start="00:00" data-end="01:30"><div class="live-dot"></div><span class="time-range">12:00 AM - 01:30 AM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
+            <div class="time-slot-card special-slot" data-title="Special Math Night" data-start="01:30" data-end="03:00"><div class="live-dot"></div><span class="time-range">01:30 AM - 03:00 AM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+            <div class="time-slot-card special-slot" data-title="Special Reasoning Night" data-start="03:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">03:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
+        </div>
+    </div>
+
+    <script>
+        window.STUDY_DATA = {
+            math: [
+                { name: "Number System", classes: 17 }, { name: "LCM HCF", classes: 8 },
+                { name: "Ratio and Proportion", classes: 9 }, { name: "Partnership", classes: 4 },
+                { name: "Age", classes: 3 }, { name: "Percentage", classes: 11 },
+                { name: "Profit & Loss", classes: 12 }, { name: "Discount", classes: 7 },
+                { name: "Simple Interest", classes: 9 }, { name: "Compound Interest", classes: 8 },
+                { name: "Time & Work", classes: 8 }, { name: "Pipe & Cistern", classes: 5 },
+                { name: "Average", classes: 9 }, { name: "Time, Speed & Distance", classes: 6 }
+            ],
+            english: [
+                { name: "Basic Grammar", classes: 16 }, { name: "Subject Verb Agreement", classes: 12 },
+                { name: "Time and Tense", classes: 9 }, { name: "Question Tag", classes: 3 },
+                { name: "Adjective", classes: 8 }, { name: "Inversion", classes: 2 },
+                { name: "Preposition", classes: 11 }, { name: "Active & Passive", classes: 12 },
+                { name: "Narration", classes: 8 }, { name: "Article", classes: 5 },
+                { name: "Pronoun", classes: 7 }, { name: "Noun", classes: 4 },
+                { name: "English Vocabulary", classes: 48 }, { name: "Phrasal Verb", classes: 24 },
+                { name: "Reading Comprehension", classes: 21 }, { name: "Vocab Series", classes: 16 }
+            ],
+            reasoning: [
+                { name: "Ranking & Order", classes: 4 }, { name: "Direction test", classes: 7 },
+                { name: "Blood Relation", classes: 4 }, { name: "English alphabet test", classes: 6 },
+                { name: "Syllogism", classes: 5 }, { name: "Sitting arrangement", classes: 4 },
+                { name: "Calendar", classes: 5 }, { name: "Clock", classes: 4 },
+                { name: "Series", classes: 4 }, { name: "Inequality", classes: 3 },
+                { name: "Coding and Decoding", classes: 4 }, { name: "Dice", classes: 3 },
+                { name: "Venn diagram", classes: 2 }, { name: "Analogy", classes: 3 },
+                { name: "Puzzle", classes: 3 }, { name: "Classification", classes: 3 },
+                { name: "Cube", classes: 2 }, { name: "Figure cutting", classes: 4 },
+                { name: "Missing number", classes: 2 }, { name: "Data sufficiency", classes: 2 },
+                { name: "Decision making", classes: 2 }, { name: "Statement and conclusion", classes: 1 },
+                { name: "Statement and Argument", classes: 1 }, { name: "Statement Course of Action", classes: 1 },
+                { name: "Mathematical operation", classes: 1 }, { name: "Cuboid", classes: 1 },
+                { name: "Machine I/O", classes: 2 }, { name: "Cause & effect", classes: 1 },
+                { name: "Series (Non verbal)", classes: 2 }, { name: "Analogy Non verbal", classes: 1 },
+                { name: "Mirror & water image", classes: 1 }, { name: "Paper cut/Fold", classes: 2 },
+                { name: "Classification (Non verbal)", classes: 1 }, { name: "Completion of figure", classes: 1 },
+                { name: "Address matching", classes: 2 }, { name: "Matrix", classes: 1 }
+            ],
+            coding: ["HTML", "CSS", "JAVASCRIPT", "PYTHON", "C", "JAVA", "REACT JS", "NODE JS"],
+            months: [
+                { name: "August", days: 31 }, { name: "September", days: 30 },
+                { name: "October", days: 31 }, { name: "November", days: 30 },
+                { name: "December", days: 31 }
+            ],
+            ssc_math: [
+                "Number System", "LCM & HCF", "Simplification", "Average", "Ratio and Proportion",
+                "Age", "Percentage", "profit and Lost", "Discount", "Simple Interest",
+                "Compound Interest", "Time and Work", "Pipe & Cistern", "Speed , Time & Distance",
+                "Train", "Boat and Stream", "Partnership", "Mixture & Alligation",
+                "Mensuration 2D", "Mensuration 3D", "Geometry", "Data Interpreation"
+            ],
+            ssc_reasoning: [
+                "Classification", "Analogy Test", "Coding-Decoding", "Logical Sequence of Word", "Series",
+                "Missing Number", "Blood Relation", "Direction Test", "Calander and Clock", "Dice",
+                "Sitting Arrangement", "Ranking/Order and Sequence Test", "Venn Diagram", "Mathematical Operations",
+                "Statement and Conclusion", "Syllogism", "Inequality", "Arithmetical Reasoning", "Figure Analogy",
+                "Mirror and Water Image", "Paper Folding and Cutting", "Figure Series", "Figure Completion", "Embedded Figure"
+            ],
+            ssc_hindi: [
+                "पारिभाषिक शब्दावली ( अंग्रेजी-हिंदी )", "सुरक्षा एवं पुलिस प्रशासन तथा सामान्य जागरूकता", 
+                "शब्द का अर्थ ( विधि, पुलिस एवं प्रशासन संदर्भ में )", "विलोम शब्द", "पर्यायवाची या समानार्थी शब्द", 
+                "शब्द विचार/तत्सम-tadhbhav", "शुद्ध-अशुद्ध ( वर्तनी )", "वाक्य शुद्धि", "विराम चिह्न", 
+                "उपसर्ग-प्रत्यय", "संधि", "मुहावरे एवं loctiyan", "वाक्यांश के लिए एक शब्द", 
+                "अनेकार्थक शब्द एवं शब्द युग्म", "रिक्त स्थानों की पूर्ति", "वाक्यांश का प्रतिस्थापन", 
+                "संज्ञा एवं सर्वनाम", "लिंग, वचन एवं कारक", "विशेषण एवं अव्यय", "क्रिया, काल एवं वाच्य", 
+                "वाक्य विचार", "अपठित गद्यांश"
+            ],
+            book_math: [
+                { name: "Ratio and Proportion", q: 255 }, { name: "Partnership", q: 93 },
+                { name: "Average", q: 210 }, { name: "Percentage", q: 310 },
+                { name: "Profit and Loss", q: 239 }, { name: "Discount", q: 108 },
+                { name: "Simple Interest", q: 110 }, { name: "Digital Sum", q: 49 },
+                { name: "Compound Interest", q: 110 }, { name: "Installment", q: 42 },
+                { name: "Time , Speed & Distance", q: 137 }, { name: "Train", q: 129 },
+                { name: "Boat & Stream", q: 45 }, { name: "Race", q: 43 },
+                { name: "Mixture and Alligation", q: 110 }, { name: "Time and Work", q: 159 },
+                { name: "Pipe & Cistern", q: 63 }, { name: "Number System", q: 264 },
+                { name: "LCM & HCF", q: 185 }, { name: "Mensuration 2D", q: 230 },
+                { name: "Mensuration 3D", q: 217 }, { name: "Polygon", q: 25 },
+                { name: "Geometry", q: 381 }, { name: "Co-ordinate Geometry", q: 65 },
+                { name: "Trigonomentry", q: 220 }, { name: "Height & Distance", q: 56 },
+                { name: "Algebra", q: 175 }, { name: "Permutation and Combination", q: 106 },
+                { name: "probability", q: 183 }, { name: "Statistics", q: 188 },
+                { name: "Data Interpretation", q: 58 }
+            ],
+            book_reasoning: [
+                { name: "Series", q: 158 }, { name: "Direction Test", q: 110 },
+                { name: "Ranking & Order", q: 90 }, { name: "Blood Relation", q: 77 },
+                { name: "Sitting Arrangement", q: 68 }, { name: "Calendar", q: 115 },
+                { name: "Clock", q: 71 }, { name: "Analogy Test", q: 150 },
+                { name: "Classification", q: 130 }, { name: "Coding and Decoding", q: 117 },
+                { name: "Logical Sequence", q: 118 }, { name: "Venn Diagram", q: 83 },
+                { name: "Dice", q: 80 }, { name: "Puzzle", q: 65 },
+                { name: "Mathematical Operation", q: 80 }, { name: "Arithmetical Reasoning", q: 63 },
+                { name: "Alphabet Test", q: 115 }, { name: "Conditional Number-Letter-Sign", q: 74 },
+                { name: "Missing Number", q: 65 }, { name: "Age", q: 50 },
+                { name: "Inequality", q: 80 }, { name: "Cube and Cuboid", q: 55 },
+                { name: "Data Sufficiency", q: 68 }, { name: "Input Output", q: 55 },
+                { name: "Decision Making", q: 70 }, { name: "Situation Reaction Test", q: 30 },
+                { name: "Syllogism", q: 145 }, { name: "Statement and Conclusion", q: 70 },
+                { name: "Statement and Argument", q: 50 }, { name: "Statement and Assumption", q: 74 },
+                { name: "Statement and Course of Action", q: 42 }, { name: "Assertion and Reason", q: 71 },
+                { name: "Cause and Effect", q: 50 }, { name: "Matrix", q: 500 },
+                { name: "Address Matching", q: 50 }, { name: "Figure Analogy", q: 57 },
+                { name: "Figure Classification", q: 60 }, { name: "Figure Series", q: 55 },
+                { name: "Mirror and Water Image", q: 75 }, { name: "Paper Folding and Cutting", q: 60 },
+                { name: "Figure Completion", q: 50 }, { name: "Embedded Figure", q: 50 },
+                { name: "Figure Formation", q: 57 }, { name: "Rotation of Figure", q: 57 },
+                { name: "Grouping of Figures", q: 48 }, { name: "Dot Situation", q: 47 },
+                { name: "Counting Of Figure", q: 121 }
+            ]
+        };
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-nav-menu');
+            if(menu) menu.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-nav-menu');
+            if(menu) menu.classList.remove('active');
+        }
+
+        // Render frameworks
+        function buildStandardGrid(containerId, chaptersList, storagePrefix) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            let cardHtml = '';
+            chaptersList.forEach((ch) => {
+                cardHtml += `<div class="milestone-card"><div class="card-header"><span>${ch.name}</span><span class="class-counter">${ch.classes} Classes</span></div><div class="list-container">`;
+                for (let i = 1; i <= ch.classes; i++) {
+                    const id = `${storagePrefix}-${ch.name.replace(/\s+/g, '')}-c${i}`;
+                    cardHtml += `<label class="item" id="lbl-${id}"><span>Class ${i}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, '${storagePrefix}')"><span class="checkmark"></span></div></label>`;
+                }
+                cardHtml += `</div></div>`;
+            });
+            container.innerHTML = cardHtml;
+        }
+
+        function buildBookGrid(containerId, dataList, storagePrefix) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            let cardHtml = '';
+            dataList.forEach((ch) => {
+                const totalQuestions = ch.q;
+                const daysNeeded = Math.ceil(totalQuestions / 30);
+                cardHtml += `<div class="milestone-card"><div class="card-header"><span>${ch.name}</span><span class="class-counter">${totalQuestions} Qs</span></div><div class="list-container">`;
+                for (let d = 1; d <= daysNeeded; d++) {
+                    const id = `${storagePrefix}-${ch.name.replace(/[^a-zA-Z0-9]/g, '')}-d${d}`;
+                    let currentDayQs = d === daysNeeded ? totalQuestions - ((daysNeeded - 1) * 30) : 30;
+                    cardHtml += `<label class="item" id="lbl-${id}"><span>Day ${d}</span><span class="sub-desc">(${currentDayQs} Qs solved)</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, '${storagePrefix}')"><span class="checkmark"></span></div></label>`;
+                }
+                cardHtml += `</div></div>`;
+            });
+            container.innerHTML = cardHtml;
+        }
+
+        function buildChapterWiseOmrGrid(containerId, dataList, prefix) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            let gridHtml = '';
+
+            dataList.forEach((ch) => {
+                const totalQs = ch.q;
+                const chKey = ch.name.replace(/[^a-zA-Z0-9]/g, '');
+
+                gridHtml += `
+                    <div class="milestone-card">
+                        <div class="card-header">
+                            <span>${ch.name}</span>
+                            <span class="omr-card-stats" id="omr-stat-${prefix}-${chKey}">0/${totalQs} (0%)</span>
+                        </div>
+                        <div class="list-container">`;
+
+                for (let i = 1; i <= totalQs; i++) {
+                    const rowId = `cardomr-${prefix}-${chKey}-q${i}`;
+                    gridHtml += `
+                        <div class="omr-row" id="row-${rowId}">
+                            <span class="omr-q-num">Q.${i}</span>
+                            <div class="omr-bubbles">
+                                <label class="omr-bubble-label"><input type="radio" name="opt-${rowId}" value="A" onchange="updateChapterOmrScore('${prefix}', '${chKey}', ${totalQs})"> A</label>
+                                <label class="omr-bubble-label"><input type="radio" name="opt-${rowId}" value="B" onchange="updateChapterOmrScore('${prefix}', '${chKey}', ${totalQs})"> B</label>
+                                <label class="omr-bubble-label"><input type="radio" name="opt-${rowId}" value="C" onchange="updateChapterOmrScore('${prefix}', '${chKey}', ${totalQs})"> C</label>
+                                <label class="omr-bubble-label"><input type="radio" name="opt-${rowId}" value="D" onchange="updateChapterOmrScore('${prefix}', '${chKey}', ${totalQs})"> D</label>
+                            </div>
+                            <div class="omr-eval-boxes">
+                                <label class="eval-box eval-box-right" title="Correct">
+                                    <input type="checkbox" id="chk-r-${rowId}" onchange="handleChapterEvalCheck('${rowId}', 'right', '${prefix}', '${chKey}', ${totalQs})"> ✔️
+                                </label>
+                                <label class="eval-box eval-box-wrong" title="Incorrect">
+                                    <input type="checkbox" id="chk-w-${rowId}" onchange="handleChapterEvalCheck('${rowId}', 'wrong', '${prefix}', '${chKey}', ${totalQs})"> ❌
+                                </label>
+                            </div>
+                        </div>`;
+                }
+
+                gridHtml += `</div></div>`;
+            });
+
+            container.innerHTML = gridHtml;
+        }
+
+        // OMR Handlers
+        function handleChapterEvalCheck(rowId, type, prefix, chKey, totalQs) {
+            const rightChk = document.getElementById(`chk-r-${rowId}`);
+            const wrongChk = document.getElementById(`chk-w-${rowId}`);
+
+            if (type === 'right' && rightChk.checked) {
+                wrongChk.checked = false;
+                localStorage.removeItem(`eval-w-${rowId}`);
+                localStorage.setItem(`eval-r-${rowId}`, 'true');
+            } else if (type === 'wrong' && wrongChk.checked) {
+                rightChk.checked = false;
+                localStorage.removeItem(`eval-r-${rowId}`);
+                localStorage.setItem(`eval-w-${rowId}`, 'true');
+            } else {
+                localStorage.removeItem(`eval-r-${rowId}`);
+                localStorage.removeItem(`eval-w-${rowId}`);
+            }
+
+            updateChapterOmrScore(prefix, chKey, totalQs);
+        }
+
+        function updateChapterOmrScore(prefix, chKey, totalQs) {
+            let rightCount = 0;
+            let wrongCount = 0;
+
+            for (let i = 1; i <= totalQs; i++) {
+                const rowId = `cardomr-${prefix}-${chKey}-q${i}`;
+                const rightChk = document.getElementById(`chk-r-${rowId}`);
+                const wrongChk = document.getElementById(`chk-w-${rowId}`);
+                const radios = document.getElementsByName(`opt-${rowId}`);
+
+                if (rightChk && rightChk.checked) rightCount++;
+                if (wrongChk && wrongChk.checked) wrongCount++;
+
+                for (let r of radios) {
+                    if (r.checked) {
+                        localStorage.setItem(`bubble-${rowId}`, r.value);
+                        break;
+                    }
+                }
+            }
+
+            const evaluatedTotal = rightCount + wrongCount;
+            const accuracy = evaluatedTotal > 0 ? Math.round((rightCount / evaluatedTotal) * 100) : 0;
+            
+            const statLbl = document.getElementById(`omr-stat-${prefix}-${chKey}`);
+            if(statLbl) {
+                statLbl.innerText = `✔️ ${rightCount}/${totalQs} (${accuracy}%)`;
+            }
+            updateSubjectProgress('omr');
+        }
+
+        function restoreChapterOmrState(dataList, prefix) {
+            dataList.forEach((ch) => {
+                const totalQs = ch.q;
+                const chKey = ch.name.replace(/[^a-zA-Z0-9]/g, '');
+
+                for (let i = 1; i <= totalQs; i++) {
+                    const rowId = `cardomr-${prefix}-${chKey}-q${i}`;
+                    const rightChk = document.getElementById(`chk-r-${rowId}`);
+                    const wrongChk = document.getElementById(`chk-w-${rowId}`);
+                    const radios = document.getElementsByName(`opt-${rowId}`);
+
+                    if (localStorage.getItem(`eval-r-${rowId}`) === 'true' && rightChk) rightChk.checked = true;
+                    if (localStorage.getItem(`eval-w-${rowId}`) === 'true' && wrongChk) wrongChk.checked = true;
+
+                    const savedBubble = localStorage.getItem(`bubble-${rowId}`);
+                    if (savedBubble && radios) {
+                        for (let r of radios) {
+                            if (r.value === savedBubble) r.checked = true;
+                        }
+                    }
+                }
+                updateChapterOmrScore(prefix, chKey, totalQs);
+            });
+        }
+
+        function buildCodingGrid() {
+            const container = document.getElementById('coding-grid');
+            if(!container) return;
+            let html = '';
+            window.STUDY_DATA.coding.forEach((lang) => {
+                const id = `coding-${lang.replace(/\s+/g, '')}`;
+                html += `<label class="coding-item-card" id="lbl-${id}"><span>${lang}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'coding')"><span class="checkmark"></span></div></label>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function buildCalendarGrid() {
+            const container = document.getElementById('calendar-grid');
+            if(!container) return;
+            let cardHtml = '';
+            window.STUDY_DATA.months.forEach((month) => {
+                cardHtml += `<div class="milestone-card"><div class="card-header"><span>${month.name}</span><span class="class-counter">${month.days} Days</span></div><div class="list-container">`;
+                for (let d = 1; d <= month.days; d++) {
+                    const id = `calendar-${month.name}-d${d}`;
+                    cardHtml += `<label class="item" id="lbl-${id}"><span>${month.name} ${d}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'calendar')"><span class="checkmark"></span></div></label>`;
+                }
+                cardHtml += `</div></div>`;
+            });
+            container.innerHTML = cardHtml;
+        }
+
+        function buildSSCMasterGrid() {
+            const mathContainer = document.getElementById('ssc-math-grid');
+            const reasoningContainer = document.getElementById('ssc-reasoning-grid');
+            const hindiContainer = document.getElementById('ssc-hindi-grid');
+            
+            let mHtml = '';
+            window.STUDY_DATA.ssc_math.forEach((ch) => {
+                const id = `sscm-${ch.replace(/[^a-zA-Z0-9]/g, '')}`;
+                mHtml += `<label class="ssc-item-card ssc-m-item" id="lbl-${id}"><span>${ch}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'ssc')"><span class="checkmark"></span></div></label>`;
+            });
+            if(mathContainer) mathContainer.innerHTML = mHtml;
+
+            let rHtml = '';
+            window.STUDY_DATA.ssc_reasoning.forEach((ch) => {
+                const id = `sscr-${ch.replace(/[^a-zA-Z0-9]/g, '')}`;
+                rHtml += `<label class="ssc-item-card ssc-r-item" id="lbl-${id}"><span>${ch}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'ssc')"><span class="checkmark"></span></div></label>`;
+            });
+            if(reasoningContainer) reasoningContainer.innerHTML = rHtml;
+
+            let hHtml = '';
+            window.STUDY_DATA.ssc_hindi.forEach((ch) => {
+                const id = `ssch-${btoa(unescape(encodeURIComponent(ch))).replace(/[^a-zA-Z0-9]/g, '').substring(0, 15)}`;
+                hHtml += `<label class="ssc-item-card ssc-h-item" id="lbl-${id}"><span>${ch}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'ssc')"><span class="checkmark"></span></div></label>`;
+            });
+            if(hindiContainer) hindiContainer.innerHTML = hHtml;
+        }
+
+        // Live Clock
+        function updateLiveClock() {
+            const now = new Date();
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            const dayName = days[now.getDay()];
+            const monthName = months[now.getMonth()];
+            const dateNum = now.getDate();
+            
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            const strHours = String(hours).padStart(2, '0');
+
+            const clockBox = document.getElementById('live-clock-box');
+            if(clockBox) {
+                clockBox.innerText = `📅 ${dayName}, ${monthName} ${dateNum} | 🕒 ${strHours}:${minutes}:${seconds} ${ampm}`;
+            }
+        }
+
+        // State Machine
+        let classesDoneToday = 0;
+        let activeSlotTitle = null;
+
+        function handleStatusClick(checkbox, sectionPrefix) {
+            const targetLabel = document.getElementById(`lbl-${checkbox.id}`);
+            let studyScore = parseInt(localStorage.getItem('ai_study_score')) || 600;
+
+            if (checkbox.checked) {
+                if(targetLabel) targetLabel.classList.add('completed');
+                localStorage.setItem(checkbox.id, 'true');
+                classesDoneToday++;
+                studyScore = Math.min(studyScore + 5, 1000);
+            } else {
+                if(targetLabel) targetLabel.classList.remove('completed');
+                localStorage.removeItem(checkbox.id);
+                if(classesDoneToday > 0) classesDoneToday--;
+                studyScore = Math.max(studyScore - 5, 0);
+            }
+            localStorage.setItem('ai_study_score', studyScore);
+            document.getElementById('ai-score-box').innerText = `⭐ Study Score: ${studyScore}`;
+
+            updateSubjectProgress(sectionPrefix);
+            calculateGlobalAnalytics();
+            updateDailyGoalText();
+        }
+
+        function updateSubjectProgress(prefix) {
+            let container = document.getElementById(`${prefix}-section`);
+            if(!container) container = document.getElementById(`ssc-section`);
+            if(!container) return;
+            
+            let checkboxes = container.querySelectorAll('input[type="checkbox"]');
+            
+            if (prefix === 'omr') {
+                checkboxes = container.querySelectorAll('input[id^="chk-r-"]:checked');
+                let totalQsAcrossAll = 0;
+                window.STUDY_DATA.book_math.forEach(ch => totalQsAcrossAll += ch.q);
+                window.STUDY_DATA.book_reasoning.forEach(ch => totalQsAcrossAll += ch.q);
+                
+                const checkedCount = checkboxes.length;
+                const percentage = totalQsAcrossAll > 0 ? Math.round((checkedCount / totalQsAcrossAll) * 100) : 0;
+                
+                const bar = document.getElementById(`progress-bar-${prefix}`);
+                const txt = document.getElementById(`progress-text-${prefix}`);
+                if(bar) bar.style.width = `${percentage}%`;
+                if(txt) txt.innerText = `Progress: ${percentage}% (${checkedCount}/${totalQsAcrossAll} Correct Qs)`;
+                return;
+            }
+
+            const total = checkboxes.length;
+            let checkedCount = 0;
+            checkboxes.forEach(cb => { if(cb.checked) checkedCount++; });
+
+            const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+            const bar = document.getElementById(`progress-bar-${prefix}`);
+            const txt = document.getElementById(`progress-text-${prefix}`);
+            if(bar) bar.style.width = `${percentage}%`;
+            if(txt) txt.innerText = `Progress: ${percentage}% (${checkedCount}/${total} Completed)`;
+        }
+
+        function calculateGlobalAnalytics() {
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            const total = allCheckboxes.length;
+            let done = 0;
+            allCheckboxes.forEach(cb => { if(cb.checked) done++; });
+            
+            document.getElementById('global-total').innerText = `Total: ${total}`;
+            document.getElementById('global-done').innerText = `Done: ${done}`;
+            document.getElementById('global-pending').innerText = `Left: ${total - done}`;
+        }
+
+        function updateDailyGoal() {
+            localStorage.setItem('study_daily_goal', document.getElementById('daily-goal-input').value);
+            updateDailyGoalText();
+        }
+
+        function updateDailyGoalText() {
+            const goalVal = parseInt(document.getElementById('daily-goal-input').value) || 5;
+            const textElement = document.getElementById('goal-progress-text');
+            textElement.innerText = `Classes (Done: ${classesDoneToday}/${goalVal})`;
+            
+            if(classesDoneToday >= goalVal) {
+                textElement.style.color = 'var(--success-color)';
+            } else {
+                textElement.style.color = 'inherit';
+            }
+        }
+
+        // Live Timetable Realtime Engine (Auto Sunday Check & Slot Trackers)
+        function runTimetableRealtimeEngine() {
+            const now = new Date();
+            const currentDay = now.getDay(); // 0 is Sunday
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const totalCurrentMinutes = (currentHours * 60) + currentMinutes;
+
+            // Auto Sunday Check for Special Day Schedule
+            const isSunday = (currentDay === 0);
+            const specialSection = document.getElementById('special-schedule-section');
+            const specialSubtitle = document.getElementById('special-day-subtitle');
+
+            if (isSunday) {
+                if (specialSection) specialSection.style.opacity = '1';
+                if (specialSubtitle) specialSubtitle.innerText = '🔥 TODAY IS SUNDAY! Special Day Routine Active';
+            } else {
+                if (specialSection) specialSection.style.opacity = '0.6';
+                if (specialSubtitle) specialSubtitle.innerText = 'Sunday Off Day Routine (Active Only On Sundays)';
+            }
+
+            const cards = document.querySelectorAll('.time-slot-card');
+            let detectedActiveSlot = null;
+
+            cards.forEach(card => {
+                // Ignore Special Day Slots on Non-Sundays
+                if (card.classList.contains('special-slot') && !isSunday) {
+                    card.style.borderColor = 'var(--card-border)';
+                    card.style.background = 'var(--card-bg)';
+                    const dot = card.querySelector('.live-dot');
+                    if(dot) dot.style.display = 'none';
+                    return;
+                }
+
+                const startStr = card.getAttribute('data-start');
+                const endStr = card.getAttribute('data-end');
+                const title = card.getAttribute('data-title');
+                
+                const [sH, sM] = startStr.split(':').map(Number);
+                const [eH, eM] = endStr.split(':').map(Number);
+                
+                let startMinutes = (sH * 60) + sM;
+                let endMinutes = (eH * 60) + eM;
+
+                let isActive = false;
+                if (endMinutes < startMinutes) {
+                    if (totalCurrentMinutes >= startMinutes || totalCurrentMinutes < endMinutes) isActive = true;
+                } else {
+                    if (totalCurrentMinutes >= startMinutes && totalCurrentMinutes < endMinutes) isActive = true;
+                }
+
+                const dot = card.querySelector('.live-dot');
+                if (isActive) {
+                    card.style.borderColor = 'var(--success-color)';
+                    card.style.background = 'rgba(74, 222, 128, 0.08)';
+                    card.style.boxShadow = '0 0 15px rgba(74, 222, 128, 0.2)';
+                    if(dot) dot.style.display = 'block';
+                    detectedActiveSlot = title;
+                } else {
+                    card.style.borderColor = 'var(--card-border)';
+                    card.style.background = 'var(--card-bg)';
+                    card.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.2)';
+                    if(dot) dot.style.display = 'none';
+                }
+            });
+
+            const mentorBox = document.getElementById('ai-greetings-box');
+            if (detectedActiveSlot) {
+                if (activeSlotTitle !== detectedActiveSlot) {
+                    activeSlotTitle = detectedActiveSlot;
+                    mentorBox.innerText = `🤖 Active Slot: [${activeSlotTitle}] running now. Focus mode on!`;
+                }
+            } else {
+                activeSlotTitle = null;
+                mentorBox.innerText = `🤖 Best of luck for today! 👍 Focus banaye rakhein.`;
+            }
+        }
+
+        function restoreSavedState() {
+            const savedGoal = localStorage.getItem('study_daily_goal') || '5';
+            document.getElementById('daily-goal-input').value = savedGoal;
+
+            const studyScore = localStorage.getItem('ai_study_score') || '600';
+            document.getElementById('ai-score-box').innerText = `⭐ Study Score: ${studyScore}`;
+
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            allCheckboxes.forEach(cb => {
+                if(localStorage.getItem(cb.id) === 'true' && !cb.id.startsWith('chk-')) {
+                    cb.checked = true;
+                    const targetLabel = document.getElementById(`lbl-${cb.id}`);
+                    if(targetLabel) targetLabel.classList.add('completed');
+                }
+            });
+
+            ['math', 'english', 'reasoning', 'coding', 'calendar', 'ssc', 'book', 'rbook', 'omr'].forEach(prefix => updateSubjectProgress(prefix));
+            calculateGlobalAnalytics();
+            updateDailyGoalText();
+        }
+
+        // Timer Implementation
+        let timerInterval = null;
+        let elapsedSeconds = 0;
+
+        function toggleStudyTimer() {
+            const btn = document.getElementById('timer-toggle-btn');
+            if(timerInterval) {
+                clearInterval(timerInterval); timerInterval = null;
+                btn.innerText = 'Resume';
+            } else {
+                btn.innerText = 'Pause';
+                timerInterval = setInterval(() => {
+                    elapsedSeconds++;
+                    const hrs = String(Math.floor(elapsedSeconds / 3600)).padStart(2, '0');
+                    const mins = String(Math.floor((elapsedSeconds % 3600) / 60)).padStart(2, '0');
+                    const secs = String(elapsedSeconds % 60).padStart(2, '0');
+                    document.getElementById('timer-display').innerText = `${hrs}:${mins}:${secs}`;
+                }, 1000);
+            }
+        }
+
+        function resetStudyTimer() {
+            clearInterval(timerInterval); timerInterval = null; elapsedSeconds = 0;
+            document.getElementById('timer-display').innerText = '00:00:00';
+            document.getElementById('timer-toggle-btn').innerText = 'Start';
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            buildStandardGrid('math-grid', window.STUDY_DATA.math, 'math');
+            buildStandardGrid('english-grid', window.STUDY_DATA.english, 'english');
+            buildStandardGrid('reasoning-grid', window.STUDY_DATA.reasoning, 'reasoning');
+            buildCodingGrid();
+            buildCalendarGrid();
+            buildSSCMasterGrid();
+            buildBookGrid('book-grid', window.STUDY_DATA.book_math, 'book');
+            buildBookGrid('rbook-grid', window.STUDY_DATA.book_reasoning, 'rbook');
+            
+            buildChapterWiseOmrGrid('omr-math-grid', window.STUDY_DATA.book_math, 'm');
+            buildChapterWiseOmrGrid('omr-reasoning-grid', window.STUDY_DATA.book_reasoning, 'r');
+            
+            restoreSavedState();
+            restoreChapterOmrState(window.STUDY_DATA.book_math, 'm');
+            restoreChapterOmrState(window.STUDY_DATA.book_reasoning, 'r');
+            
+            updateLiveClock();
+            setInterval(updateLiveClock, 1000);
+            
+            runTimetableRealtimeEngine();
+            setInterval(runTimetableRealtimeEngine, 10000);
+        });
+    </script>
+</body>
+</html>
