@@ -2,22 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate AI Study Milestone Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>iPhone 17 Pro Max - Ultimate Study Suite 2026-2027</title>
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #070a12 0%, #0c1322 50%, #1a103c 100%);
-            --card-bg: rgba(23, 32, 51, 0.75);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --top-bar-bg: rgba(12, 19, 34, 0.92);
-            --item-bg: rgba(255, 255, 255, 0.02);
-            --item-border: rgba(255, 255, 255, 0.05);
+            /* iPhone 17 Pro Max Titanium & iOS Deep Space Palette */
+            --ios-bg: #030712;
+            --ios-card-glass: rgba(17, 24, 39, 0.72);
+            --ios-border-subtle: rgba(255, 255, 255, 0.12);
+            --ios-border-specular: rgba(255, 255, 255, 0.28);
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --ios-bar-blur: rgba(11, 15, 25, 0.88);
+            --sidebar-width: 250px;
             
-            /* Neon Highlights */
-            --math-color: #38bdf8;
+            /* High-Energy Neon Accents */
             --english-color: #a78bfa;
+            --math-color: #38bdf8;
             --reasoning-color: #f472b6;
             --coding-color: #2dd4bf;
             --calendar-color: #fb923c;
@@ -27,531 +28,810 @@
             --rbook-color: #06b6d4;
             --omr-color: #818cf8;
             --special-color: #ec4899;
-            --success-color: #4ade80;
-            --success-bg: rgba(34, 197, 94, 0.2);
-            --success-border: rgba(74, 222, 128, 0.5);
+            --vocab-color: #38bdf8;
+            --success-color: #34d399;
+            --success-bg: rgba(52, 211, 153, 0.18);
             --timetable-color: #10b981;
             --quote-color: #fb7185;
             --ai-mentor-color: #c084fc;
         }
 
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--bg-gradient);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            background-color: var(--ios-bg);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.18), transparent 40%),
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.14), transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.12), transparent 50%);
             background-attachment: fixed;
-            color: var(--text-main);
+            color: var(--text-primary);
             margin: 0;
-            padding: 220px 15px 50px 15px;
+            padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Responsive Top Control Bar */
-        .top-control-bar {
+        /* ================= LEFT SIDEBAR NAVIGATION ================= */
+        .ios-sidebar {
             position: fixed;
-            top: 0; left: 0; right: 0;
-            background: var(--top-bar-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            padding: 12px 20px;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--ios-bar-blur);
+            backdrop-filter: blur(35px) saturate(190%);
+            -webkit-backdrop-filter: blur(35px) saturate(190%);
+            border-right: 0.5px solid var(--ios-border-subtle);
+            z-index: 1100;
+            padding: 24px 16px 40px 16px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            gap: 12px;
+            overflow-y: auto;
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .control-row { display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 12px; }
-        .widget-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        
-        .timer-widget, .analytics-widget, .goal-widget, .ai-score-widget, .ai-greetings-widget, .clock-widget {
+        .sidebar-brand {
             display: flex;
             align-items: center;
             gap: 10px;
+            padding: 8px 12px 14px 12px;
+            border-bottom: 0.5px solid var(--ios-border-subtle);
+            margin-bottom: 6px;
+        }
+
+        .sidebar-brand-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-sidebar-btn {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            border: 0.5px solid var(--ios-border-subtle);
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.86rem;
+            font-weight: 600;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+        }
+
+        .nav-sidebar-btn:hover {
+            color: #fff;
+            border-color: var(--ios-border-specular);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(3px);
+        }
+
+        .nav-sidebar-btn.active {
+            background: linear-gradient(135deg, #6366f1, #3b82f6);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 16px rgba(99, 102, 241, 0.5);
+        }
+
+        /* ================= MAIN CONTENT WRAPPER ================= */
+        .main-app-area {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 140px 24px 70px 24px;
+            width: calc(100% - var(--sidebar-width));
+            position: relative;
+        }
+
+        /* Fixed Top Header */
+        .ios-top-bar {
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-width);
+            right: 0;
+            background: var(--ios-bar-blur);
+            backdrop-filter: blur(35px) saturate(190%);
+            -webkit-backdrop-filter: blur(35px) saturate(190%);
+            border-bottom: 0.5px solid var(--ios-border-subtle);
+            z-index: 1000;
+            padding: 8px 24px 10px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ios-status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            padding: 0 4px;
+        }
+
+        .dynamic-island {
+            background: #000000;
+            border: 0.5px solid rgba(255, 255, 255, 0.18);
+            border-radius: 26px;
+            padding: 5px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+        }
+
+        .island-pulse {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--success-color);
+            animation: pulseIsland 1.5s infinite;
+        }
+
+        @keyframes pulseIsland {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        .control-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            width: 100%; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+        }
+
+        .widget-group { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            flex-wrap: wrap; 
+        }
+        
+        .analytics-widget, .goal-widget, .ai-score-widget, .ai-greetings-widget, .clock-widget {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.04);
-            padding: 8px 16px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 0.5px solid var(--ios-border-subtle);
+            font-size: 0.82rem;
+            backdrop-filter: blur(12px);
         }
 
         .clock-widget {
-            border-color: var(--math-color);
-            color: var(--math-color);
+            border-color: var(--english-color);
+            color: var(--english-color);
             font-weight: 700;
-            font-family: monospace;
-            font-size: 0.95rem;
+            font-family: ui-monospace, monospace;
+            font-size: 0.86rem;
         }
 
-        .ai-greetings-widget { border-color: var(--ai-mentor-color); color: #fff; background: rgba(192, 132, 252, 0.12); font-weight: 700; }
+        .ai-greetings-widget { border-color: var(--ai-mentor-color); color: #fff; background: rgba(192, 132, 252, 0.1); font-weight: 600; }
         .ai-score-widget { border-color: var(--ssc-color); color: var(--ssc-color); font-weight: 800; }
 
-        .timer-display { font-family: monospace; font-size: 1.15rem; font-weight: 700; color: var(--coding-color); }
-        .timer-btn {
-            background: var(--coding-color); color: #0f172a; border: none;
-            padding: 5px 14px; border-radius: 20px; font-weight: 700;
-            cursor: pointer; font-size: 0.8rem; transition: all 0.2s ease;
-        }
-        .timer-btn:hover { transform: scale(1.05); box-shadow: 0 0 10px var(--coding-color); }
-
         .goal-input {
-            width: 45px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);
-            color: #fff; text-align: center; border-radius: 6px; font-weight: 700; padding: 3px;
+            width: 42px; 
+            background: rgba(0,0,0,0.5); 
+            border: 0.5px solid rgba(255,255,255,0.25);
+            color: #fff; 
+            text-align: center; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            padding: 2px;
+            outline: none;
         }
 
-        /* Navigation Shortcuts */
-        .nav-shortcuts { display: flex; gap: 6px; flex-wrap: wrap; }
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.04); color: var(--text-sub);
-            border: 1px solid rgba(255, 255, 255, 0.08); padding: 7px 12px;
-            border-radius: 10px; cursor: pointer; text-decoration: none;
-            font-size: 0.8rem; font-weight: 600; transition: all 0.2s ease;
-        }
-        .nav-btn:hover { color: #fff; border-color: var(--text-sub); background: rgba(255,255,255,0.1); }
-
-        /* Mobile Hamburger Button (Three Lines) */
-        .mobile-menu-btn {
+        .mobile-hamburger-btn {
             display: none;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border: 0.5px solid var(--ios-border-subtle);
             color: #fff;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 1.2rem;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 1.1rem;
             cursor: pointer;
-            line-height: 1;
         }
 
-        /* Quotes Container */
-        .quotes-container { width: 100%; max-width: 1400px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; align-items: center; }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1050;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Quotes Banner */
+        .quotes-container { 
+            width: 100%; 
+            max-width: 1300px; 
+            display: flex; 
+            flex-direction: column; 
+            margin-bottom: 25px; 
+            align-items: center; 
+        }
+
         .quote-banner {
-            width: 100%; background: rgba(251, 113, 133, 0.05); backdrop-filter: blur(12px);
-            border: 1px solid rgba(251, 113, 133, 0.2); border-radius: 14px; padding: 14px 20px; text-align: center;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); box-sizing: border-box; transition: all 0.3s ease;
+            width: 100%; 
+            background: rgba(251, 113, 133, 0.06); 
+            backdrop-filter: blur(16px);
+            border: 0.5px solid rgba(251, 113, 133, 0.25); 
+            border-radius: 16px; 
+            padding: 12px 18px; 
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
         }
-        .quote-banner:hover { border-color: var(--quote-color); box-shadow: 0 0 15px rgba(251, 113, 133, 0.3); }
-        .quote-text { font-size: 1.15rem; font-weight: 700; font-style: italic; color: var(--quote-color); text-shadow: 0 0 10px rgba(251, 113, 133, 0.2); margin: 0; }
 
-        /* Timetable Layouts */
-        .timetable-section { width: 100%; max-width: 1400px; margin-bottom: 50px; }
-        .timetable-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px 0; }
-        .time-slot-card {
-            background: var(--card-bg); backdrop-filter: blur(12px);
-            border-radius: 14px; padding: 15px; border: 1px solid var(--card-border);
-            display: flex; flex-direction: column; gap: 5px; position: relative; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+        .quote-text { 
+            font-size: 1.05rem; 
+            font-weight: 700; 
+            font-style: italic; 
+            color: var(--quote-color); 
+            margin: 0; 
         }
-        .time-slot-card .time-range { font-size: 0.8rem; color: var(--text-sub); font-weight: 600; }
-        .time-slot-card .subject-name { font-size: 1.1rem; font-weight: 700; }
-        
+
+        /* Tab Switch Transition */
+        .tab-view {
+            display: none;
+            width: 100%;
+            max-width: 1300px;
+            will-change: transform, opacity;
+            animation: iosSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .tab-view.active-tab { display: block; }
+
+        @keyframes iosSlideUp {
+            from { opacity: 0; transform: scale(0.99) translateY(6px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Headings & Progress Bar */
+        .header-container { text-align: center; margin-bottom: 22px; }
+        .main-title { font-size: 2.5rem; font-weight: 900; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 1.5px; }
+        .sub-title { font-size: 0.95rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; margin: 0; font-weight: 600; }
+        .ssc-subtitle { font-size: 1.4rem; font-weight: 800; text-align: left; margin: 30px 0 12px 0; border-bottom: 0.5px dashed rgba(255,255,255,0.15); padding-bottom: 6px; }
+
+        .subject-progress-container {
+            width: 100%; 
+            max-width: 380px; 
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px; 
+            height: 6px; 
+            margin: 8px auto 0 auto; 
+            overflow: hidden;
+            border: 0.5px solid rgba(255,255,255,0.06);
+        }
+
+        .subject-progress-bar { height: 100%; width: 0%; border-radius: 20px; transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .progress-text { display: block; font-size: 0.8rem; font-weight: 700; margin-top: 5px; color: var(--text-secondary); }
+
+        .tracker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; padding: 6px 0; }
+        .coding-grid-special { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; padding: 6px 0; }
+        .timetable-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; padding: 6px 0; }
+
+        /* Frosted Glass Cards */
+        .milestone-card {
+            background: var(--ios-card-glass); 
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border-radius: 20px; 
+            padding: 16px; 
+            border: 0.5px solid var(--ios-border-subtle);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); 
+            display: flex; 
+            flex-direction: column; 
+            height: 370px;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .milestone-card:hover { 
+            transform: translateY(-2px); 
+            border-color: var(--ios-border-specular); 
+        }
+
+        .time-slot-card {
+            background: var(--ios-card-glass); 
+            backdrop-filter: blur(20px);
+            border-radius: 16px; 
+            padding: 14px 16px; 
+            border: 0.5px solid var(--ios-border-subtle);
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px; 
+            position: relative; 
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .time-slot-card .time-range { font-size: 0.78rem; color: var(--text-secondary); font-weight: 600; }
+        .time-slot-card .subject-name { font-size: 1.05rem; font-weight: 700; }
+
         .live-dot {
-            position: absolute; top: 12px; right: 12px; width: 9px; height: 9px;
+            position: absolute; top: 12px; right: 12px; width: 8px; height: 8px;
             background-color: var(--success-color); border-radius: 50%;
-            box-shadow: 0 0 12px var(--success-color); display: none;
+            box-shadow: 0 0 10px var(--success-color); display: none;
             animation: pulseGlow 1.5s infinite;
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+            70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
         }
-
-        /* Subject Sections */
-        .subject-section { width: 100%; max-width: 1400px; margin-bottom: 65px; scroll-margin-top: 220px; }
-        .header-container { text-align: center; margin-bottom: 20px; }
-        .main-title { font-size: 3rem; font-weight: 900; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 2px; }
-        .ssc-subtitle { font-size: 1.8rem; font-weight: 800; text-align: left; margin: 35px 0 15px 0; border-bottom: 2px dashed rgba(255,255,255,0.1); padding-bottom: 8px; }
-
-        /* Progress Framework */
-        .subject-progress-container {
-            width: 100%; max-width: 400px; background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px; height: 8px; margin: 10px auto 0 auto; overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .subject-progress-bar { height: 100%; width: 0%; border-radius: 10px; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .progress-text { display: block; font-size: 0.85rem; font-weight: 700; margin-top: 6px; color: var(--text-sub); }
-
-        /* Theme Accent Mapping */
-        .math-sec .main-title { color: var(--math-color); }
-        .math-sec .subject-progress-bar { background: var(--math-color); box-shadow: 0 0 8px var(--math-color); }
-
-        .english-sec .main-title { color: var(--english-color); }
-        .english-sec .subject-progress-bar { background: var(--english-color); box-shadow: 0 0 8px var(--english-color); }
-
-        .reasoning-sec .main-title { color: var(--reasoning-color); }
-        .reasoning-sec .subject-progress-bar { background: var(--reasoning-color); box-shadow: 0 0 8px var(--reasoning-color); }
-
-        .coding-sec .main-title { color: var(--coding-color); }
-        .coding-sec .subject-progress-bar { background: var(--coding-color); box-shadow: 0 0 8px var(--coding-color); }
-
-        .calendar-sec .main-title { color: var(--calendar-color); }
-        .calendar-sec .subject-progress-bar { background: var(--calendar-color); box-shadow: 0 0 8px var(--calendar-color); }
-
-        .ssc-sec .main-title { color: var(--ssc-color); text-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
-        .ssc-sec .subject-progress-bar { background: var(--ssc-color); box-shadow: 0 0 8px var(--ssc-color); }
-
-        .book-sec .main-title { color: var(--book-color); text-shadow: 0 0 20px rgba(163, 230, 53, 0.3); }
-        .book-sec .subject-progress-bar { background: var(--book-color); box-shadow: 0 0 8px var(--book-color); }
-
-        .rbook-sec .main-title { color: var(--rbook-color); text-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
-        .rbook-sec .subject-progress-bar { background: var(--rbook-color); box-shadow: 0 0 8px var(--rbook-color); }
-
-        .omr-sec .main-title { color: var(--omr-color); text-shadow: 0 0 20px rgba(129, 140, 248, 0.3); }
-        .omr-sec .subject-progress-bar { background: var(--omr-color); box-shadow: 0 0 8px var(--omr-color); }
-
-        .tracker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; padding: 10px 0; }
-        .coding-grid-special { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; padding: 10px 0; }
-
-        /* Card Framework */
-        .milestone-card {
-            background: var(--card-bg); backdrop-filter: blur(12px);
-            border-radius: 18px; padding: 20px; border: 1px solid var(--card-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; height: 380px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .milestone-card:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.2); }
 
         .coding-item-card, .ssc-item-card {
-            background: var(--card-bg); backdrop-filter: blur(12px);
-            border-radius: 14px; padding: 18px 20px; border: 1px solid var(--card-border);
-            display: flex; align-items: center; justify-content: space-between;
-            cursor: pointer; transition: all 0.2s ease; user-select: none; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            background: var(--ios-card-glass); 
+            backdrop-filter: blur(20px);
+            border-radius: 16px; 
+            padding: 16px 18px; 
+            border: 0.5px solid var(--ios-border-subtle);
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            cursor: pointer; 
+            user-select: none; 
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            transition: all 0.2s ease;
         }
-        .coding-item-card:hover, .ssc-item-card:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.3); }
-        .coding-item-card span, .ssc-item-card span { font-size: 1.05rem; font-weight: 600; }
+
+        .coding-item-card:hover, .ssc-item-card:hover { 
+            transform: translateY(-2px); 
+            border-color: var(--ios-border-specular); 
+        }
 
         .card-header {
-            font-size: 1.15rem; font-weight: 700; padding-bottom: 10px; margin-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center;
+            font-size: 1.1rem; font-weight: 700; padding-bottom: 8px; margin-bottom: 8px;
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center;
         }
-        .class-counter { font-size: 0.75rem; padding: 3px 10px; border-radius: 20px; font-weight: 600; background: rgba(255, 255, 255, 0.05); }
 
-        .list-container { overflow-y: auto; flex-grow: 1; padding-right: 5px; }
-        .list-container::-webkit-scrollbar { width: 5px; }
-        .list-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
-        .list-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 10px; }
+        .class-counter { font-size: 0.72rem; padding: 3px 8px; border-radius: 12px; font-weight: 600; background: rgba(255, 255, 255, 0.05); }
+
+        .list-container { 
+            overflow-y: auto; 
+            flex-grow: 1; 
+            padding-right: 4px;
+            overscroll-behavior: contain;
+        }
+
+        .list-container::-webkit-scrollbar { width: 4px; }
+        .list-container::-webkit-scrollbar-track { background: transparent; }
+        .list-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.18); border-radius: 10px; }
 
         .item {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 10px 12px; margin-bottom: 8px; border-radius: 10px;
-            background: var(--item-bg); border: 1px solid var(--item-border);
-            cursor: pointer; transition: all 0.15s ease; user-select: none;
+            padding: 9px 11px; margin-bottom: 6px; border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02); border: 0.5px solid rgba(255, 255, 255, 0.04);
+            cursor: pointer; user-select: none; transition: background 0.15s ease;
         }
-        .item:hover { background: rgba(255, 255, 255, 0.05); }
-        .item span { font-size: 0.9rem; font-weight: 500; }
-        .item .sub-desc { font-size: 0.75rem; color: var(--text-sub); font-weight: 600; }
 
-        /* Checkbox Mechanism */
-        .checkbox-wrapper { position: relative; display: block; width: 22px; height: 22px; }
+        .item:hover { background: rgba(255, 255, 255, 0.05); }
+        .item span { font-size: 0.88rem; font-weight: 500; }
+        .item .sub-desc { font-size: 0.72rem; color: var(--text-secondary); font-weight: 600; }
+
+        /* iOS Checkbox */
+        .checkbox-wrapper { position: relative; display: block; width: 20px; height: 20px; }
         .checkbox-wrapper input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
         .checkmark {
-            position: absolute; top: 0; left: 0; height: 22px; width: 22px;
-            background-color: rgba(255, 255, 255, 0.04); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 7px;
+            position: absolute; top: 0; left: 0; height: 20px; width: 20px;
+            background-color: rgba(255, 255, 255, 0.05); border: 1.5px solid rgba(255, 255, 255, 0.25); border-radius: 6px;
+            transition: all 0.2s ease;
         }
         
         .checkbox-wrapper input:checked ~ .checkmark {
             background-color: var(--success-color); border-color: var(--success-color);
-            box-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+            box-shadow: 0 0 10px rgba(52, 211, 153, 0.4);
         }
+
         .checkmark:after { content: ""; position: absolute; display: none; }
         .checkbox-wrapper input:checked ~ .checkmark:after { display: block; }
         .checkbox-wrapper .checkmark:after {
-            left: 7px; top: 3px; width: 5px; height: 10px;
-            border: solid #0f172a; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg);
+            left: 6px; top: 2.5px; width: 4px; height: 9px;
+            border: solid #030712; border-width: 0 2px 2px 0; transform: rotate(45deg);
         }
 
-        /* Completed Status Styles */
-        .item.completed, .coding-item-card.completed, .ssc-item-card.completed { background: var(--success-bg) !important; border-color: var(--success-border) !important; }
-        .item.completed span, .coding-item-card.completed span, .ssc-item-card.completed span { text-decoration: line-through; opacity: 0.5; }
+        .item.completed, .coding-item-card.completed, .ssc-item-card.completed { 
+            background: var(--success-bg) !important; 
+            border-color: rgba(52, 211, 153, 0.4) !important; 
+        }
 
-        /* OMR STYLES */
-        .omr-card-stats { font-size: 0.75rem; color: var(--omr-color); font-weight: 700; background: rgba(129, 140, 248, 0.1); padding: 3px 8px; border-radius: 6px; }
+        .item.completed span, .coding-item-card.completed span, .ssc-item-card.completed span { 
+            text-decoration: line-through; opacity: 0.6; 
+        }
+
+        /* OMR iOS Styles */
+        .omr-card-stats { font-size: 0.72rem; color: var(--omr-color); font-weight: 700; background: rgba(129, 140, 248, 0.1); padding: 2px 7px; border-radius: 6px; }
         .omr-row {
-            background: var(--item-bg); border: 1px solid var(--item-border);
-            border-radius: 10px; padding: 7px 10px; margin-bottom: 8px;
-            display: flex; align-items: center; justify-content: space-between; gap: 6px; transition: all 0.15s ease;
+            background: rgba(255, 255, 255, 0.02); border: 0.5px solid rgba(255, 255, 255, 0.04);
+            border-radius: 8px; padding: 6px 9px; margin-bottom: 6px;
+            display: flex; align-items: center; justify-content: space-between; gap: 5px;
         }
-        .omr-row:hover { border-color: rgba(129, 140, 248, 0.4); background: rgba(129, 140, 248, 0.05); }
-        .omr-q-num { font-weight: 800; font-size: 0.8rem; min-width: 30px; }
+
+        .omr-q-num { font-weight: 800; font-size: 0.78rem; min-width: 28px; }
         .omr-bubbles { display: flex; gap: 4px; }
         .omr-bubble-label {
-            width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.25);
-            display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700;
-            cursor: pointer; user-select: none; transition: all 0.15s ease;
+            width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.22);
+            display: flex; align-items: center; justify-content: center; font-size: 0.66rem; font-weight: 700;
+            cursor: pointer; user-select: none;
         }
+
         .omr-bubble-label input { display: none; }
         .omr-bubble-label:has(input:checked) {
             background-color: #3b82f6; border-color: #60a5fa; color: #ffffff; box-shadow: 0 0 6px rgba(59, 130, 246, 0.6);
         }
-        .omr-eval-boxes { display: flex; gap: 6px; align-items: center; border-left: 1px solid rgba(255, 255, 255, 0.1); padding-left: 6px; }
-        .eval-box {
-            width: 20px; height: 20px; border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-size: 0.7rem; user-select: none; border: 1.5px solid rgba(255, 255, 255, 0.2); transition: all 0.15s ease;
-        }
-        .eval-box input { display: none; }
-        .eval-box-right:has(input:checked) { background-color: #16a34a; border-color: #4ade80; color: #fff; box-shadow: 0 0 6px rgba(74, 222, 128, 0.5); }
-        .eval-box-wrong:has(input:checked) { background-color: #dc2626; border-color: #f87171; color: #fff; box-shadow: 0 0 6px rgba(248, 113, 113, 0.5); }
 
-        /* Media Queries for Mobile Responsiveness & Hamburger Menu */
-        @media (max-width: 900px) {
-            body { padding-top: 220px; }
-            .main-title { font-size: 2.2rem; }
-            .control-row { justify-content: center; text-align: center; }
+        .omr-eval-boxes { display: flex; gap: 5px; align-items: center; border-left: 0.5px solid rgba(255, 255, 255, 0.12); padding-left: 5px; }
+        .eval-box {
+            width: 19px; height: 19px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 0.65rem; user-select: none; border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .eval-box input { display: none; }
+        .eval-box-right:has(input:checked) { background-color: #16a34a; border-color: #4ade80; color: #fff; }
+        .eval-box-wrong:has(input:checked) { background-color: #dc2626; border-color: #f87171; color: #fff; }
+
+        /* iPhone Bottom Home Indicator Bar */
+        .ios-home-indicator {
+            position: fixed;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            :root { --sidebar-width: 220px; }
+            .main-app-area { padding-top: 150px; }
+            .ios-top-bar { left: var(--sidebar-width); }
         }
 
         @media (max-width: 768px) {
-            .mobile-menu-btn { display: block; }
-            .nav-shortcuts {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                gap: 8px;
-                background: rgba(15, 23, 42, 0.98);
-                padding: 15px;
-                border-radius: 12px;
-                border: 1px solid rgba(255,255,255,0.1);
-                margin-top: 5px;
+            .ios-sidebar {
+                transform: translateX(-100%);
+                width: 260px;
             }
-            .nav-shortcuts.active { display: flex; }
-            .nav-btn { text-align: center; width: 100%; box-sizing: border-box; }
-            .control-row { justify-content: space-between; }
+            .ios-sidebar.open {
+                transform: translateX(0);
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+            .main-app-area {
+                margin-left: 0;
+                width: 100%;
+                padding: 160px 16px 70px 16px;
+            }
+            .ios-top-bar {
+                left: 0;
+            }
+            .mobile-hamburger-btn {
+                display: block;
+            }
+            .main-title { font-size: 2.1rem; }
         }
 
         @media (max-width: 600px) {
-            body { padding-top: 250px; }
+            .main-app-area { padding-top: 175px; }
             .tracker-grid, .coding-grid-special { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- STICKY CONTROL & MULTI-WIDGET DASHBOARD BAR -->
-    <div class="top-control-bar">
+    <!-- SIDEBAR OVERLAY FOR MOBILE -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- ================= LEFT SIDEBAR NAVIGATION ================= -->
+    <aside class="ios-sidebar" id="iosSidebar">
+        <div class="sidebar-brand">
+            <span style="font-size: 1.3rem;">📱</span>
+            <div class="sidebar-brand-title">Study Suite 17</div>
+        </div>
+
+        <div class="sidebar-nav-list">
+            <button class="nav-sidebar-btn active" onclick="switchTab('tab-schedule', this)">
+                <span>📅</span> <span>Daily Schedule</span>
+            </button>
+            <button class="nav-sidebar-btn" style="color: var(--timetable-color)" onclick="switchTab('tab-night', this)">
+                <span>🌙</span> <span>Night Routine</span>
+            </button>
+            <button class="nav-sidebar-btn" style="color: var(--special-color)" onclick="switchTab('tab-special', this)">
+                <span>🔥</span> <span>Special Sunday</span>
+            </button>
+            <button class="nav-sidebar-btn" onclick="switchTab('tab-english', this)">
+                <span>🔤</span> <span>English Classes</span>
+            </button>
+            <button class="nav-sidebar-btn" onclick="switchTab('tab-math', this)">
+                <span>🔢</span> <span>Math Classes</span>
+            </button>
+            <button class="nav-sidebar-btn" onclick="switchTab('tab-reasoning', this)">
+                <span>🧠</span> <span>Reasoning Classes</span>
+            </button>
+            <button class="nav-sidebar-btn" onclick="switchTab('tab-coding', this)">
+                <span>💻</span> <span>Coding & Tech</span>
+            </button>
+            <button class="nav-sidebar-btn" onclick="switchTab('tab-tracker', this)">
+                <span>📆</span> <span>2026-27 Tracker</span>
+            </button>
+            <button class="nav-sidebar-btn" onclick="switchTab('tab-ssc', this)">
+                <span>🎖️</span> <span>SSC GD 2027</span>
+            </button>
+            <button class="nav-sidebar-btn" style="color: var(--book-color)" onclick="switchTab('tab-mbook', this)">
+                <span>📚</span> <span>Math Book</span>
+            </button>
+            <button class="nav-sidebar-btn" style="color: var(--rbook-color)" onclick="switchTab('tab-rbook', this)">
+                <span>📚</span> <span>Reasoning Book</span>
+            </button>
+            <button class="nav-sidebar-btn" style="color: var(--omr-color)" onclick="switchTab('tab-omr', this)">
+                <span>📝</span> <span>OMR Practice</span>
+            </button>
+            <button class="nav-sidebar-btn" style="color: var(--vocab-color)" onclick="switchTab('tab-vocab', this)">
+                <span>📖</span> <span>Vocab Series</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ================= FIXED TOP STATUS & WIDGET BAR ================= -->
+    <header class="ios-top-bar">
+        <div class="ios-status-row">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <button class="mobile-hamburger-btn" onclick="toggleSidebar()">☰</button>
+                <span id="ios-clock-time">09:41 PM</span>
+            </div>
+            
+            <div class="dynamic-island">
+                <div class="island-pulse"></div>
+                <span id="island-active-text">AI Study Suite 17 Pro Max</span>
+            </div>
+
+            <span>5G 📶 100% 🔋</span>
+        </div>
+
         <div class="control-row">
             <div class="widget-group">
-                <!-- LIVE TIME & DATE DISPLAY -->
-                <div class="clock-widget" id="live-clock-box">📅 Mon, Aug 10 | 🕒 09:00:00 PM</div>
-                <div class="ai-greetings-widget" id="ai-greetings-box">🤖 AI Mentor: Booting System...</div>
+                <div class="clock-widget" id="live-clock-box">🕒 Syncing System Time...</div>
+                <div class="ai-greetings-widget" id="ai-greetings-box">🤖 AI Mentor: Active</div>
                 <div class="ai-score-widget" id="ai-score-box">⭐ Study Score: 600</div>
             </div>
             <div class="widget-group">
+                <div class="goal-widget">
+                    <span>🎯 <strong>Goal:</strong></span>
+                    <input type="number" id="daily-goal-input" class="goal-input" value="5" min="1" onchange="updateDailyGoal()">
+                    <span id="goal-progress-text">Classes (0/5)</span>
+                </div>
                 <div class="analytics-widget">
-                    <span>📊 <strong>Global Tasks:</strong></span>
-                    <span style="color:var(--math-color)" id="global-total">Total: 0</span> | 
+                    <span>📊 <strong>Tasks:</strong></span>
+                    <span style="color:var(--english-color)" id="global-total">Total: 0</span> | 
                     <span style="color:var(--success-color)" id="global-done">Done: 0</span> | 
                     <span style="color:var(--reasoning-color)" id="global-pending">Left: 0</span>
                 </div>
             </div>
         </div>
+    </header>
 
-        <div class="control-row">
-            <div class="widget-group">
-                <div class="timer-widget">
-                    <span>⏱️ <strong>Timer:</strong></span>
-                    <div class="timer-display" id="timer-display">00:00:00</div>
-                    <button class="timer-btn" id="timer-toggle-btn" onclick="toggleStudyTimer()">Start</button>
-                    <button class="timer-btn" style="background: rgba(255,255,255,0.1); color:inherit;" onclick="resetStudyTimer()">Reset</button>
-                </div>
-                
-                <div class="goal-widget">
-                    <span>🎯 <strong>Daily Goal:</strong></span>
-                    <input type="number" id="daily-goal-input" class="goal-input" value="5" min="1" onchange="updateDailyGoal()">
-                    <span id="goal-progress-text">Classes (Done: 0/5)</span>
-                </div>
+    <!-- ================= MAIN DISPLAY AREA ================= -->
+    <main class="main-app-area">
+
+        <!-- MOTIVATIONAL QUOTES -->
+        <div class="quotes-container">
+            <div class="quote-banner"><p class="quote-text">"If you want to become a king, learn by working hard like a slave."</p></div>
+        </div>
+
+        <!-- TAB 1: DAILY TIMETABLE -->
+        <div class="tab-view active-tab" id="tab-schedule">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--timetable-color);">Daily Timetable</h1>
+                <h2 class="sub-title">Routine Schedule</h2>
             </div>
-
-            <!-- Hamburger Button for Mobile -->
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰ Navigation</button>
-
-            <!-- Collapsible Shortcuts -->
-            <div class="widget-group">
-                <div class="nav-shortcuts" id="mobile-nav-menu">
-                    <a href="#timetable-section" class="nav-btn" style="color: #cbd5e1" onclick="closeMobileMenu()">📅 Schedule</a>
-                    <a href="#math-section" class="nav-btn" onclick="closeMobileMenu()">🔢 Math</a>
-                    <a href="#english-section" class="nav-btn" onclick="closeMobileMenu()">🔤 English</a>
-                    <a href="#reasoning-section" class="nav-btn" onclick="closeMobileMenu()">🧠 Reasoning</a>
-                    <a href="#coding-section" class="nav-btn" onclick="closeMobileMenu()">💻 Coding</a>
-                    <a href="#calendar-section" class="nav-btn" onclick="closeMobileMenu()">📆 Tracker</a>
-                    <a href="#ssc-section" class="nav-btn" onclick="closeMobileMenu()">🎖️ SSC GD</a>
-                    <a href="#book-section" class="nav-btn" style="color: var(--book-color)" onclick="closeMobileMenu()">📚 M-Book</a>
-                    <a href="#rbook-section" class="nav-btn" style="color: var(--rbook-color)" onclick="closeMobileMenu()">📚 R-Book</a>
-                    <a href="#omr-section" class="nav-btn" style="color: var(--omr-color)" onclick="closeMobileMenu()">📝 OMR Sheets</a>
-                    <a href="#night-schedule-section" class="nav-btn" style="color: var(--timetable-color)" onclick="closeMobileMenu()">🌙 Night Timetable</a>
-                    <a href="#special-schedule-section" class="nav-btn" style="color: var(--special-color)" onclick="closeMobileMenu()">🔥 Special Day</a>
-                </div>
+            <div class="timetable-grid">
+                <div class="time-slot-card" data-title="Math" data-start="20:00" data-end="21:20"><div class="live-dot"></div><span class="time-range">08:00 PM - 09:20 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+                <div class="time-slot-card" data-title="English" data-start="21:20" data-end="22:30"><div class="live-dot"></div><span class="time-range">09:20 PM - 10:30 PM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
+                <div class="time-slot-card" data-title="Reasoning" data-start="22:30" data-end="23:00"><div class="live-dot"></div><span class="time-range">10:30 PM - 11:00 PM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
+                <div class="time-slot-card" data-title="Self Study" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: #e2e8f0;">Self Study</span></div>
+                <div class="time-slot-card" data-title="Programming" data-start="00:00" data-end="02:00"><div class="live-dot"></div><span class="time-range">12:00 AM - 02:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming</span></div>
+                <div class="time-slot-card" data-title="College Work" data-start="02:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">02:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--calendar-color);">College Work</span></div>
             </div>
         </div>
-    </div>
 
-    <!-- MOTIVATIONAL QUOTES -->
-    <div class="quotes-container">
-        <div class="quote-banner"><p class="quote-text">"If you want to become a king, learn by working hard like a slave."</p></div>
-        <div class="quote-banner"><p class="quote-text">"If you want to become a king, learn by working hard like a slave."</p></div>
-    </div>
-
-    <!-- ================= TIMETABLE SECTION ================= -->
-    <div class="timetable-section" id="timetable-section">
-        <div class="header-container">
-            <h1 class="main-title" style="color: var(--timetable-color); text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);">Daily Timetable</h1>
-            <h2 class="sub-title">Your Study Routine</h2>
-        </div>
-        <div class="timetable-grid">
-            <div class="time-slot-card" data-title="Math" data-start="20:00" data-end="21:20"><div class="live-dot"></div><span class="time-range">08:00 PM - 09:20 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
-            <div class="time-slot-card" data-title="English" data-start="21:20" data-end="22:30"><div class="live-dot"></div><span class="time-range">09:20 PM - 10:30 PM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
-            <div class="time-slot-card" data-title="Reasoning" data-start="22:30" data-end="23:00"><div class="live-dot"></div><span class="time-range">10:30 PM - 11:00 PM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
-            <div class="time-slot-card" data-title="Self Study" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: #e2e8f0;">Self Study</span></div>
-            <div class="time-slot-card" data-title="Programming" data-start="00:00" data-end="02:00"><div class="live-dot"></div><span class="time-range">12:00 AM - 02:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming</span></div>
-            <div class="time-slot-card" data-title="College Work" data-start="02:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">02:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--calendar-color);">College Work</span></div>
-        </div>
-    </div>
-
-    <!-- ================= SUBJECT SECTIONS ================= -->
-    <div class="subject-section math-sec" id="math-section">
-        <div class="header-container">
-            <h1 class="main-title">Math</h1>
-            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-math"></div></div>
-            <span class="progress-text" id="progress-text-math">Progress: 0%</span>
-        </div>
-        <div class="tracker-grid" id="math-grid"></div>
-    </div>
-
-    <div class="subject-section english-sec" id="english-section">
-        <div class="header-container">
-            <h1 class="main-title">English</h1>
-            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-english"></div></div>
-            <span class="progress-text" id="progress-text-english">Progress: 0%</span>
-        </div>
-        <div class="tracker-grid" id="english-grid"></div>
-    </div>
-
-    <div class="subject-section reasoning-sec" id="reasoning-section">
-        <div class="header-container">
-            <h1 class="main-title">Reasoning</h1>
-            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-reasoning"></div></div>
-            <span class="progress-text" id="progress-text-reasoning">Progress: 0%</span>
-        </div>
-        <div class="tracker-grid" id="reasoning-grid"></div>
-    </div>
-
-    <div class="subject-section coding-sec" id="coding-section">
-        <div class="header-container">
-            <h1 class="main-title">Coding</h1>
-            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-coding"></div></div>
-            <span class="progress-text" id="progress-text-coding">Progress: 0%</span>
-        </div>
-        <div class="coding-grid-special" id="coding-grid"></div>
-    </div>
-
-    <div class="subject-section calendar-sec" id="calendar-section">
-        <div class="header-container">
-            <h1 class="main-title">Monthly Tracker</h1>
-            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-calendar"></div></div>
-            <span class="progress-text" id="progress-text-calendar">Progress: 0%</span>
-        </div>
-        <div class="tracker-grid" id="calendar-grid"></div>
-    </div>
-
-    <div class="subject-section ssc-sec" id="ssc-section">
-        <div class="header-container">
-            <h1 class="main-title">SSC GD 2027</h1>
-            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-ssc"></div></div>
-            <span class="progress-text" id="progress-text-ssc">Progress: 0%</span>
-        </div>
-        <h3 class="ssc-subtitle" style="color: var(--math-color);">⚡ Math Syllabus</h3>
-        <div class="coding-grid-special" id="ssc-math-grid"></div>
-        <h3 class="ssc-subtitle" style="color: var(--reasoning-color);">⚡ Reasoning Syllabus</h3>
-        <div class="coding-grid-special" id="ssc-reasoning-grid"></div>
-        <h3 class="ssc-subtitle" style="color: var(--hindi-color);">⚡ Hindi Syllabus</h3>
-        <div class="coding-grid-special" id="ssc-hindi-grid"></div>
-    </div>
-
-    <div class="subject-section book-sec" id="book-section">
-        <div class="header-container">
-            <h1 class="main-title">Math Book Tracker</h1>
-            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-book"></div></div>
-            <span class="progress-text" id="progress-text-book">Progress: 0%</span>
-        </div>
-        <div class="tracker-grid" id="book-grid"></div>
-    </div>
-
-    <div class="subject-section rbook-sec" id="rbook-section">
-        <div class="header-container">
-            <h1 class="main-title">Reasoning Book Tracker</h1>
-            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-rbook"></div></div>
-            <span class="progress-text" id="progress-text-rbook">Progress: 0%</span>
-        </div>
-        <div class="tracker-grid" id="rbook-grid"></div>
-    </div>
-
-    <!-- ================= ALL CHAPTERS OMR PRACTICE SHEETS SECTION ================= -->
-    <div class="subject-section omr-sec" id="omr-section">
-        <div class="header-container">
-            <h1 class="main-title">OMR Practice Sheets</h1>
-            <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-omr"></div></div>
-            <span class="progress-text" id="progress-text-omr">Progress: 0%</span>
+        <!-- TAB 2: NIGHT ROUTINE -->
+        <div class="tab-view" id="tab-night">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--timetable-color);">Night Study Timetable</h1>
+                <h2 class="sub-title">Intensive Schedule</h2>
+            </div>
+            <div class="timetable-grid">
+                <div class="time-slot-card" data-title="Math" data-start="20:00" data-end="21:30"><div class="live-dot"></div><span class="time-range">08:00 PM - 09:30 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+                <div class="time-slot-card" data-title="Operating System" data-start="22:00" data-end="23:00"><div class="live-dot"></div><span class="time-range">10:00 PM - 11:00 PM</span><span class="subject-name" style="color: #38bdf8;">Operating System</span></div>
+                <div class="time-slot-card" data-title="Programming Language" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming Language</span></div>
+                <div class="time-slot-card" data-title="English" data-start="00:00" data-end="01:30"><div class="live-dot"></div><span class="time-range">12:00 AM - 01:30 AM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
+                <div class="time-slot-card" data-title="Math" data-start="01:30" data-end="03:00"><div class="live-dot"></div><span class="time-range">01:30 AM - 03:00 AM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+                <div class="time-slot-card" data-title="Reasoning" data-start="03:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">03:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
+                <div class="time-slot-card" data-title="BYPASS Reasoning" data-start="07:00" data-end="09:00"><div class="live-dot"></div><span class="time-range">07:00 AM - 09:00 AM</span><span class="subject-name" style="color: var(--ssc-color);">BYPASS Reasoning</span></div>
+            </div>
         </div>
 
-        <h3 class="ssc-subtitle" style="color: var(--math-color);">⚡ Math OMR Sheets</h3>
-        <div class="tracker-grid" id="omr-math-grid"></div>
-
-        <h3 class="ssc-subtitle" style="color: var(--reasoning-color);">⚡ Reasoning OMR Sheets</h3>
-        <div class="tracker-grid" id="omr-reasoning-grid"></div>
-    </div>
-
-    <!-- ================= NIGHT STUDY TIMETABLE SECTION ================= -->
-    <div class="timetable-section" id="night-schedule-section">
-        <div class="header-container">
-            <h1 class="main-title" style="color: var(--timetable-color); text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);">
-                Night Study Timetable
-            </h1>
-            <h2 class="sub-title">Daily Night Intensive Schedule</h2>
+        <!-- TAB 3: SPECIAL DAY (SUNDAY) -->
+        <div class="tab-view" id="tab-special">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--special-color);">Special Day Schedule</h1>
+                <h2 class="sub-title" id="special-day-subtitle">Sunday Routine (Active On Sundays)</h2>
+            </div>
+            <div class="timetable-grid" id="special-day-grid">
+                <div class="time-slot-card special-slot" data-title="Special Math" data-start="09:30" data-end="12:00"><div class="live-dot"></div><span class="time-range">09:30 AM - 12:00 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+                <div class="time-slot-card special-slot" data-title="Special Reasoning" data-start="12:00" data-end="14:30"><div class="live-dot"></div><span class="time-range">12:00 PM - 02:30 PM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
+                <div class="time-slot-card special-slot" data-title="Special BYPASS" data-start="15:30" data-end="17:00"><div class="live-dot"></div><span class="time-range">03:30 PM - 05:00 PM</span><span class="subject-name" style="color: var(--ssc-color);">BYPASS</span></div>
+                <div class="time-slot-card special-slot" data-title="Special Math Evening" data-start="17:30" data-end="19:30"><div class="live-dot"></div><span class="time-range">05:30 PM - 07:30 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+                <div class="time-slot-card special-slot" data-title="Special OS" data-start="19:30" data-end="21:00"><div class="live-dot"></div><span class="time-range">07:30 PM - 09:00 PM</span><span class="subject-name" style="color: #38bdf8;">Operating System</span></div>
+                <div class="time-slot-card special-slot" data-title="Special Programming" data-start="21:30" data-end="00:00"><div class="live-dot"></div><span class="time-range">09:30 PM - 12:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming Language</span></div>
+                <div class="time-slot-card special-slot" data-title="Special English" data-start="00:00" data-end="01:30"><div class="live-dot"></div><span class="time-range">12:00 AM - 01:30 AM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
+                <div class="time-slot-card special-slot" data-title="Special Math Night" data-start="01:30" data-end="03:00"><div class="live-dot"></div><span class="time-range">01:30 AM - 03:00 AM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
+                <div class="time-slot-card special-slot" data-title="Special Reasoning Night" data-start="03:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">03:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
+            </div>
         </div>
-        <div class="timetable-grid">
-            <div class="time-slot-card" data-title="Math" data-start="20:00" data-end="21:30"><div class="live-dot"></div><span class="time-range">08:00 PM - 09:30 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
-            <div class="time-slot-card" data-title="Operating System" data-start="22:00" data-end="23:00"><div class="live-dot"></div><span class="time-range">10:00 PM - 11:00 PM</span><span class="subject-name" style="color: #38bdf8;">Operating System</span></div>
-            <div class="time-slot-card" data-title="Programming Language" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming Language</span></div>
-            <div class="time-slot-card" data-title="English" data-start="00:00" data-end="01:30"><div class="live-dot"></div><span class="time-range">12:00 AM - 01:30 AM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
-            <div class="time-slot-card" data-title="Math" data-start="01:30" data-end="03:00"><div class="live-dot"></div><span class="time-range">01:30 AM - 03:00 AM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
-            <div class="time-slot-card" data-title="Reasoning" data-start="03:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">03:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
-            <div class="time-slot-card" data-title="BYPASS Reasoning" data-start="07:00" data-end="09:00"><div class="live-dot"></div><span class="time-range">07:00 AM - 09:00 AM</span><span class="subject-name" style="color: var(--ssc-color);">BYPASS Reasoning</span></div>
-        </div>
-    </div>
 
-    <!-- ================= SPECIAL DAY (SUNDAY OFF) SECTION ================= -->
-    <div class="timetable-section" id="special-schedule-section">
-        <div class="header-container">
-            <h1 class="main-title" style="color: var(--special-color); text-shadow: 0 0 20px rgba(236, 72, 153, 0.4);">
-                Special Day Schedule
-            </h1>
-            <h2 class="sub-title" id="special-day-subtitle">Sunday Off Day Routine (Active Only On Sundays)</h2>
+        <!-- TAB 4: ENGLISH -->
+        <div class="tab-view" id="tab-english">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--english-color);">English Classes</h1>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-english" style="background: var(--english-color);"></div></div>
+                <span class="progress-text" id="progress-text-english">Progress: 0%</span>
+            </div>
+            <div class="tracker-grid" id="english-grid"></div>
         </div>
-        <div class="timetable-grid" id="special-day-grid">
-            <div class="time-slot-card special-slot" data-title="Special Math" data-start="09:30" data-end="12:00"><div class="live-dot"></div><span class="time-range">09:30 AM - 12:00 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
-            <div class="time-slot-card special-slot" data-title="Special Reasoning" data-start="12:00" data-end="14:30"><div class="live-dot"></div><span class="time-range">12:00 PM - 02:30 PM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
-            <div class="time-slot-card special-slot" data-title="Special BYPASS" data-start="15:30" data-end="17:00"><div class="live-dot"></div><span class="time-range">03:30 PM - 05:00 PM</span><span class="subject-name" style="color: var(--ssc-color);">BYPASS</span></div>
-            <div class="time-slot-card special-slot" data-title="Special Math Evening" data-start="17:30" data-end="19:30"><div class="live-dot"></div><span class="time-range">05:30 PM - 07:30 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
-            <div class="time-slot-card special-slot" data-title="Special OS" data-start="19:30" data-end="21:00"><div class="live-dot"></div><span class="time-range">07:30 PM - 09:00 PM</span><span class="subject-name" style="color: #38bdf8;">Operating System</span></div>
-            <div class="time-slot-card special-slot" data-title="Special Programming" data-start="21:30" data-end="00:00"><div class="live-dot"></div><span class="time-range">09:30 PM - 12:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming Language</span></div>
-            <div class="time-slot-card special-slot" data-title="Special English" data-start="00:00" data-end="01:30"><div class="live-dot"></div><span class="time-range">12:00 AM - 01:30 AM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
-            <div class="time-slot-card special-slot" data-title="Special Math Night" data-start="01:30" data-end="03:00"><div class="live-dot"></div><span class="time-range">01:30 AM - 03:00 AM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
-            <div class="time-slot-card special-slot" data-title="Special Reasoning Night" data-start="03:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">03:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
-        </div>
-    </div>
 
+        <!-- TAB 5: MATH -->
+        <div class="tab-view" id="tab-math">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--math-color);">Math Classes</h1>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-math" style="background: var(--math-color);"></div></div>
+                <span class="progress-text" id="progress-text-math">Progress: 0%</span>
+            </div>
+            <div class="tracker-grid" id="math-grid"></div>
+        </div>
+
+        <!-- TAB 6: REASONING -->
+        <div class="tab-view" id="tab-reasoning">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--reasoning-color);">Reasoning Classes</h1>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-reasoning" style="background: var(--reasoning-color);"></div></div>
+                <span class="progress-text" id="progress-text-reasoning">Progress: 0%</span>
+            </div>
+            <div class="tracker-grid" id="reasoning-grid"></div>
+        </div>
+
+        <!-- TAB 7: CODING -->
+        <div class="tab-view" id="tab-coding">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--coding-color);">Coding & Tech</h1>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-coding" style="background: var(--coding-color);"></div></div>
+                <span class="progress-text" id="progress-text-coding">Progress: 0%</span>
+            </div>
+            <div class="coding-grid-special" id="coding-grid"></div>
+        </div>
+
+        <!-- TAB 8: 2026-2027 FULL CALENDAR TRACKER -->
+        <div class="tab-view" id="tab-tracker">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--calendar-color);">Monthly Tracker (2026 - 2027)</h1>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-calendar" style="background: var(--calendar-color);"></div></div>
+                <span class="progress-text" id="progress-text-calendar">Progress: 0%</span>
+            </div>
+
+            <h3 class="ssc-subtitle" style="color: var(--ssc-color);">📌 Remaining 2026 Months (August - December)</h3>
+            <div class="tracker-grid" id="calendar-2026-grid"></div>
+
+            <h3 class="ssc-subtitle" style="color: var(--calendar-color);">📌 Full Year 2027 Tracker (Jan - Dec)</h3>
+            <div class="tracker-grid" id="calendar-2027-grid"></div>
+        </div>
+
+        <!-- TAB 9: SSC GD 2027 -->
+        <div class="tab-view" id="tab-ssc">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--ssc-color);">SSC GD 2027 Syllabus</h1>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-ssc" style="background: var(--ssc-color);"></div></div>
+                <span class="progress-text" id="progress-text-ssc">Progress: 0%</span>
+            </div>
+            <h3 class="ssc-subtitle" style="color: var(--math-color);">⚡ Math Syllabus</h3>
+            <div class="coding-grid-special" id="ssc-math-grid"></div>
+            <h3 class="ssc-subtitle" style="color: var(--reasoning-color);">⚡ Reasoning Syllabus</h3>
+            <div class="coding-grid-special" id="ssc-reasoning-grid"></div>
+            <h3 class="ssc-subtitle" style="color: var(--hindi-color);">⚡ Hindi Syllabus</h3>
+            <div class="coding-grid-special" id="ssc-hindi-grid"></div>
+        </div>
+
+        <!-- TAB 10: MATH BOOK -->
+        <div class="tab-view" id="tab-mbook">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--book-color);">Math Book Tracker</h1>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-book" style="background: var(--book-color);"></div></div>
+                <span class="progress-text" id="progress-text-book">Progress: 0%</span>
+            </div>
+            <div class="tracker-grid" id="book-grid"></div>
+        </div>
+
+        <!-- TAB 11: REASONING BOOK -->
+        <div class="tab-view" id="tab-rbook">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--rbook-color);">Reasoning Book Tracker</h1>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-rbook" style="background: var(--rbook-color);"></div></div>
+                <span class="progress-text" id="progress-text-rbook">Progress: 0%</span>
+            </div>
+            <div class="tracker-grid" id="rbook-grid"></div>
+        </div>
+
+        <!-- TAB 12: OMR SHEETS -->
+        <div class="tab-view" id="tab-omr">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--omr-color);">OMR Practice Sheets</h1>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-omr" style="background: var(--omr-color);"></div></div>
+                <span class="progress-text" id="progress-text-omr">Progress: 0%</span>
+            </div>
+            <h3 class="ssc-subtitle" style="color: var(--math-color);">⚡ Math OMR Sheets</h3>
+            <div class="tracker-grid" id="omr-math-grid"></div>
+            <h3 class="ssc-subtitle" style="color: var(--reasoning-color);">⚡ Reasoning OMR Sheets</h3>
+            <div class="tracker-grid" id="omr-reasoning-grid"></div>
+        </div>
+
+        <!-- TAB 13: VOCABULARY SERIES (20 WORDS / DAY) -->
+        <div class="tab-view" id="tab-vocab">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--vocab-color);">Vocabulary Series</h1>
+                <h2 class="sub-title">20 Words / Day Target</h2>
+                <div class="subject-progress-container"><div class="subject-progress-bar" id="progress-bar-vocab" style="background: var(--vocab-color);"></div></div>
+                <span class="progress-text" id="progress-text-vocab">Progress: 0%</span>
+            </div>
+            <div class="tracker-grid" id="vocab-grid"></div>
+        </div>
+
+    </main>
+
+    <!-- iOS Home Indicator Swipe Bar -->
+    <div class="ios-home-indicator"></div>
+
+    <!-- JAVASCRIPT ENGINE -->
     <script>
         window.STUDY_DATA = {
-            math: [
-                { name: "Number System", classes: 17 }, { name: "LCM HCF", classes: 8 },
-                { name: "Ratio and Proportion", classes: 9 }, { name: "Partnership", classes: 4 },
-                { name: "Age", classes: 3 }, { name: "Percentage", classes: 11 },
-                { name: "Profit & Loss", classes: 12 }, { name: "Discount", classes: 7 },
-                { name: "Simple Interest", classes: 9 }, { name: "Compound Interest", classes: 8 },
-                { name: "Time & Work", classes: 8 }, { name: "Pipe & Cistern", classes: 5 },
-                { name: "Average", classes: 9 }, { name: "Time, Speed & Distance", classes: 6 }
-            ],
             english: [
                 { name: "Basic Grammar", classes: 16 }, { name: "Subject Verb Agreement", classes: 12 },
                 { name: "Time and Tense", classes: 9 }, { name: "Question Tag", classes: 3 },
@@ -561,6 +841,15 @@
                 { name: "Pronoun", classes: 7 }, { name: "Noun", classes: 4 },
                 { name: "English Vocabulary", classes: 48 }, { name: "Phrasal Verb", classes: 24 },
                 { name: "Reading Comprehension", classes: 21 }, { name: "Vocab Series", classes: 16 }
+            ],
+            math: [
+                { name: "Number System", classes: 17 }, { name: "LCM HCF", classes: 8 },
+                { name: "Ratio and Proportion", classes: 9 }, { name: "Partnership", classes: 4 },
+                { name: "Age", classes: 3 }, { name: "Percentage", classes: 11 },
+                { name: "Profit & Loss", classes: 12 }, { name: "Discount", classes: 7 },
+                { name: "Simple Interest", classes: 9 }, { name: "Compound Interest", classes: 8 },
+                { name: "Time & Work", classes: 8 }, { name: "Pipe & Cistern", classes: 5 },
+                { name: "Average", classes: 9 }, { name: "Time, Speed & Distance", classes: 6 }
             ],
             reasoning: [
                 { name: "Ranking & Order", classes: 4 }, { name: "Direction test", classes: 7 },
@@ -583,10 +872,26 @@
                 { name: "Address matching", classes: 2 }, { name: "Matrix", classes: 1 }
             ],
             coding: ["HTML", "CSS", "JAVASCRIPT", "PYTHON", "C", "JAVA", "REACT JS", "NODE JS"],
-            months: [
-                { name: "August", days: 31 }, { name: "September", days: 30 },
-                { name: "October", days: 31 }, { name: "November", days: 30 },
-                { name: "December", days: 31 }
+            months2026: [
+                { name: "August 2026", days: 31 },
+                { name: "September 2026", days: 30 },
+                { name: "October 2026", days: 31 },
+                { name: "November 2026", days: 30 },
+                { name: "December 2026", days: 31 }
+            ],
+            months2027: [
+                { name: "January 2027", days: 31 },
+                { name: "February 2027", days: 28 },
+                { name: "March 2027", days: 31 },
+                { name: "April 2027", days: 30 },
+                { name: "May 2027", days: 31 },
+                { name: "June 2027", days: 30 },
+                { name: "July 2027", days: 31 },
+                { name: "August 2027", days: 31 },
+                { name: "September 2027", days: 30 },
+                { name: "October 2027", days: 31 },
+                { name: "November 2027", days: 30 },
+                { name: "December 2027", days: 31 }
             ],
             ssc_math: [
                 "Number System", "LCM & HCF", "Simplification", "Average", "Ratio and Proportion",
@@ -654,74 +959,130 @@
                 { name: "Figure Formation", q: 57 }, { name: "Rotation of Figure", q: 57 },
                 { name: "Grouping of Figures", q: 48 }, { name: "Dot Situation", q: 47 },
                 { name: "Counting Of Figure", q: 121 }
+            ],
+            vocab_series: [
+                { name: "Vocab A", words: 150 },
+                { name: "Vocab B", words: 100 },
+                { name: "Vocab C", words: 170 },
+                { name: "Vocab D", words: 130 },
+                { name: "Vocab E", words: 120 },
+                { name: "Vocab F", words: 120 },
+                { name: "Vocab G", words: 106 },
+                { name: "Vocab H", words: 116 },
+                { name: "Vocab I", words: 180 },
+                { name: "Vocab J, K, L", words: 94 },
+                { name: "Vocab M", words: 140 },
+                { name: "Vocab N, O", words: 98 },
+                { name: "Vocab P", words: 186 },
+                { name: "Vocab Q, R", words: 126 },
+                { name: "Vocab S", words: 220 },
+                { name: "Vocab T - Z", words: 240 }
             ]
         };
 
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-nav-menu');
-            if(menu) menu.classList.toggle('active');
+        // Sidebar Toggle for Mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('iosSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if(sidebar) sidebar.classList.toggle('open');
+            if(overlay) overlay.classList.toggle('active');
         }
 
-        function closeMobileMenu() {
-            const menu = document.getElementById('mobile-nav-menu');
-            if(menu) menu.classList.remove('active');
+        // SPA Tab Switcher
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-view').forEach(tab => tab.classList.remove('active-tab'));
+            document.querySelectorAll('.nav-sidebar-btn').forEach(b => b.classList.remove('active'));
+
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.add('active-tab');
+            if(btn) btn.classList.add('active');
+            
+            const sidebar = document.getElementById('iosSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if(sidebar) sidebar.classList.remove('open');
+            if(overlay) overlay.classList.remove('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Render frameworks
+        // Batch Rendering Helpers
         function buildStandardGrid(containerId, chaptersList, storagePrefix) {
             const container = document.getElementById(containerId);
             if(!container) return;
-            let cardHtml = '';
+            const buffer = [];
+
             chaptersList.forEach((ch) => {
-                cardHtml += `<div class="milestone-card"><div class="card-header"><span>${ch.name}</span><span class="class-counter">${ch.classes} Classes</span></div><div class="list-container">`;
+                buffer.push(`<div class="milestone-card"><div class="card-header"><span>${ch.name}</span><span class="class-counter">${ch.classes} Classes</span></div><div class="list-container">`);
                 for (let i = 1; i <= ch.classes; i++) {
                     const id = `${storagePrefix}-${ch.name.replace(/\s+/g, '')}-c${i}`;
-                    cardHtml += `<label class="item" id="lbl-${id}"><span>Class ${i}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, '${storagePrefix}')"><span class="checkmark"></span></div></label>`;
+                    buffer.push(`<label class="item" id="lbl-${id}"><span>Class ${i}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, '${storagePrefix}')"><span class="checkmark"></span></div></label>`);
                 }
-                cardHtml += `</div></div>`;
+                buffer.push(`</div></div>`);
             });
-            container.innerHTML = cardHtml;
+            container.innerHTML = buffer.join('');
         }
 
         function buildBookGrid(containerId, dataList, storagePrefix) {
             const container = document.getElementById(containerId);
             if(!container) return;
-            let cardHtml = '';
+            const buffer = [];
+
             dataList.forEach((ch) => {
                 const totalQuestions = ch.q;
                 const daysNeeded = Math.ceil(totalQuestions / 30);
-                cardHtml += `<div class="milestone-card"><div class="card-header"><span>${ch.name}</span><span class="class-counter">${totalQuestions} Qs</span></div><div class="list-container">`;
+                buffer.push(`<div class="milestone-card"><div class="card-header"><span>${ch.name}</span><span class="class-counter">${totalQuestions} Qs</span></div><div class="list-container">`);
                 for (let d = 1; d <= daysNeeded; d++) {
                     const id = `${storagePrefix}-${ch.name.replace(/[^a-zA-Z0-9]/g, '')}-d${d}`;
                     let currentDayQs = d === daysNeeded ? totalQuestions - ((daysNeeded - 1) * 30) : 30;
-                    cardHtml += `<label class="item" id="lbl-${id}"><span>Day ${d}</span><span class="sub-desc">(${currentDayQs} Qs solved)</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, '${storagePrefix}')"><span class="checkmark"></span></div></label>`;
+                    buffer.push(`<label class="item" id="lbl-${id}"><span>Day ${d}</span><span class="sub-desc">(${currentDayQs} Qs)</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, '${storagePrefix}')"><span class="checkmark"></span></div></label>`);
                 }
-                cardHtml += `</div></div>`;
+                buffer.push(`</div></div>`);
             });
-            container.innerHTML = cardHtml;
+            container.innerHTML = buffer.join('');
+        }
+
+        // Vocabulary 20 Words / Day Builder
+        function buildVocabGrid() {
+            const container = document.getElementById('vocab-grid');
+            if(!container) return;
+            const buffer = [];
+
+            window.STUDY_DATA.vocab_series.forEach((v) => {
+                const totalWords = v.words;
+                const daysNeeded = Math.ceil(totalWords / 20);
+                const vKey = v.name.replace(/[^a-zA-Z0-9]/g, '');
+
+                buffer.push(`<div class="milestone-card"><div class="card-header"><span>${v.name}</span><span class="class-counter">${totalWords} Words</span></div><div class="list-container">`);
+                for (let d = 1; d <= daysNeeded; d++) {
+                    const id = `vocab-${vKey}-d${d}`;
+                    let currentDayWords = d === daysNeeded ? totalWords - ((daysNeeded - 1) * 20) : 20;
+                    buffer.push(`<label class="item" id="lbl-${id}"><span>Day ${d}</span><span class="sub-desc">(${currentDayWords} Words Target)</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'vocab')"><span class="checkmark"></span></div></label>`);
+                }
+                buffer.push(`</div></div>`);
+            });
+            container.innerHTML = buffer.join('');
         }
 
         function buildChapterWiseOmrGrid(containerId, dataList, prefix) {
             const container = document.getElementById(containerId);
             if(!container) return;
-            let gridHtml = '';
+            const buffer = [];
 
             dataList.forEach((ch) => {
                 const totalQs = ch.q;
                 const chKey = ch.name.replace(/[^a-zA-Z0-9]/g, '');
 
-                gridHtml += `
+                buffer.push(`
                     <div class="milestone-card">
                         <div class="card-header">
                             <span>${ch.name}</span>
                             <span class="omr-card-stats" id="omr-stat-${prefix}-${chKey}">0/${totalQs} (0%)</span>
                         </div>
-                        <div class="list-container">`;
+                        <div class="list-container">`);
 
                 for (let i = 1; i <= totalQs; i++) {
                     const rowId = `cardomr-${prefix}-${chKey}-q${i}`;
-                    gridHtml += `
+                    buffer.push(`
                         <div class="omr-row" id="row-${rowId}">
                             <span class="omr-q-num">Q.${i}</span>
                             <div class="omr-bubbles">
@@ -738,26 +1099,25 @@
                                     <input type="checkbox" id="chk-w-${rowId}" onchange="handleChapterEvalCheck('${rowId}', 'wrong', '${prefix}', '${chKey}', ${totalQs})"> ❌
                                 </label>
                             </div>
-                        </div>`;
+                        </div>`);
                 }
-
-                gridHtml += `</div></div>`;
+                buffer.push(`</div></div>`);
             });
 
-            container.innerHTML = gridHtml;
+            container.innerHTML = buffer.join('');
         }
 
-        // OMR Handlers
+        // OMR Micro-Handlers
         function handleChapterEvalCheck(rowId, type, prefix, chKey, totalQs) {
             const rightChk = document.getElementById(`chk-r-${rowId}`);
             const wrongChk = document.getElementById(`chk-w-${rowId}`);
 
-            if (type === 'right' && rightChk.checked) {
-                wrongChk.checked = false;
+            if (type === 'right' && rightChk && rightChk.checked) {
+                if(wrongChk) wrongChk.checked = false;
                 localStorage.removeItem(`eval-w-${rowId}`);
                 localStorage.setItem(`eval-r-${rowId}`, 'true');
-            } else if (type === 'wrong' && wrongChk.checked) {
-                rightChk.checked = false;
+            } else if (type === 'wrong' && wrongChk && wrongChk.checked) {
+                if(rightChk) rightChk.checked = false;
                 localStorage.removeItem(`eval-r-${rowId}`);
                 localStorage.setItem(`eval-w-${rowId}`, 'true');
             } else {
@@ -827,27 +1187,27 @@
         function buildCodingGrid() {
             const container = document.getElementById('coding-grid');
             if(!container) return;
-            let html = '';
+            const buffer = [];
             window.STUDY_DATA.coding.forEach((lang) => {
                 const id = `coding-${lang.replace(/\s+/g, '')}`;
-                html += `<label class="coding-item-card" id="lbl-${id}"><span>${lang}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'coding')"><span class="checkmark"></span></div></label>`;
+                buffer.push(`<label class="coding-item-card" id="lbl-${id}"><span>${lang}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'coding')"><span class="checkmark"></span></div></label>`);
             });
-            container.innerHTML = html;
+            container.innerHTML = buffer.join('');
         }
 
-        function buildCalendarGrid() {
-            const container = document.getElementById('calendar-grid');
+        function buildCustomCalendarGrid(containerId, monthsList, storagePrefix) {
+            const container = document.getElementById(containerId);
             if(!container) return;
-            let cardHtml = '';
-            window.STUDY_DATA.months.forEach((month) => {
-                cardHtml += `<div class="milestone-card"><div class="card-header"><span>${month.name}</span><span class="class-counter">${month.days} Days</span></div><div class="list-container">`;
+            const buffer = [];
+            monthsList.forEach((month) => {
+                buffer.push(`<div class="milestone-card"><div class="card-header"><span>${month.name}</span><span class="class-counter">${month.days} Days</span></div><div class="list-container">`);
                 for (let d = 1; d <= month.days; d++) {
-                    const id = `calendar-${month.name}-d${d}`;
-                    cardHtml += `<label class="item" id="lbl-${id}"><span>${month.name} ${d}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'calendar')"><span class="checkmark"></span></div></label>`;
+                    const id = `${storagePrefix}-${month.name.replace(/\s+/g, '')}-d${d}`;
+                    buffer.push(`<label class="item" id="lbl-${id}"><span>${month.name.split(' ')[0]} ${d}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'calendar')"><span class="checkmark"></span></div></label>`);
                 }
-                cardHtml += `</div></div>`;
+                buffer.push(`</div></div>`);
             });
-            container.innerHTML = cardHtml;
+            container.innerHTML = buffer.join('');
         }
 
         function buildSSCMasterGrid() {
@@ -855,29 +1215,35 @@
             const reasoningContainer = document.getElementById('ssc-reasoning-grid');
             const hindiContainer = document.getElementById('ssc-hindi-grid');
             
-            let mHtml = '';
-            window.STUDY_DATA.ssc_math.forEach((ch) => {
-                const id = `sscm-${ch.replace(/[^a-zA-Z0-9]/g, '')}`;
-                mHtml += `<label class="ssc-item-card ssc-m-item" id="lbl-${id}"><span>${ch}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'ssc')"><span class="checkmark"></span></div></label>`;
-            });
-            if(mathContainer) mathContainer.innerHTML = mHtml;
+            if(mathContainer) {
+                const buffer = [];
+                window.STUDY_DATA.ssc_math.forEach((ch) => {
+                    const id = `sscm-${ch.replace(/[^a-zA-Z0-9]/g, '')}`;
+                    buffer.push(`<label class="ssc-item-card ssc-m-item" id="lbl-${id}"><span>${ch}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'ssc')"><span class="checkmark"></span></div></label>`);
+                });
+                mathContainer.innerHTML = buffer.join('');
+            }
 
-            let rHtml = '';
-            window.STUDY_DATA.ssc_reasoning.forEach((ch) => {
-                const id = `sscr-${ch.replace(/[^a-zA-Z0-9]/g, '')}`;
-                rHtml += `<label class="ssc-item-card ssc-r-item" id="lbl-${id}"><span>${ch}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'ssc')"><span class="checkmark"></span></div></label>`;
-            });
-            if(reasoningContainer) reasoningContainer.innerHTML = rHtml;
+            if(reasoningContainer) {
+                const buffer = [];
+                window.STUDY_DATA.ssc_reasoning.forEach((ch) => {
+                    const id = `sscr-${ch.replace(/[^a-zA-Z0-9]/g, '')}`;
+                    buffer.push(`<label class="ssc-item-card ssc-r-item" id="lbl-${id}"><span>${ch}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'ssc')"><span class="checkmark"></span></div></label>`);
+                });
+                reasoningContainer.innerHTML = buffer.join('');
+            }
 
-            let hHtml = '';
-            window.STUDY_DATA.ssc_hindi.forEach((ch) => {
-                const id = `ssch-${btoa(unescape(encodeURIComponent(ch))).replace(/[^a-zA-Z0-9]/g, '').substring(0, 15)}`;
-                hHtml += `<label class="ssc-item-card ssc-h-item" id="lbl-${id}"><span>${ch}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'ssc')"><span class="checkmark"></span></div></label>`;
-            });
-            if(hindiContainer) hindiContainer.innerHTML = hHtml;
+            if(hindiContainer) {
+                const buffer = [];
+                window.STUDY_DATA.ssc_hindi.forEach((ch) => {
+                    const id = `ssch-${btoa(unescape(encodeURIComponent(ch))).replace(/[^a-zA-Z0-9]/g, '').substring(0, 15)}`;
+                    buffer.push(`<label class="ssc-item-card ssc-h-item" id="lbl-${id}"><span>${ch}</span><div class="checkbox-wrapper"><input type="checkbox" id="${id}" onchange="handleStatusClick(this, 'ssc')"><span class="checkmark"></span></div></label>`);
+                });
+                hindiContainer.innerHTML = buffer.join('');
+            }
         }
 
-        // Live Clock
+        // Live Real-Time Date & Time Clock
         function updateLiveClock() {
             const now = new Date();
             const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -892,13 +1258,17 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             const ampm = hours >= 12 ? 'PM' : 'AM';
             
-            hours = hours % 12;
-            hours = hours ? hours : 12;
+            hours = hours % 12 || 12;
             const strHours = String(hours).padStart(2, '0');
 
             const clockBox = document.getElementById('live-clock-box');
             if(clockBox) {
                 clockBox.innerText = `📅 ${dayName}, ${monthName} ${dateNum} | 🕒 ${strHours}:${minutes}:${seconds} ${ampm}`;
+            }
+
+            const iosClock = document.getElementById('ios-clock-time');
+            if(iosClock) {
+                iosClock.innerText = `${strHours}:${minutes} ${ampm}`;
             }
         }
 
@@ -930,8 +1300,8 @@
         }
 
         function updateSubjectProgress(prefix) {
-            let container = document.getElementById(`${prefix}-section`);
-            if(!container) container = document.getElementById(`ssc-section`);
+            let container = document.getElementById(`tab-${prefix}`);
+            if(!container) container = document.getElementById(`tab-ssc`);
             if(!container) return;
             
             let checkboxes = container.querySelectorAll('input[type="checkbox"]');
@@ -982,7 +1352,7 @@
         function updateDailyGoalText() {
             const goalVal = parseInt(document.getElementById('daily-goal-input').value) || 5;
             const textElement = document.getElementById('goal-progress-text');
-            textElement.innerText = `Classes (Done: ${classesDoneToday}/${goalVal})`;
+            textElement.innerText = `Classes (${classesDoneToday}/${goalVal})`;
             
             if(classesDoneToday >= goalVal) {
                 textElement.style.color = 'var(--success-color)';
@@ -991,17 +1361,16 @@
             }
         }
 
-        // Live Timetable Realtime Engine (Auto Sunday Check & Slot Trackers)
+        // Live Timetable Checker
         function runTimetableRealtimeEngine() {
             const now = new Date();
-            const currentDay = now.getDay(); // 0 is Sunday
+            const currentDay = now.getDay();
             const currentHours = now.getHours();
             const currentMinutes = now.getMinutes();
             const totalCurrentMinutes = (currentHours * 60) + currentMinutes;
 
-            // Auto Sunday Check for Special Day Schedule
             const isSunday = (currentDay === 0);
-            const specialSection = document.getElementById('special-schedule-section');
+            const specialSection = document.getElementById('tab-special');
             const specialSubtitle = document.getElementById('special-day-subtitle');
 
             if (isSunday) {
@@ -1009,17 +1378,16 @@
                 if (specialSubtitle) specialSubtitle.innerText = '🔥 TODAY IS SUNDAY! Special Day Routine Active';
             } else {
                 if (specialSection) specialSection.style.opacity = '0.6';
-                if (specialSubtitle) specialSubtitle.innerText = 'Sunday Off Day Routine (Active Only On Sundays)';
+                if (specialSubtitle) specialSubtitle.innerText = 'Sunday Routine (Active On Sundays)';
             }
 
             const cards = document.querySelectorAll('.time-slot-card');
             let detectedActiveSlot = null;
 
             cards.forEach(card => {
-                // Ignore Special Day Slots on Non-Sundays
                 if (card.classList.contains('special-slot') && !isSunday) {
-                    card.style.borderColor = 'var(--card-border)';
-                    card.style.background = 'var(--card-bg)';
+                    card.style.borderColor = 'var(--ios-border-subtle)';
+                    card.style.background = 'var(--ios-card-glass)';
                     const dot = card.querySelector('.live-dot');
                     if(dot) dot.style.display = 'none';
                     return;
@@ -1045,27 +1413,31 @@
                 const dot = card.querySelector('.live-dot');
                 if (isActive) {
                     card.style.borderColor = 'var(--success-color)';
-                    card.style.background = 'rgba(74, 222, 128, 0.08)';
-                    card.style.boxShadow = '0 0 15px rgba(74, 222, 128, 0.2)';
+                    card.style.background = 'rgba(52, 211, 153, 0.08)';
+                    card.style.boxShadow = '0 0 16px rgba(52, 211, 153, 0.25)';
                     if(dot) dot.style.display = 'block';
                     detectedActiveSlot = title;
                 } else {
-                    card.style.borderColor = 'var(--card-border)';
-                    card.style.background = 'var(--card-bg)';
-                    card.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.2)';
+                    card.style.borderColor = 'var(--ios-border-subtle)';
+                    card.style.background = 'var(--ios-card-glass)';
+                    card.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.25)';
                     if(dot) dot.style.display = 'none';
                 }
             });
 
             const mentorBox = document.getElementById('ai-greetings-box');
+            const islandText = document.getElementById('island-active-text');
+
             if (detectedActiveSlot) {
                 if (activeSlotTitle !== detectedActiveSlot) {
                     activeSlotTitle = detectedActiveSlot;
-                    mentorBox.innerText = `🤖 Active Slot: [${activeSlotTitle}] running now. Focus mode on!`;
+                    mentorBox.innerText = `🤖 Active: [${activeSlotTitle}] slot live.`;
+                    if(islandText) islandText.innerText = `Active Slot: ${activeSlotTitle}`;
                 }
             } else {
                 activeSlotTitle = null;
-                mentorBox.innerText = `🤖 Best of luck for today! 👍 Focus banaye rakhein.`;
+                mentorBox.innerText = `🤖 Best of luck! Focus mode ready.`;
+                if(islandText) islandText.innerText = `Study Suite 17 Pro Max`;
             }
         }
 
@@ -1085,47 +1457,25 @@
                 }
             });
 
-            ['math', 'english', 'reasoning', 'coding', 'calendar', 'ssc', 'book', 'rbook', 'omr'].forEach(prefix => updateSubjectProgress(prefix));
+            ['english', 'math', 'reasoning', 'coding', 'calendar', 'ssc', 'book', 'rbook', 'omr', 'vocab'].forEach(prefix => updateSubjectProgress(prefix));
             calculateGlobalAnalytics();
             updateDailyGoalText();
         }
 
-        // Timer Implementation
-        let timerInterval = null;
-        let elapsedSeconds = 0;
-
-        function toggleStudyTimer() {
-            const btn = document.getElementById('timer-toggle-btn');
-            if(timerInterval) {
-                clearInterval(timerInterval); timerInterval = null;
-                btn.innerText = 'Resume';
-            } else {
-                btn.innerText = 'Pause';
-                timerInterval = setInterval(() => {
-                    elapsedSeconds++;
-                    const hrs = String(Math.floor(elapsedSeconds / 3600)).padStart(2, '0');
-                    const mins = String(Math.floor((elapsedSeconds % 3600) / 60)).padStart(2, '0');
-                    const secs = String(elapsedSeconds % 60).padStart(2, '0');
-                    document.getElementById('timer-display').innerText = `${hrs}:${mins}:${secs}`;
-                }, 1000);
-            }
-        }
-
-        function resetStudyTimer() {
-            clearInterval(timerInterval); timerInterval = null; elapsedSeconds = 0;
-            document.getElementById('timer-display').innerText = '00:00:00';
-            document.getElementById('timer-toggle-btn').innerText = 'Start';
-        }
-
+        // DOM Ready Initializer
         document.addEventListener("DOMContentLoaded", () => {
-            buildStandardGrid('math-grid', window.STUDY_DATA.math, 'math');
             buildStandardGrid('english-grid', window.STUDY_DATA.english, 'english');
+            buildStandardGrid('math-grid', window.STUDY_DATA.math, 'math');
             buildStandardGrid('reasoning-grid', window.STUDY_DATA.reasoning, 'reasoning');
             buildCodingGrid();
-            buildCalendarGrid();
+            
+            buildCustomCalendarGrid('calendar-2026-grid', window.STUDY_DATA.months2026, 'cal26');
+            buildCustomCalendarGrid('calendar-2027-grid', window.STUDY_DATA.months2027, 'cal27');
+            
             buildSSCMasterGrid();
             buildBookGrid('book-grid', window.STUDY_DATA.book_math, 'book');
             buildBookGrid('rbook-grid', window.STUDY_DATA.book_reasoning, 'rbook');
+            buildVocabGrid(); // Vocabulary 20/day builder
             
             buildChapterWiseOmrGrid('omr-math-grid', window.STUDY_DATA.book_math, 'm');
             buildChapterWiseOmrGrid('omr-reasoning-grid', window.STUDY_DATA.book_reasoning, 'r');
