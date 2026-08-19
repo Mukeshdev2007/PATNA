@@ -465,13 +465,15 @@
             border: solid #030712; border-width: 0 2px 2px 0; transform: rotate(45deg);
         }
 
+        /* COMPLETED STYLE - CLEAN (NO CROSS/LINE-THROUGH) */
         .item.completed, .coding-item-card.completed, .ssc-item-card.completed { 
             background: var(--success-bg) !important; 
             border-color: rgba(52, 211, 153, 0.4) !important; 
         }
 
         .item.completed span, .coding-item-card.completed span, .ssc-item-card.completed span { 
-            text-decoration: line-through; opacity: 0.6; 
+            text-decoration: none !important; /* Cross/Line-through completely removed */
+            opacity: 0.95; 
         }
 
         /* OMR iOS Styles */
@@ -1361,7 +1363,7 @@
             }
         }
 
-        // Live Timetable Checker
+        // Live Timetable Checker (Auto-Sunday Adaptive)
         function runTimetableRealtimeEngine() {
             const now = new Date();
             const currentDay = now.getDay();
@@ -1462,7 +1464,7 @@
             updateDailyGoalText();
         }
 
-        // DOM Ready Initializer
+        // Initialize on DOM Ready
         document.addEventListener("DOMContentLoaded", () => {
             buildStandardGrid('english-grid', window.STUDY_DATA.english, 'english');
             buildStandardGrid('math-grid', window.STUDY_DATA.math, 'math');
@@ -1475,7 +1477,7 @@
             buildSSCMasterGrid();
             buildBookGrid('book-grid', window.STUDY_DATA.book_math, 'book');
             buildBookGrid('rbook-grid', window.STUDY_DATA.book_reasoning, 'rbook');
-            buildVocabGrid(); // Vocabulary 20/day builder
+            buildVocabGrid();
             
             buildChapterWiseOmrGrid('omr-math-grid', window.STUDY_DATA.book_math, 'm');
             buildChapterWiseOmrGrid('omr-reasoning-grid', window.STUDY_DATA.book_reasoning, 'r');
