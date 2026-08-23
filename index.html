@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>iPhone 17 Pro Max - Ultimate Study Suite 2026-2027</title>
+    <!-- TensorFlow.js & COCO-SSD AI Computer Vision Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"></script>
     <style>
         :root {
             /* iPhone 17 Pro Max Titanium & iOS Deep Space Palette */
@@ -29,6 +32,8 @@
             --omr-color: #818cf8;
             --special-color: #ec4899;
             --vocab-color: #38bdf8;
+            --countdown-color: #f43f5e;
+            --camera-color: #10b981;
             --success-color: #34d399;
             --success-bg: rgba(52, 211, 153, 0.18);
             --timetable-color: #10b981;
@@ -472,8 +477,216 @@
         }
 
         .item.completed span, .coding-item-card.completed span, .ssc-item-card.completed span { 
-            text-decoration: none !important; /* Cross/Line-through completely removed */
+            text-decoration: none !important;
             opacity: 0.95; 
+        }
+
+        /* EXAM COUNTDOWN STYLES */
+        .countdown-input-box {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .countdown-input-field {
+            background: rgba(0, 0, 0, 0.4);
+            border: 0.5px solid var(--ios-border-subtle);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            outline: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .countdown-input-field:focus {
+            border-color: var(--countdown-color);
+            box-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
+        }
+
+        .countdown-submit-btn {
+            background: linear-gradient(135deg, #f43f5e, #e11d48);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
+        }
+
+        .countdown-submit-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.6);
+        }
+
+        .countdown-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            width: 100%;
+            max-width: 700px;
+            margin-top: 15px;
+        }
+
+        .countdown-unit-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 0.5px solid rgba(244, 63, 94, 0.3);
+            border-radius: 18px;
+            padding: 18px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .unit-num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--countdown-color);
+            font-family: ui-monospace, monospace;
+            text-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+        }
+
+        .unit-lbl {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* AI CAMERA FOCUS TRACKER STYLES */
+        .camera-container-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            background: var(--ios-card-glass);
+            border: 0.5px solid var(--ios-border-subtle);
+            border-radius: 24px;
+            padding: 24px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+            gap: 20px;
+        }
+
+        .cam-preview-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            height: 380px;
+            background: #000;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cam-video-element {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cam-canvas-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .cam-controls-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .cam-btn-start {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .cam-btn-stop {
+            background: linear-gradient(135deg, #f43f5e, #dc2626);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(244, 63, 94, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .cam-btn-start:hover, .cam-btn-stop:hover {
+            transform: scale(1.03);
+        }
+
+        .cam-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 14px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .cam-stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 0.5px solid var(--ios-border-subtle);
+            border-radius: 16px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .cam-stat-val {
+            font-size: 1.6rem;
+            font-weight: 900;
+            font-family: ui-monospace, monospace;
+            margin-top: 4px;
+        }
+
+        .cam-stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge-focus {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: inline-block;
         }
 
         /* OMR iOS Styles */
@@ -551,6 +764,8 @@
                 display: block;
             }
             .main-title { font-size: 2.1rem; }
+            .countdown-cards-grid { grid-template-columns: repeat(2, 1fr); }
+            .cam-preview-wrapper { height: 260px; }
         }
 
         @media (max-width: 600px) {
@@ -574,6 +789,12 @@
         <div class="sidebar-nav-list">
             <button class="nav-sidebar-btn active" onclick="switchTab('tab-schedule', this)">
                 <span>📅</span> <span>Daily Schedule</span>
+            </button>
+            <button class="nav-sidebar-btn" style="color: var(--camera-color)" onclick="switchTab('tab-camera', this)">
+                <span>📷</span> <span>AI Focus Camera</span>
+            </button>
+            <button class="nav-sidebar-btn" style="color: var(--countdown-color)" onclick="switchTab('tab-countdown', this)">
+                <span>⏳</span> <span>Exam Countdown</span>
             </button>
             <button class="nav-sidebar-btn" style="color: var(--timetable-color)" onclick="switchTab('tab-night', this)">
                 <span>🌙</span> <span>Night Routine</span>
@@ -676,7 +897,87 @@
             </div>
         </div>
 
-        <!-- TAB 2: NIGHT ROUTINE -->
+        <!-- TAB 2: AI CAMERA FOCUS TRACKER (NEW) -->
+        <div class="tab-view" id="tab-camera">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--camera-color);">AI Camera Focus Tracker</h1>
+                <h2 class="sub-title">Real-Time Chair Absence & Mobile Detection</h2>
+            </div>
+
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <div class="camera-container-card">
+                    <div id="ai-status-badge" class="status-badge-focus" style="background: rgba(148, 163, 184, 0.2); color: var(--text-secondary);">
+                        📷 Camera Inactive - Click "Start Camera" Below
+                    </div>
+
+                    <div class="cam-preview-wrapper">
+                        <video id="webcam-video" class="cam-video-element" autoplay playsinline muted></video>
+                        <canvas id="webcam-canvas" class="cam-canvas-overlay"></canvas>
+                    </div>
+
+                    <div class="cam-controls-row">
+                        <button class="cam-btn-start" id="btn-start-cam" onclick="startAiCamera()">Start AI Focus Camera 📷</button>
+                        <button class="cam-btn-stop" id="btn-stop-cam" onclick="stopAiCamera()">Stop Camera 🛑</button>
+                    </div>
+
+                    <div class="cam-stats-grid">
+                        <div class="cam-stat-card">
+                            <span class="cam-stat-lbl">Focus Duration</span>
+                            <span class="cam-stat-val" id="cam-stat-focused-time" style="color: var(--camera-color);">00:00:00</span>
+                        </div>
+                        <div class="cam-stat-card">
+                            <span class="cam-stat-lbl">Left Chair Count</span>
+                            <span class="cam-stat-val" id="cam-stat-absences" style="color: var(--calendar-color);">0 times</span>
+                        </div>
+                        <div class="cam-stat-card">
+                            <span class="cam-stat-lbl">Mobile Usage Time</span>
+                            <span class="cam-stat-val" id="cam-stat-phone-time" style="color: var(--countdown-color);">00:00:00</span>
+                        </div>
+                        <div class="cam-stat-card">
+                            <span class="cam-stat-lbl">Focus Ratio</span>
+                            <span class="cam-stat-val" id="cam-stat-score" style="color: var(--math-color);">100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: EXAM COUNTDOWN -->
+        <div class="tab-view" id="tab-countdown">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--countdown-color);">Exam Countdown</h1>
+                <h2 class="sub-title" id="countdown-exam-title">Target Exam Live Countdown</h2>
+            </div>
+            
+            <div class="milestone-card" style="height: auto; min-height: 380px; align-items: center; justify-content: center; gap: 24px;">
+                <div class="countdown-input-box">
+                    <input type="text" id="exam-name-input" class="countdown-input-field" placeholder="Exam Name (e.g. SSC GD 2027)">
+                    <input type="date" id="exam-date-picker" class="countdown-input-field">
+                    <button class="countdown-submit-btn" onclick="saveExamTarget()">Set Target ⏳</button>
+                </div>
+
+                <div class="countdown-cards-grid">
+                    <div class="countdown-unit-box">
+                        <span class="unit-num" id="cd-days">00</span>
+                        <span class="unit-lbl">Days</span>
+                    </div>
+                    <div class="countdown-unit-box">
+                        <span class="unit-num" id="cd-hours">00</span>
+                        <span class="unit-lbl">Hours</span>
+                    </div>
+                    <div class="countdown-unit-box">
+                        <span class="unit-num" id="cd-mins">00</span>
+                        <span class="unit-lbl">Minutes</span>
+                    </div>
+                    <div class="countdown-unit-box">
+                        <span class="unit-num" id="cd-secs">00</span>
+                        <span class="unit-lbl">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: NIGHT ROUTINE -->
         <div class="tab-view" id="tab-night">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--timetable-color);">Night Study Timetable</h1>
@@ -693,7 +994,7 @@
             </div>
         </div>
 
-        <!-- TAB 3: SPECIAL DAY (SUNDAY) -->
+        <!-- TAB 5: SPECIAL DAY (SUNDAY) -->
         <div class="tab-view" id="tab-special">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--special-color);">Special Day Schedule</h1>
@@ -712,7 +1013,7 @@
             </div>
         </div>
 
-        <!-- TAB 4: ENGLISH -->
+        <!-- TAB 6: ENGLISH -->
         <div class="tab-view" id="tab-english">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--english-color);">English Classes</h1>
@@ -722,7 +1023,7 @@
             <div class="tracker-grid" id="english-grid"></div>
         </div>
 
-        <!-- TAB 5: MATH -->
+        <!-- TAB 7: MATH -->
         <div class="tab-view" id="tab-math">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--math-color);">Math Classes</h1>
@@ -732,7 +1033,7 @@
             <div class="tracker-grid" id="math-grid"></div>
         </div>
 
-        <!-- TAB 6: REASONING -->
+        <!-- TAB 8: REASONING -->
         <div class="tab-view" id="tab-reasoning">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--reasoning-color);">Reasoning Classes</h1>
@@ -742,7 +1043,7 @@
             <div class="tracker-grid" id="reasoning-grid"></div>
         </div>
 
-        <!-- TAB 7: CODING -->
+        <!-- TAB 9: CODING -->
         <div class="tab-view" id="tab-coding">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--coding-color);">Coding & Tech</h1>
@@ -752,7 +1053,7 @@
             <div class="coding-grid-special" id="coding-grid"></div>
         </div>
 
-        <!-- TAB 8: 2026-2027 FULL CALENDAR TRACKER -->
+        <!-- TAB 10: 2026-2027 FULL CALENDAR TRACKER -->
         <div class="tab-view" id="tab-tracker">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--calendar-color);">Monthly Tracker (2026 - 2027)</h1>
@@ -767,7 +1068,7 @@
             <div class="tracker-grid" id="calendar-2027-grid"></div>
         </div>
 
-        <!-- TAB 9: SSC GD 2027 -->
+        <!-- TAB 11: SSC GD 2027 -->
         <div class="tab-view" id="tab-ssc">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--ssc-color);">SSC GD 2027 Syllabus</h1>
@@ -782,7 +1083,7 @@
             <div class="coding-grid-special" id="ssc-hindi-grid"></div>
         </div>
 
-        <!-- TAB 10: MATH BOOK -->
+        <!-- TAB 12: MATH BOOK -->
         <div class="tab-view" id="tab-mbook">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--book-color);">Math Book Tracker</h1>
@@ -792,7 +1093,7 @@
             <div class="tracker-grid" id="book-grid"></div>
         </div>
 
-        <!-- TAB 11: REASONING BOOK -->
+        <!-- TAB 13: REASONING BOOK -->
         <div class="tab-view" id="tab-rbook">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--rbook-color);">Reasoning Book Tracker</h1>
@@ -802,7 +1103,7 @@
             <div class="tracker-grid" id="rbook-grid"></div>
         </div>
 
-        <!-- TAB 12: OMR SHEETS -->
+        <!-- TAB 14: OMR SHEETS -->
         <div class="tab-view" id="tab-omr">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--omr-color);">OMR Practice Sheets</h1>
@@ -815,7 +1116,7 @@
             <div class="tracker-grid" id="omr-reasoning-grid"></div>
         </div>
 
-        <!-- TAB 13: VOCABULARY SERIES (20 WORDS / DAY) -->
+        <!-- TAB 15: VOCABULARY SERIES (20 WORDS / DAY) -->
         <div class="tab-view" id="tab-vocab">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--vocab-color);">Vocabulary Series</h1>
@@ -1007,6 +1308,249 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Exam Countdown Logic
+        let countdownTimerInterval = null;
+
+        function saveExamTarget() {
+            const nameInput = document.getElementById('exam-name-input').value;
+            const dateInput = document.getElementById('exam-date-picker').value;
+
+            if (!dateInput) {
+                alert("Please select a target exam date!");
+                return;
+            }
+
+            localStorage.setItem('exam_target_name', nameInput || 'SSC GD 2027 Exam');
+            localStorage.setItem('exam_target_date', dateInput);
+
+            startExamCountdown();
+        }
+
+        function startExamCountdown() {
+            const savedName = localStorage.getItem('exam_target_name') || 'SSC GD 2027 Exam';
+            const savedDate = localStorage.getItem('exam_target_date');
+
+            if (savedName) document.getElementById('exam-name-input').value = savedName;
+            if (savedDate) document.getElementById('exam-date-picker').value = savedDate;
+
+            const titleEl = document.getElementById('countdown-exam-title');
+            if (titleEl) titleEl.innerText = `Target: ${savedName}`;
+
+            if (!savedDate) return;
+
+            if (countdownTimerInterval) clearInterval(countdownTimerInterval);
+
+            function updateTimer() {
+                const targetTime = new Date(savedDate + "T00:00:00").getTime();
+                const nowTime = new Date().getTime();
+                const diff = targetTime - nowTime;
+
+                if (diff <= 0) {
+                    document.getElementById('cd-days').innerText = '00';
+                    document.getElementById('cd-hours').innerText = '00';
+                    document.getElementById('cd-mins').innerText = '00';
+                    document.getElementById('cd-secs').innerText = '00';
+                    if (titleEl) titleEl.innerText = `🎉 ${savedName} Day Today! Good Luck!`;
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
+                document.getElementById('cd-secs').innerText = String(secs).padStart(2, '0');
+            }
+
+            updateTimer();
+            countdownTimerInterval = setInterval(updateTimer, 1000);
+        }
+
+        // AI CAMERA FOCUS TRACKER LOGIC
+        let cocoModel = null;
+        let camStream = null;
+        let isCamRunning = false;
+        let camDetectionInterval = null;
+
+        let focusedSecondsTotal = parseInt(localStorage.getItem('ai_cam_focused_sec')) || 0;
+        let phoneUsageSecondsTotal = parseInt(localStorage.getItem('ai_cam_phone_sec')) || 0;
+        let chairAbsenceCount = parseInt(localStorage.getItem('ai_cam_absences')) || 0;
+
+        let wasPersonPresentLastFrame = true;
+        let camTimerInterval = null;
+
+        async function startAiCamera() {
+            const badge = document.getElementById('ai-status-badge');
+            badge.innerText = "⏳ Loading AI Vision Model...";
+            badge.style.background = "rgba(245, 158, 11, 0.2)";
+            badge.style.color = "var(--ssc-color)";
+
+            try {
+                if (!cocoModel) {
+                    cocoModel = await cocoSsd.load();
+                }
+
+                const video = document.getElementById('webcam-video');
+                camStream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 }, audio: false });
+                video.srcObject = camStream;
+
+                await new Promise((resolve) => {
+                    video.onloadedmetadata = () => { resolve(); };
+                });
+
+                isCamRunning = true;
+                badge.innerText = "🟢 AI Camera Active - Monitoring Focus";
+                badge.style.background = "rgba(52, 211, 153, 0.2)";
+                badge.style.color = "var(--success-color)";
+
+                if (camTimerInterval) clearInterval(camTimerInterval);
+                camTimerInterval = setInterval(runCamSecondTick, 1000);
+
+                runDetectionLoop();
+            } catch (err) {
+                console.error("Camera Access Error:", err);
+                badge.innerText = "❌ Camera Error: Permission Denied or Device Unavailable";
+                badge.style.background = "rgba(244, 63, 94, 0.2)";
+                badge.style.color = "var(--countdown-color)";
+            }
+        }
+
+        function stopAiCamera() {
+            isCamRunning = false;
+            if (camStream) {
+                camStream.getTracks().forEach(track => track.stop());
+                camStream = null;
+            }
+            if (camTimerInterval) clearInterval(camTimerInterval);
+
+            const badge = document.getElementById('ai-status-badge');
+            badge.innerText = "📷 Camera Stopped";
+            badge.style.background = "rgba(148, 163, 184, 0.2)";
+            badge.style.color = "var(--text-secondary)";
+
+            const canvas = document.getElementById('webcam-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        let currentPersonDetected = false;
+        let currentPhoneDetected = false;
+
+        async function runDetectionLoop() {
+            if (!isCamRunning) return;
+
+            const video = document.getElementById('webcam-video');
+            const canvas = document.getElementById('webcam-canvas');
+            if (!video || video.readyState !== 4) {
+                requestAnimationFrame(runDetectionLoop);
+                return;
+            }
+
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 380;
+            const ctx = canvas.getContext('2d');
+
+            const predictions = await cocoModel.detect(video);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let personFound = false;
+            let phoneFound = false;
+
+            predictions.forEach(pred => {
+                if (pred.score > 0.45) {
+                    const [x, y, width, height] = pred.bbox;
+
+                    if (pred.class === 'person') {
+                        personFound = true;
+                        ctx.strokeStyle = '#10b981';
+                        ctx.lineWidth = 3;
+                        ctx.strokeRect(x, y, width, height);
+
+                        ctx.fillStyle = '#10b981';
+                        ctx.font = 'bold 14px sans-serif';
+                        ctx.fillText(`👤 Student Focused (${Math.round(pred.score * 100)}%)`, x, y > 20 ? y - 6 : 15);
+                    }
+
+                    if (pred.class === 'cell phone') {
+                        phoneFound = true;
+                        ctx.strokeStyle = '#f43f5e';
+                        ctx.lineWidth = 3;
+                        ctx.strokeRect(x, y, width, height);
+
+                        ctx.fillStyle = '#f43f5e';
+                        ctx.font = 'bold 14px sans-serif';
+                        ctx.fillText(`📱 Phone Distraction! (${Math.round(pred.score * 100)}%)`, x, y > 20 ? y - 6 : 15);
+                    }
+                }
+            });
+
+            // Chair Absence Transition Check
+            if (wasPersonPresentLastFrame && !personFound) {
+                chairAbsenceCount++;
+                localStorage.setItem('ai_cam_absences', chairAbsenceCount);
+                document.getElementById('cam-stat-absences').innerText = `${chairAbsenceCount} times`;
+            }
+
+            wasPersonPresentLastFrame = personFound;
+            currentPersonDetected = personFound;
+            currentPhoneDetected = phoneFound;
+
+            const badge = document.getElementById('ai-status-badge');
+            if (phoneFound) {
+                badge.innerText = "⚠️ Phone Detected! Stay Focused!";
+                badge.style.background = "rgba(244, 63, 94, 0.25)";
+                badge.style.color = "var(--countdown-color)";
+            } else if (!personFound) {
+                badge.innerText = "🚪 Away From Chair";
+                badge.style.background = "rgba(251, 146, 60, 0.25)";
+                badge.style.color = "var(--calendar-color)";
+            } else {
+                badge.innerText = "🟢 Student Focused at Desk";
+                badge.style.background = "rgba(52, 211, 153, 0.2)";
+                badge.style.color = "var(--success-color)";
+            }
+
+            if (isCamRunning) {
+                setTimeout(runDetectionLoop, 300); // AI Frame sampling every 300ms
+            }
+        }
+
+        function runCamSecondTick() {
+            if (!isCamRunning) return;
+
+            if (currentPersonDetected && !currentPhoneDetected) {
+                focusedSecondsTotal++;
+                localStorage.setItem('ai_cam_focused_sec', focusedSecondsTotal);
+            }
+
+            if (currentPhoneDetected) {
+                phoneUsageSecondsTotal++;
+                localStorage.setItem('ai_cam_phone_sec', phoneUsageSecondsTotal);
+            }
+
+            updateCamUiDisplay();
+        }
+
+        function formatSecondsToHms(sec) {
+            const hrs = Math.floor(sec / 3600);
+            const mins = Math.floor((sec % 3600) / 60);
+            const secs = sec % 60;
+            return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function updateCamUiDisplay() {
+            document.getElementById('cam-stat-focused-time').innerText = formatSecondsToHms(focusedSecondsTotal);
+            document.getElementById('cam-stat-phone-time').innerText = formatSecondsToHms(phoneUsageSecondsTotal);
+            document.getElementById('cam-stat-absences').innerText = `${chairAbsenceCount} times`;
+
+            const totalActive = focusedSecondsTotal + phoneUsageSecondsTotal;
+            const focusRatio = totalActive > 0 ? Math.round((focusedSecondsTotal / totalActive) * 100) : 100;
+            document.getElementById('cam-stat-score').innerText = `${focusRatio}%`;
+        }
+
         // Batch Rendering Helpers
         function buildStandardGrid(containerId, chaptersList, storagePrefix) {
             const container = document.getElementById(containerId);
@@ -1043,7 +1587,6 @@
             container.innerHTML = buffer.join('');
         }
 
-        // Vocabulary 20 Words / Day Builder
         function buildVocabGrid() {
             const container = document.getElementById('vocab-grid');
             if(!container) return;
@@ -1363,7 +1906,7 @@
             }
         }
 
-        // Live Timetable Checker (Auto-Sunday Adaptive)
+        // Live Timetable Checker
         function runTimetableRealtimeEngine() {
             const now = new Date();
             const currentDay = now.getDay();
@@ -1462,6 +2005,7 @@
             ['english', 'math', 'reasoning', 'coding', 'calendar', 'ssc', 'book', 'rbook', 'omr', 'vocab'].forEach(prefix => updateSubjectProgress(prefix));
             calculateGlobalAnalytics();
             updateDailyGoalText();
+            updateCamUiDisplay();
         }
 
         // Initialize on DOM Ready
@@ -1485,6 +2029,8 @@
             restoreSavedState();
             restoreChapterOmrState(window.STUDY_DATA.book_math, 'm');
             restoreChapterOmrState(window.STUDY_DATA.book_reasoning, 'r');
+            
+            startExamCountdown();
             
             updateLiveClock();
             setInterval(updateLiveClock, 1000);
