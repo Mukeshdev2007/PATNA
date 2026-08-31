@@ -22,7 +22,7 @@
             /* High-Energy Neon Accents */
             --english-color: #a78bfa;
             --math-color: #38bdf8;
-            --reasoning-color: #f472b6;
+            --reasoning-color: #34d399;
             --coding-color: #2dd4bf;
             --calendar-color: #fb923c;
             --ssc-color: #f59e0b;
@@ -30,15 +30,16 @@
             --book-color: #a3e635;
             --rbook-color: #06b6d4;
             --omr-color: #818cf8;
-            --special-color: #ec4899;
+            --special-color: #10b981;
             --vocab-color: #38bdf8;
-            --countdown-color: rgba(52, 211, 153, 0.45);
+            --countdown-color: #48e5a3;
             --camera-color: #10b981;
             --success-color: #34d399;
             --success-bg: rgba(52, 211, 153, 0.18);
             --timetable-color: #10b981;
-            --quote-color: #fb7185;
+            --quote-color: #34d399;
             --ai-mentor-color: #c084fc;
+            --profile-color: #38bdf8;
         }
 
         * {
@@ -52,7 +53,7 @@
             background-image: 
                 radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.18), transparent 40%),
                 radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.14), transparent 45%),
-                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.12), transparent 50%);
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.12), transparent 50%);
             background-attachment: fixed;
             color: var(--text-primary);
             margin: 0;
@@ -293,9 +294,9 @@
 
         .quote-banner {
             width: 100%; 
-            background: rgba(251, 113, 133, 0.06); 
+            background: rgba(52, 211, 153, 0.06); 
             backdrop-filter: blur(16px);
-            border: 0.5px solid rgba(251, 113, 133, 0.25); 
+            border: 0.5px solid rgba(52, 211, 153, 0.25); 
             border-radius: 16px; 
             padding: 12px 18px; 
             text-align: center;
@@ -470,7 +471,7 @@
             border: solid #030712; border-width: 0 2px 2px 0; transform: rotate(45deg);
         }
 
-        /* COMPLETED STYLE - CLEAN (NO CROSS/LINE-THROUGH) */
+        /* COMPLETED STYLE - CLEAN */
         .item.completed, .coding-item-card.completed, .ssc-item-card.completed { 
             background: var(--success-bg) !important; 
             border-color: rgba(52, 211, 153, 0.4) !important; 
@@ -481,87 +482,383 @@
             opacity: 0.95; 
         }
 
-        /* EXAM COUNTDOWN STYLES */
-        .countdown-input-box {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
+        /* ================= EXAM COUNTDOWN STYLES ================= */
+        .countdown-view-container {
             width: 100%;
-            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+        }
+
+        .countdown-main-heading {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #48e5a3;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(72, 229, 163, 0.45);
+        }
+
+        .countdown-sub-heading {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0;
+        }
+
+        .countdown-glass-panel {
+            background: rgba(13, 20, 36, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(72, 229, 163, 0.05);
+            backdrop-filter: blur(20px);
+            width: 100%;
+            max-width: 780px;
         }
 
         .countdown-input-field {
-            background: rgba(0, 0, 0, 0.4);
-            border: 0.5px solid var(--ios-border-subtle);
-            color: #fff;
-            padding: 10px 16px;
+            background: #060a12;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            padding: 12px 18px;
             border-radius: 12px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-weight: 600;
             outline: none;
-            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
         }
 
         .countdown-input-field:focus {
-            border-color: var(--countdown-color);
-            box-shadow: 0 0 10px rgba(52, 211, 153, 0.45);
+            border-color: #48e5a3;
+            box-shadow: 0 0 12px rgba(72, 229, 163, 0.35);
+        }
+
+        #exam-name-input {
+            flex: 1.4;
+            min-width: 220px;
+        }
+
+        #exam-date-picker {
+            flex: 1;
+            min-width: 160px;
+            color-scheme: dark;
         }
 
         .countdown-submit-btn {
-            background: linear-gradient(135deg, #f43f5e, #e11d48);
-            color: #fff;
+            background: linear-gradient(135deg, #10b981, #2dd4bf);
+            color: #03130e;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.9rem;
+            font-weight: 800;
+            font-size: 0.92rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow:0 0 15px rgba(16, 185, 129, 0.4);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.45);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
 
         .countdown-submit-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(244, 63, 94, 0.6);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 28px rgba(72, 229, 163, 0.7);
+        }
+
+        .countdown-submit-btn:active {
+            transform: scale(0.98);
         }
 
         .countdown-cards-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            gap: 18px;
             width: 100%;
-            max-width: 700px;
-            margin-top: 15px;
+            max-width: 780px;
+            margin-top: 6px;
         }
 
         .countdown-unit-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 0.5px solid rgba(244, 63, 94, 0.3);
-            border-radius: 18px;
-            padding: 18px 10px;
+            background: #09101d;
+            border: 1.5px solid #2dd4bf;
+            border-radius: 20px;
+            padding: 24px 12px 18px 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 25px rgba(45, 212, 191, 0.25), inset 0 0 15px rgba(45, 212, 191, 0.04);
+            transition: all 0.25s ease;
+        }
+
+        .countdown-unit-box:hover {
+            transform: translateY(-4px);
+            border-color: #48e5a3;
+            box-shadow: 0 0 35px rgba(72, 229, 163, 0.5), inset 0 0 20px rgba(72, 229, 163, 0.1);
         }
 
         .unit-num {
-            font-size: 2.5rem;
+            font-size: 3.2rem;
             font-weight: 900;
-            color: var(--countdown-color);
-            font-family: ui-monospace, monospace;
-            text-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+            color: #48e5a3;
+            font-family: ui-monospace, "SF Pro Display", monospace;
+            text-shadow: 0 0 18px rgba(72, 229, 163, 0.65);
+            line-height: 1;
         }
 
         .unit-lbl {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 700;
+            font-size: 0.78rem;
+            color: #f1f5f9;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            margin-top: 12px;
+        }
+
+        .countdown-status-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #48e5a3;
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-top: 8px;
+            text-shadow: 0 0 12px rgba(72, 229, 163, 0.5);
+            text-align: center;
+        }
+
+        /* ================= STUDENT PROFILE STYLES ================= */
+        .profile-container-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 24px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .profile-card-preview {
+            background: var(--ios-card-glass);
+            border: 1px solid var(--ios-border-subtle);
+            border-radius: 24px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card-preview::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 90px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(52, 211, 153, 0.25));
+            border-bottom: 0.5px solid var(--ios-border-subtle);
+        }
+
+        .profile-avatar-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            margin-top: 25px;
+            background: #0b1329;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .profile-avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #38bdf8;
+            font-size: 0.65rem;
+            text-align: center;
+            padding: 4px 0;
+            font-weight: 700;
+        }
+
+        .profile-name-disp {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 14px 0 2px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .profile-dream-tag {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--success-color);
+            border: 0.5px solid rgba(52, 211, 153, 0.35);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .profile-meta-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+            padding-top: 14px;
+        }
+
+        .profile-meta-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.84rem;
+        }
+
+        .profile-meta-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .profile-meta-val {
+            color: #fff;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .profile-form-card {
+            background: var(--ios-card-glass);
+            border: 1px solid var(--ios-border-subtle);
+            border-radius: 24px;
+            padding: 26px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-field-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .form-input-control {
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            padding: 11px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-input-control:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+        }
+
+        .exam-prep-chips-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
             margin-top: 4px;
+        }
+
+        .exam-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 7px 14px;
+            border-radius: 18px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .exam-chip:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--profile-color);
+        }
+
+        .exam-chip.active {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+            color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+            font-weight: 700;
+        }
+
+        .profile-save-btn {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #030712;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .profile-save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.6);
         }
 
         /* AI CAMERA FOCUS TRACKER STYLES */
@@ -739,6 +1036,7 @@
             :root { --sidebar-width: 220px; }
             .main-app-area { padding-top: 150px; }
             .ios-top-bar { left: var(--sidebar-width); }
+            .profile-container-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -764,13 +1062,17 @@
                 display: block;
             }
             .main-title { font-size: 2.1rem; }
+            .countdown-main-heading { font-size: 1.5rem; }
             .countdown-cards-grid { grid-template-columns: repeat(2, 1fr); }
             .cam-preview-wrapper { height: 260px; }
+            .form-grid-2col { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 600px) {
             .main-app-area { padding-top: 175px; }
             .tracker-grid, .coding-grid-special { grid-template-columns: 1fr; }
+            .countdown-glass-panel { flex-direction: column; align-items: stretch; }
+            .countdown-submit-btn { justify-content: center; }
         }
     </style>
 </head>
@@ -787,6 +1089,10 @@
         </div>
 
         <div class="sidebar-nav-list">
+            <!-- NEW STUDENT PROFILE TAB -->
+            <button class="nav-sidebar-btn" style="color: var(--profile-color);" onclick="switchTab('tab-profile', this)">
+                <span>👤</span> <span>Student Profile</span>
+            </button>
             <button class="nav-sidebar-btn active" onclick="switchTab('tab-schedule', this)">
                 <span>📅</span> <span>Daily Schedule</span>
             </button>
@@ -808,7 +1114,7 @@
             <button class="nav-sidebar-btn" onclick="switchTab('tab-math', this)">
                 <span>🔢</span> <span>Math Classes</span>
             </button>
-            <button class="nav-sidebar-btn" onclick="switchTab('tab-reasoning', this)">
+            <button class="nav-sidebar-btn" style="color: var(--reasoning-color);" onclick="switchTab('tab-reasoning', this)">
                 <span>🧠</span> <span>Reasoning Classes</span>
             </button>
             <button class="nav-sidebar-btn" onclick="switchTab('tab-coding', this)">
@@ -881,6 +1187,128 @@
             <div class="quote-banner"><p class="quote-text">"If you want to become a king, learn by working hard like a slave."</p></div>
         </div>
 
+        <!-- TAB 0: STUDENT PROFILE -->
+        <div class="tab-view" id="tab-profile">
+            <div class="header-container">
+                <h1 class="main-title" style="color: var(--profile-color);">Student Profile</h1>
+                <h2 class="sub-title">Academic Identity & Examination Targets</h2>
+            </div>
+
+            <div class="profile-container-grid">
+                <!-- LIVE PREVIEW ID CARD -->
+                <div class="profile-card-preview">
+                    <input type="file" id="student-photo-input" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+                    <div class="profile-avatar-wrapper" onclick="document.getElementById('student-photo-input').click()" title="Click to Upload Photo">
+                        <img id="profile-display-img" class="profile-avatar-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='%239ca3af'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>" alt="Student Photo">
+                        <div class="profile-avatar-overlay">📷 UPLOAD</div>
+                    </div>
+
+                    <h3 class="profile-name-disp" id="disp-student-name">Mukesh Kumar</h3>
+                    <div class="profile-dream-tag" id="disp-student-dream">Dream Job: Software Engineer / Officer</div>
+
+                    <div class="profile-meta-list">
+                        <div class="profile-meta-item">
+                            <span class="profile-meta-label">Roll Number:</span>
+                            <span class="profile-meta-val" id="disp-student-roll">---</span>
+                        </div>
+                        <div class="profile-meta-item">
+                            <span class="profile-meta-label">ID Number:</span>
+                            <span class="profile-meta-val" id="disp-student-id">---</span>
+                        </div>
+                        <div class="profile-meta-item">
+                            <span class="profile-meta-label">University:</span>
+                            <span class="profile-meta-val" id="disp-student-uni">---</span>
+                        </div>
+                        <div class="profile-meta-item">
+                            <span class="profile-meta-label">Course:</span>
+                            <span class="profile-meta-val" id="disp-student-course">---</span>
+                        </div>
+                        <div class="profile-meta-item">
+                            <span class="profile-meta-label">Mobile:</span>
+                            <span class="profile-meta-val" id="disp-student-mobile">---</span>
+                        </div>
+                        <div class="profile-meta-item">
+                            <span class="profile-meta-label">Target Year:</span>
+                            <span class="profile-meta-val" id="disp-student-year">2026 - 2027</span>
+                        </div>
+                        <div class="profile-meta-item" style="flex-direction: column; gap: 4px; margin-top: 6px;">
+                            <span class="profile-meta-label">Target Exams:</span>
+                            <span class="profile-meta-val" id="disp-student-prep" style="text-align: left; color: var(--profile-color); font-size: 0.78rem;">None selected</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EDIT PROFILE FORM -->
+                <div class="profile-form-card">
+                    <h3 style="margin: 0; font-size: 1.2rem; color: #fff; border-bottom: 0.5px solid rgba(255,255,255,0.1); padding-bottom: 8px;">Edit Profile Information</h3>
+                    
+                    <div class="form-grid-2col">
+                        <div class="form-field-group">
+                            <label class="form-field-label">Student Name</label>
+                            <input type="text" id="input-name" class="form-input-control" placeholder="Enter Full Name">
+                        </div>
+                        <div class="form-field-group">
+                            <label class="form-field-label">Roll Number</label>
+                            <input type="text" id="input-roll" class="form-input-control" placeholder="Enter Roll Number">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2col">
+                        <div class="form-field-group">
+                            <label class="form-field-label">ID Number</label>
+                            <input type="text" id="input-id" class="form-input-control" placeholder="College / Student ID">
+                        </div>
+                        <div class="form-field-group">
+                            <label class="form-field-label">Student Mobile Number</label>
+                            <input type="tel" id="input-mobile" class="form-input-control" placeholder="+91 XXXXX XXXXX">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2col">
+                        <div class="form-field-group">
+                            <label class="form-field-label">University / Institute</label>
+                            <input type="text" id="input-university" class="form-input-control" placeholder="e.g. Patliputra University / AKU / CIMAGE">
+                        </div>
+                        <div class="form-field-group">
+                            <label class="form-field-label">Course / Degree</label>
+                            <input type="text" id="input-course" class="form-input-control" placeholder="e.g. BCA / B.Tech / B.Sc">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2col">
+                        <div class="form-field-group">
+                            <label class="form-field-label">Examination Target Year</label>
+                            <input type="text" id="input-target-year" class="form-input-control" placeholder="e.g. 2026 / 2027">
+                        </div>
+                        <div class="form-field-group">
+                            <label class="form-field-label">Dream Job</label>
+                            <input type="text" id="input-dream-job" class="form-input-control" placeholder="e.g. Software Engineer / SSC CGL ASO / CAPF">
+                        </div>
+                    </div>
+
+                    <div class="form-field-group">
+                        <label class="form-field-label">Examination Preparation (Multiple Select Options)</label>
+                        <div class="exam-prep-chips-grid" id="exam-chips-box">
+                            <div class="exam-chip" onclick="toggleExamChip(this, 'SSC GD')">🎖️ SSC GD</div>
+                            <div class="exam-chip" onclick="toggleExamChip(this, 'SSC CGL')">⚡ SSC CGL</div>
+                            <div class="exam-chip" onclick="toggleExamChip(this, 'SSC CHSL')">📋 SSC CHSL</div>
+                            <div class="exam-chip" onclick="toggleExamChip(this, 'BCA/College Semester Exams')">🎓 College Semester Exams</div>
+                            <div class="exam-chip" onclick="toggleExamChip(this, 'Coding Placements / Tech')">💻 Tech / Software Placement</div>
+                            <div class="exam-chip" onclick="toggleExamChip(this, 'Banking (IBPS/SBI)')">🏦 Banking Exams</div>
+                            <div class="exam-chip" onclick="toggleExamChip(this, 'Railway (NTPC/Group D)')">🚆 Railway</div>
+                            <div class="exam-chip" onclick="toggleExamChip(this, 'State Govt Exams')">🏛️ State Govt Exams</div>
+                            <div class="exam-chip" onclick="toggleExamChip(this, 'UPSC / Defence')">🛡️ UPSC / Defence</div>
+                        </div>
+                    </div>
+
+                    <button class="profile-save-btn" onclick="saveStudentProfile()">
+                        <span>💾</span>
+                        <span>Save & Update Profile</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- TAB 1: DAILY TIMETABLE -->
         <div class="tab-view active-tab" id="tab-schedule">
             <div class="header-container">
@@ -897,7 +1325,7 @@
             </div>
         </div>
 
-        <!-- TAB 2: AI CAMERA FOCUS TRACKER (NEW) -->
+        <!-- TAB 2: AI CAMERA FOCUS TRACKER -->
         <div class="tab-view" id="tab-camera">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--camera-color);">AI Camera Focus Tracker</h1>
@@ -942,37 +1370,45 @@
             </div>
         </div>
 
-        <!-- TAB 3: EXAM COUNTDOWN -->
+        <!-- TAB 3: EXACT MATCHED EXAM COUNTDOWN -->
         <div class="tab-view" id="tab-countdown">
-            <div class="header-container">
-                <h1 class="main-title" style="color: var(--countdown-color);">Exam Countdown</h1>
-                <h2 class="sub-title" id="countdown-exam-title">Target Exam Live Countdown</h2>
-            </div>
-            
-            <div class="milestone-card" style="height: auto; min-height: 380px; align-items: center; justify-content: center; gap: 24px;">
-                <div class="countdown-input-box">
-                    <input type="text" id="exam-name-input" class="countdown-input-field" placeholder="Exam Name (e.g. SSC GD 2027)">
+            <div class="countdown-view-container">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                    <h1 class="countdown-main-heading" id="countdown-exam-title">3RD SEMESTER EXTERNAL EXAMINATION COUNTDOWN</h1>
+                    <h2 class="countdown-sub-heading">SET YOUR TARGET NAME & DATE</h2>
+                </div>
+                
+                <div class="countdown-glass-panel">
+                    <input type="text" id="exam-name-input" class="countdown-input-field" placeholder="Target Exam Name">
                     <input type="date" id="exam-date-picker" class="countdown-input-field">
-                    <button class="countdown-submit-btn" onclick="saveExamTarget()">Set Target ⏳</button>
+                    <button class="countdown-submit-btn" onclick="saveExamTarget()">
+                        <span>🎯</span>
+                        <span>Start Countdown</span>
+                    </button>
                 </div>
 
                 <div class="countdown-cards-grid">
                     <div class="countdown-unit-box">
                         <span class="unit-num" id="cd-days">00</span>
-                        <span class="unit-lbl">Days</span>
+                        <span class="unit-lbl">DAYS LEFT</span>
                     </div>
                     <div class="countdown-unit-box">
                         <span class="unit-num" id="cd-hours">00</span>
-                        <span class="unit-lbl">Hours</span>
+                        <span class="unit-lbl">HOURS</span>
                     </div>
                     <div class="countdown-unit-box">
                         <span class="unit-num" id="cd-mins">00</span>
-                        <span class="unit-lbl">Minutes</span>
+                        <span class="unit-lbl">MINUTES</span>
                     </div>
                     <div class="countdown-unit-box">
                         <span class="unit-num" id="cd-secs">00</span>
-                        <span class="unit-lbl">Seconds</span>
+                        <span class="unit-lbl">SECONDS</span>
                     </div>
+                </div>
+
+                <div class="countdown-status-badge" id="countdown-status-banner">
+                    <span>🎯</span>
+                    <span id="countdown-status-msg">Target Exam Countdown Active</span>
                 </div>
             </div>
         </div>
@@ -1283,6 +1719,111 @@
             ]
         };
 
+        // ================= STUDENT PROFILE ENGINE =================
+        let selectedExamPrepOptions = [];
+
+        function toggleExamChip(element, examName) {
+            element.classList.toggle('active');
+            if (element.classList.contains('active')) {
+                if (!selectedExamPrepOptions.includes(examName)) {
+                    selectedExamPrepOptions.push(examName);
+                }
+            } else {
+                selectedExamPrepOptions = selectedExamPrepOptions.filter(item => item !== examName);
+            }
+        }
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Img = e.target.result;
+                    document.getElementById('profile-display-img').src = base64Img;
+                    localStorage.setItem('student_profile_photo', base64Img);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveStudentProfile() {
+            const profileData = {
+                name: document.getElementById('input-name').value,
+                roll: document.getElementById('input-roll').value,
+                id: document.getElementById('input-id').value,
+                mobile: document.getElementById('input-mobile').value,
+                university: document.getElementById('input-university').value,
+                course: document.getElementById('input-course').value,
+                targetYear: document.getElementById('input-target-year').value,
+                dreamJob: document.getElementById('input-dream-job').value,
+                examPrep: selectedExamPrepOptions
+            };
+
+            localStorage.setItem('student_profile_data', JSON.stringify(profileData));
+            updateProfileUI(profileData);
+            alert('✅ Student Profile Updated Successfully!');
+        }
+
+        function updateProfileUI(data) {
+            if (!data) return;
+            document.getElementById('disp-student-name').innerText = data.name || 'Student Name';
+            document.getElementById('disp-student-dream').innerText = `Dream Job: ${data.dreamJob || 'Not Specified'}`;
+            document.getElementById('disp-student-roll').innerText = data.roll || '---';
+            document.getElementById('disp-student-id').innerText = data.id || '---';
+            document.getElementById('disp-student-uni').innerText = data.university || '---';
+            document.getElementById('disp-student-course').innerText = data.course || '---';
+            document.getElementById('disp-student-mobile').innerText = data.mobile || '---';
+            document.getElementById('disp-student-year').innerText = data.targetYear || '---';
+
+            const prepList = (data.examPrep && data.examPrep.length > 0) ? data.examPrep.join(', ') : 'None selected';
+            document.getElementById('disp-student-prep').innerText = prepList;
+
+            // Populate form inputs
+            document.getElementById('input-name').value = data.name || '';
+            document.getElementById('input-roll').value = data.roll || '';
+            document.getElementById('input-id').value = data.id || '';
+            document.getElementById('input-mobile').value = data.mobile || '';
+            document.getElementById('input-university').value = data.university || '';
+            document.getElementById('input-course').value = data.course || '';
+            document.getElementById('input-target-year').value = data.targetYear || '';
+            document.getElementById('input-dream-job').value = data.dreamJob || '';
+
+            // Restore chips
+            selectedExamPrepOptions = data.examPrep || [];
+            document.querySelectorAll('.exam-chip').forEach(chip => {
+                const text = chip.innerText.replace(/^[^\w]+/, '').trim();
+                const matched = selectedExamPrepOptions.some(item => chip.innerText.includes(item));
+                if (matched) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+
+            // Restore Photo
+            const savedPhoto = localStorage.getItem('student_profile_photo');
+            if (savedPhoto) {
+                document.getElementById('profile-display-img').src = savedPhoto;
+            }
+        }
+
+        function restoreStudentProfile() {
+            const raw = localStorage.getItem('student_profile_data');
+            if (raw) {
+                try {
+                    const data = JSON.parse(raw);
+                    updateProfileUI(data);
+                } catch(e) {
+                    console.error("Profile parse error", e);
+                }
+            } else {
+                const defaultPhoto = localStorage.getItem('student_profile_photo');
+                if (defaultPhoto) {
+                    document.getElementById('profile-display-img').src = defaultPhoto;
+                }
+            }
+        }
+
         // Sidebar Toggle for Mobile
         function toggleSidebar() {
             const sidebar = document.getElementById('iosSidebar');
@@ -1320,21 +1861,22 @@
                 return;
             }
 
-            localStorage.setItem('exam_target_name', nameInput || 'SSC GD 2027 Exam');
+            localStorage.setItem('exam_target_name', nameInput || '3RD SEMESTER EXTERNAL EXAMINATION COUNTDOWN');
             localStorage.setItem('exam_target_date', dateInput);
 
             startExamCountdown();
         }
 
         function startExamCountdown() {
-            const savedName = localStorage.getItem('exam_target_name') || 'SSC GD 2027 Exam';
+            const savedName = localStorage.getItem('exam_target_name') || '3RD SEMESTER EXTERNAL EXAMINATION COUNTDOWN';
             const savedDate = localStorage.getItem('exam_target_date');
 
             if (savedName) document.getElementById('exam-name-input').value = savedName;
             if (savedDate) document.getElementById('exam-date-picker').value = savedDate;
 
             const titleEl = document.getElementById('countdown-exam-title');
-            if (titleEl) titleEl.innerText = `Target: ${savedName}`;
+            const statusMsg = document.getElementById('countdown-status-msg');
+            if (titleEl) titleEl.innerText = savedName.toUpperCase();
 
             if (!savedDate) return;
 
@@ -1350,7 +1892,7 @@
                     document.getElementById('cd-hours').innerText = '00';
                     document.getElementById('cd-mins').innerText = '00';
                     document.getElementById('cd-secs').innerText = '00';
-                    if (titleEl) titleEl.innerText = `🎉 ${savedName} Day Today! Good Luck!`;
+                    if (statusMsg) statusMsg.innerText = `Target Exam Reached or Passed! Select a new date above.`;
                     return;
                 }
 
@@ -1363,6 +1905,7 @@
                 document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
                 document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
                 document.getElementById('cd-secs').innerText = String(secs).padStart(2, '0');
+                if (statusMsg) statusMsg.innerText = `Counting down live to ${savedName}`;
             }
 
             updateTimer();
@@ -1413,7 +1956,7 @@
             } catch (err) {
                 console.error("Camera Access Error:", err);
                 badge.innerText = "❌ Camera Error: Permission Denied or Device Unavailable";
-                badge.style.background = "rgba(244, 63, 94, 0.2)";
+                badge.style.background = "rgba(52, 211, 153, 0.2)";
                 badge.style.color = "var(--countdown-color)";
             }
         }
@@ -1476,18 +2019,17 @@
 
                     if (pred.class === 'cell phone') {
                         phoneFound = true;
-                        ctx.strokeStyle = '#f43f5e';
+                        ctx.strokeStyle = '#34d399';
                         ctx.lineWidth = 3;
                         ctx.strokeRect(x, y, width, height);
 
-                        ctx.fillStyle = '#f43f5e';
+                        ctx.fillStyle = '#34d399';
                         ctx.font = 'bold 14px sans-serif';
                         ctx.fillText(`📱 Phone Distraction! (${Math.round(pred.score * 100)}%)`, x, y > 20 ? y - 6 : 15);
                     }
                 }
             });
 
-            // Chair Absence Transition Check
             if (wasPersonPresentLastFrame && !personFound) {
                 chairAbsenceCount++;
                 localStorage.setItem('ai_cam_absences', chairAbsenceCount);
@@ -1501,8 +2043,8 @@
             const badge = document.getElementById('ai-status-badge');
             if (phoneFound) {
                 badge.innerText = "⚠️ Phone Detected! Stay Focused!";
-                badge.style.background = "rgba(244, 63, 94, 0.25)";
-                badge.style.color = "var(--countdown-color)";
+                badge.style.background = "rgba(52, 211, 153, 0.25)";
+                badge.style.color = "#34d399";
             } else if (!personFound) {
                 badge.innerText = "🚪 Away From Chair";
                 badge.style.background = "rgba(251, 146, 60, 0.25)";
@@ -1514,7 +2056,7 @@
             }
 
             if (isCamRunning) {
-                setTimeout(runDetectionLoop, 300); // AI Frame sampling every 300ms
+                setTimeout(runDetectionLoop, 300);
             }
         }
 
@@ -2006,6 +2548,7 @@
             calculateGlobalAnalytics();
             updateDailyGoalText();
             updateCamUiDisplay();
+            restoreStudentProfile();
         }
 
         // Initialize on DOM Ready
