@@ -231,6 +231,15 @@
             gap: 8px; 
             flex-wrap: wrap; 
         }
+
+        /* Dedicated Right-Aligned Widget Container */
+        .widget-group-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
         
         .analytics-widget, .goal-widget, .ai-score-widget, .ai-greetings-widget, .clock-widget {
             display: flex;
@@ -476,7 +485,7 @@
             border: solid #030712; border-width: 0 2px 2px 0; transform: rotate(45deg);
         }
 
-        /* COMPLETED STYLE - CLEAN */
+        /* COMPLETED STYLE */
         .item.completed, .coding-item-card.completed, .ssc-item-card.completed { 
             background: var(--success-bg) !important; 
             border-color: rgba(52, 211, 153, 0.4) !important; 
@@ -1134,6 +1143,7 @@
             .tracker-grid, .coding-grid-special { grid-template-columns: 1fr; }
             .countdown-glass-panel { flex-direction: column; align-items: stretch; }
             .countdown-submit-btn { justify-content: center; }
+            .widget-group-right { margin-left: 0; width: 100%; justify-content: flex-start; }
         }
     </style>
 </head>
@@ -1150,7 +1160,6 @@
         </div>
 
         <div class="sidebar-nav-list">
-            <!-- PERFORMANCE GRAPHS TAB -->
             <button class="nav-sidebar-btn" style="color: var(--chart-color);" onclick="switchTab('tab-graphs', this)">
                 <span>📊</span> <span>Live Graphs</span>
             </button>
@@ -1225,12 +1234,15 @@
         </div>
 
         <div class="control-row">
+            <!-- Left Side Control Widgets -->
             <div class="widget-group">
                 <div class="clock-widget" id="live-clock-box">🕒 Syncing System Time...</div>
                 <div class="ai-greetings-widget" id="ai-greetings-box">🤖 AI Mentor: Active</div>
                 <div class="ai-score-widget" id="ai-score-box">⭐ Study Score: 600</div>
             </div>
-            <div class="widget-group">
+
+            <!-- Right Side Shifted Control Widgets (Goal & Tasks) -->
+            <div class="widget-group-right">
                 <div class="goal-widget">
                     <span>🎯 <strong>Goal:</strong></span>
                     <input type="number" id="daily-goal-input" class="goal-input" value="5" min="1" onchange="updateDailyGoal()">
@@ -1262,7 +1274,6 @@
             </div>
 
             <div class="graphs-container-grid">
-                <!-- Overall Subject Wise Progress Graph -->
                 <div class="graph-panel-card">
                     <h3 class="graph-panel-title">
                         <span>📈 Live Subject Completion (%)</span>
@@ -1273,7 +1284,6 @@
                     </div>
                 </div>
 
-                <!-- Monthly Calendar Tracker Graph -->
                 <div class="graph-panel-card">
                     <h3 class="graph-panel-title">
                         <span>📅 Monthly Completion Graph (2026 - 2027)</span>
@@ -1294,7 +1304,6 @@
             </div>
 
             <div class="profile-container-grid">
-                <!-- LIVE PREVIEW ID CARD -->
                 <div class="profile-card-preview">
                     <input type="file" id="student-photo-input" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
                     <div class="profile-avatar-wrapper" onclick="document.getElementById('student-photo-input').click()" title="Click to Upload Photo">
@@ -1337,7 +1346,6 @@
                     </div>
                 </div>
 
-                <!-- EDIT PROFILE FORM -->
                 <div class="profile-form-card">
                     <h3 style="margin: 0; font-size: 1.2rem; color: #fff; border-bottom: 0.5px solid rgba(255,255,255,0.1); padding-bottom: 8px;">Edit Profile Information</h3>
                     
@@ -1472,8 +1480,6 @@
         <!-- TAB 3: DUAL EXAM COUNTDOWN -->
         <div class="tab-view" id="tab-countdown">
             <div class="countdown-view-container">
-
-                <!-- COUNTDOWN 1 (PRIMARY) -->
                 <div class="countdown-section-card">
                     <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
                         <h1 class="countdown-main-heading" id="countdown-exam-title-1">3RD SEMESTER EXTERNAL EXAMINATION COUNTDOWN</h1>
@@ -1514,7 +1520,6 @@
                     </div>
                 </div>
 
-                <!-- COUNTDOWN 2 (SECONDARY - CYAN/BLUE ACCENT) -->
                 <div class="countdown-section-card countdown-theme-blue">
                     <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
                         <h1 class="countdown-main-heading" id="countdown-exam-title-2">SECONDARY EXAM / TARGET COUNTDOWN</h1>
@@ -1554,7 +1559,6 @@
                         <span id="countdown-status-msg-2">Target Exam 2 Active</span>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -1604,7 +1608,7 @@
             <div class="tracker-grid" id="english-grid"></div>
         </div>
 
-        <!-- TAB 7: ARITHMETIC MATH (UPDATED) -->
+        <!-- TAB 7: ARITHMETIC MATH -->
         <div class="tab-view" id="tab-math">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--math-color);">Arithmetic Math Classes</h1>
@@ -1902,7 +1906,6 @@
         let monthlyChartInstance = null;
 
         function initCharts() {
-            // Overall Chart
             const ctxOverall = document.getElementById('overallProgressChart');
             if (ctxOverall) {
                 overallChartInstance = new Chart(ctxOverall.getContext('2d'), {
@@ -1942,7 +1945,6 @@
                 });
             }
 
-            // Monthly Chart
             const ctxMonthly = document.getElementById('monthlyProgressChart');
             if (ctxMonthly) {
                 const monthLabels = [
@@ -2232,7 +2234,7 @@
             countdownIntervals[id] = setInterval(updateTimer, 1000);
         }
 
-        // AI CAMERA FOCUS TRACKER LOGIC
+        // ================= AI CAMERA FOCUS TRACKER LOGIC =================
         let cocoModel = null;
         let camStream = null;
         let isCamRunning = false;
@@ -2412,7 +2414,7 @@
             document.getElementById('cam-stat-score').innerText = `${focusRatio}%`;
         }
 
-        // Batch Rendering Helpers
+        // ================= GRID BUILDERS =================
         function buildStandardGrid(containerId, chaptersList, storagePrefix) {
             const container = document.getElementById(containerId);
             if(!container) return;
@@ -2513,7 +2515,7 @@
             container.innerHTML = buffer.join('');
         }
 
-        // OMR Micro-Handlers
+        // ================= OMR HANDLERS =================
         function handleChapterEvalCheck(rowId, type, prefix, chKey, totalQs) {
             const rightChk = document.getElementById(`chk-r-${rowId}`);
             const wrongChk = document.getElementById(`chk-w-${rowId}`);
@@ -2894,11 +2896,9 @@
             restoreChapterOmrState(window.STUDY_DATA.book_math, 'm');
             restoreChapterOmrState(window.STUDY_DATA.book_reasoning, 'r');
             
-            // Start both countdowns
             startExamCountdown(1);
             startExamCountdown(2);
             
-            // Start Graphs
             initCharts();
 
             updateLiveClock();
