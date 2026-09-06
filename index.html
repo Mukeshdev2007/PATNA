@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ultimate Study Suite 2026-2027</title>
+    <title>Realistic Flowing Water Study Suite</title>
     <!-- Chart.js Live Graph Visualizer Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- TensorFlow.js & COCO-SSD AI Computer Vision Libraries -->
@@ -11,40 +11,42 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"></script>
     <style>
         :root {
-            /* iPhone 17 Pro Max Titanium & iOS Deep Space Palette */
-            --ios-bg: #030712;
-            --ios-card-glass: rgba(17, 24, 39, 0.72);
-            --ios-border-subtle: rgba(255, 255, 255, 0.12);
-            --ios-border-specular: rgba(255, 255, 255, 0.28);
-            --text-primary: #f9fafb;
-            --text-secondary: #9ca3af;
-            --ios-bar-blur: rgba(11, 15, 25, 0.88);
+            /* 100% Water Glassmorphism Theme (Zero Solid White) */
+            --water-card-glass: rgba(6, 38, 58, 0.22);
+            --water-border: rgba(56, 189, 248, 0.35);
+            --water-border-specular: rgba(45, 212, 191, 0.85);
+            
+            /* High Luminance Aqua Text & Glows */
+            --text-primary: #e0f2fe;
+            --text-secondary: #7dd3fc;
+            --text-glow: #38bdf8;
+            --water-bar-blur: rgba(3, 20, 32, 0.45);
             --sidebar-width: 250px;
             
-            /* High-Energy Neon Accents */
-            --english-color: #a78bfa;
-            --math-color: #38bdf8;
+            /* Pure Neon Water Accents */
+            --english-color: #38bdf8;
+            --math-color: #22d3ee;
             --adv-math-color: #06b6d4;
             --reasoning-color: #34d399;
             --coding-color: #2dd4bf;
-            --calendar-color: #fb923c;
-            --ssc-color: #f59e0b;
-            --hindi-color: #ff6b6b;
-            --book-color: #a3e635;
+            --calendar-color: #14b8a6;
+            --ssc-color: #38bdf8;
+            --hindi-color: #2dd4bf;
+            --book-color: #4ade80;
             --rbook-color: #06b6d4;
-            --omr-color: #818cf8;
+            --omr-color: #38bdf8;
             --special-color: #10b981;
-            --vocab-color: #38bdf8;
-            --countdown-color: #48e5a3;
+            --vocab-color: #22d3ee;
+            --countdown-color: #34d399;
             --countdown-color-2: #38bdf8;
             --camera-color: #10b981;
-            --success-color: #34d399;
-            --success-bg: rgba(52, 211, 153, 0.18);
-            --timetable-color: #10b981;
-            --quote-color: #34d399;
-            --ai-mentor-color: #c084fc;
-            --profile-color: #38bdf8;
-            --chart-color: #f43f5e;
+            --success-color: #2dd4bf;
+            --success-bg: rgba(45, 212, 191, 0.28);
+            --timetable-color: #34d399;
+            --quote-color: #2dd4bf;
+            --ai-mentor-color: #38bdf8;
+            --profile-color: #22d3ee;
+            --chart-color: #14b8a6;
         }
 
         * {
@@ -54,38 +56,45 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-            background-color: var(--ios-bg);
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.18), transparent 40%),
-                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.14), transparent 45%),
-                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.12), transparent 50%);
-            background-attachment: fixed;
+            background-color: #02121d;
             color: var(--text-primary);
             margin: 0;
             padding: 0;
             display: flex;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* ================= LEFT SIDEBAR NAVIGATION ================= */
+        /* ================= REAL-TIME FLOWING WATER CANVAS ================= */
+        #waterCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ================= SIDEBAR (LIQUID GLASS) ================= */
         .ios-sidebar {
             position: fixed;
             top: 0;
             left: 0;
             bottom: 0;
             width: var(--sidebar-width);
-            background: var(--ios-bar-blur);
-            backdrop-filter: blur(35px) saturate(190%);
-            -webkit-backdrop-filter: blur(35px) saturate(190%);
-            border-right: 0.5px solid var(--ios-border-subtle);
+            background: var(--water-bar-blur);
+            backdrop-filter: blur(28px) saturate(210%);
+            -webkit-backdrop-filter: blur(28px) saturate(210%);
+            border-right: 1px solid var(--water-border);
             z-index: 1100;
             padding: 24px 16px 40px 16px;
             display: flex;
             flex-direction: column;
             gap: 12px;
             overflow-y: auto;
-            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 10px 0 35px rgba(1, 16, 26, 0.7);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -94,17 +103,17 @@
             align-items: center;
             gap: 10px;
             padding: 8px 12px 14px 12px;
-            border-bottom: 0.5px solid var(--ios-border-subtle);
+            border-bottom: 1px solid var(--water-border);
             margin-bottom: 6px;
         }
 
         .sidebar-brand-title {
             font-size: 1.05rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            background: linear-gradient(135deg, #38bdf8, #34d399);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         .sidebar-nav-list {
@@ -114,9 +123,9 @@
         }
 
         .nav-sidebar-btn {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(6, 182, 212, 0.08);
             color: var(--text-secondary);
-            border: 0.5px solid var(--ios-border-subtle);
+            border: 1px solid rgba(56, 189, 248, 0.22);
             padding: 10px 14px;
             border-radius: 12px;
             cursor: pointer;
@@ -126,26 +135,27 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            backdrop-filter: blur(14px);
             width: 100%;
         }
 
         .nav-sidebar-btn:hover {
-            color: #fff;
-            border-color: var(--ios-border-specular);
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateX(3px);
+            color: #f0fdfa;
+            border-color: var(--water-border-specular);
+            background: rgba(45, 212, 191, 0.2);
+            box-shadow: 0 0 16px rgba(45, 212, 191, 0.4);
+            transform: translateX(4px);
         }
 
         .nav-sidebar-btn.active {
-            background: linear-gradient(135deg, #6366f1, #3b82f6);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 16px rgba(99, 102, 241, 0.5);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.5), rgba(16, 185, 129, 0.45));
+            color: #ccfbf1;
+            border-color: var(--water-border-specular);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
         }
 
-        /* ================= MAIN CONTENT WRAPPER ================= */
+        /* ================= MAIN CONTENT ================= */
         .main-app-area {
             margin-left: var(--sidebar-width);
             flex: 1;
@@ -156,24 +166,24 @@
             padding: 140px 24px 70px 24px;
             width: calc(100% - var(--sidebar-width));
             position: relative;
+            z-index: 1;
         }
 
-        /* Fixed Top Header */
         .ios-top-bar {
             position: fixed;
             top: 0;
             left: var(--sidebar-width);
             right: 0;
-            background: var(--ios-bar-blur);
-            backdrop-filter: blur(35px) saturate(190%);
-            -webkit-backdrop-filter: blur(35px) saturate(190%);
-            border-bottom: 0.5px solid var(--ios-border-subtle);
+            background: var(--water-bar-blur);
+            backdrop-filter: blur(30px) saturate(220%);
+            -webkit-backdrop-filter: blur(30px) saturate(220%);
+            border-bottom: 1px solid var(--water-border);
             z-index: 1000;
             padding: 8px 24px 10px 24px;
             display: flex;
             flex-direction: column;
             gap: 8px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 10px 35px rgba(2, 16, 26, 0.7);
             transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -184,21 +194,22 @@
             width: 100%;
             font-size: 0.8rem;
             font-weight: 600;
-            color: #e5e7eb;
+            color: var(--text-primary);
             padding: 0 4px;
         }
 
         .dynamic-island {
-            background: #000000;
-            border: 0.5px solid rgba(255, 255, 255, 0.18);
+            background: rgba(2, 22, 34, 0.85);
+            border: 1px solid var(--water-border);
             border-radius: 26px;
             padding: 5px 18px;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
             font-size: 0.78rem;
             letter-spacing: 0.3px;
+            color: #7dd3fc;
         }
 
         .island-pulse {
@@ -206,13 +217,13 @@
             height: 8px;
             background-color: var(--success-color);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--success-color);
+            box-shadow: 0 0 12px var(--success-color);
             animation: pulseIsland 1.5s infinite;
         }
 
         @keyframes pulseIsland {
             0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 1; }
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
@@ -232,7 +243,6 @@
             flex-wrap: wrap; 
         }
 
-        /* Dedicated Right-Aligned Widget Container */
         .widget-group-right {
             margin-left: auto;
             display: flex;
@@ -245,30 +255,43 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(8, 45, 68, 0.35);
             padding: 6px 14px;
             border-radius: 20px;
-            border: 0.5px solid var(--ios-border-subtle);
+            border: 1px solid var(--water-border);
             font-size: 0.82rem;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            color: var(--text-primary);
         }
 
         .clock-widget {
-            border-color: var(--english-color);
-            color: var(--english-color);
+            border-color: #38bdf8;
+            color: #7dd3fc;
             font-weight: 700;
             font-family: ui-monospace, monospace;
             font-size: 0.86rem;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
         }
 
-        .ai-greetings-widget { border-color: var(--ai-mentor-color); color: #fff; background: rgba(192, 132, 252, 0.1); font-weight: 600; }
-        .ai-score-widget { border-color: var(--ssc-color); color: var(--ssc-color); font-weight: 800; }
+        .ai-greetings-widget { 
+            border-color: var(--coding-color); 
+            color: #a7f3d0; 
+            background: rgba(45, 212, 191, 0.15); 
+            font-weight: 600; 
+        }
+        
+        .ai-score-widget { 
+            border-color: #38bdf8; 
+            color: #38bdf8; 
+            font-weight: 800; 
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+        }
 
         .goal-input {
             width: 42px; 
-            background: rgba(0,0,0,0.5); 
-            border: 0.5px solid rgba(255,255,255,0.25);
-            color: #fff; 
+            background: rgba(2, 20, 31, 0.75); 
+            border: 1px solid var(--water-border);
+            color: #7dd3fc; 
             text-align: center; 
             border-radius: 8px; 
             font-weight: 700; 
@@ -278,9 +301,9 @@
 
         .mobile-hamburger-btn {
             display: none;
-            background: rgba(255, 255, 255, 0.08);
-            border: 0.5px solid var(--ios-border-subtle);
-            color: #fff;
+            background: rgba(6, 182, 212, 0.18);
+            border: 1px solid var(--water-border);
+            color: #7dd3fc;
             padding: 6px 12px;
             border-radius: 12px;
             font-size: 1.1rem;
@@ -291,9 +314,9 @@
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(2, 18, 28, 0.75);
             z-index: 1050;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(6px);
         }
 
         /* Quotes Banner */
@@ -308,139 +331,191 @@
 
         .quote-banner {
             width: 100%; 
-            background: rgba(52, 211, 153, 0.06); 
-            backdrop-filter: blur(16px);
-            border: 0.5px solid rgba(52, 211, 153, 0.25); 
+            background: rgba(8, 45, 68, 0.25); 
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(45, 212, 191, 0.4); 
             border-radius: 16px; 
             padding: 12px 18px; 
             text-align: center;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 8px 30px rgba(6, 182, 212, 0.2);
         }
 
         .quote-text { 
             font-size: 1.05rem; 
             font-weight: 700; 
             font-style: italic; 
-            color: var(--quote-color); 
+            color: #5eead4; 
             margin: 0; 
+            text-shadow: 0 0 12px rgba(45, 212, 191, 0.5);
         }
 
-        /* Tab Switch Transition */
         .tab-view {
             display: none;
             width: 100%;
             max-width: 1300px;
             will-change: transform, opacity;
-            animation: iosSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: waterSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .tab-view.active-tab { display: block; }
 
-        @keyframes iosSlideUp {
-            from { opacity: 0; transform: scale(0.99) translateY(6px); }
+        @keyframes waterSlideUp {
+            from { opacity: 0; transform: scale(0.99) translateY(8px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* Headings & Progress Bar */
         .header-container { text-align: center; margin-bottom: 22px; }
-        .main-title { font-size: 2.5rem; font-weight: 900; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 1.5px; }
-        .sub-title { font-size: 0.95rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; margin: 0; font-weight: 600; }
-        .ssc-subtitle { font-size: 1.4rem; font-weight: 800; text-align: left; margin: 30px 0 12px 0; border-bottom: 0.5px dashed rgba(255,255,255,0.15); padding-bottom: 6px; }
+        .main-title { 
+            font-size: 2.5rem; 
+            font-weight: 900; 
+            margin: 0 0 4px 0; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 25px rgba(56, 189, 248, 0.55);
+        }
+        .sub-title { 
+            font-size: 0.95rem; 
+            color: var(--text-secondary); 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            margin: 0; 
+            font-weight: 600; 
+        }
+        
+        .ssc-subtitle { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            text-align: left; 
+            margin: 30px 0 12px 0; 
+            border-bottom: 1px dashed rgba(45, 212, 191, 0.35); 
+            padding-bottom: 6px; 
+        }
 
         .subject-progress-container {
             width: 100%; 
             max-width: 380px; 
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(3, 27, 40, 0.5);
             border-radius: 20px; 
-            height: 6px; 
+            height: 7px; 
             margin: 8px auto 0 auto; 
             overflow: hidden;
-            border: 0.5px solid rgba(255,255,255,0.06);
+            border: 1px solid var(--water-border);
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
         }
 
-        .subject-progress-bar { height: 100%; width: 0%; border-radius: 20px; transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .progress-text { display: block; font-size: 0.8rem; font-weight: 700; margin-top: 5px; color: var(--text-secondary); }
+        .subject-progress-bar { 
+            height: 100%; 
+            width: 0%; 
+            border-radius: 20px; 
+            transition: width 0.35s ease;
+            box-shadow: 0 0 14px rgba(45, 212, 191, 0.7);
+        }
+        
+        .progress-text { 
+            display: block; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            margin-top: 5px; 
+            color: var(--text-secondary); 
+        }
 
         .tracker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; padding: 6px 0; }
         .coding-grid-special { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; padding: 6px 0; }
         .timetable-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; padding: 6px 0; }
 
-        /* Frosted Glass Cards */
+        /* Liquid 100% Transparent Frosted Cards */
         .milestone-card {
-            background: var(--ios-card-glass); 
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
+            background: var(--water-card-glass); 
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border-radius: 20px; 
             padding: 16px; 
-            border: 0.5px solid var(--ios-border-subtle);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); 
+            border: 1px solid var(--water-border);
+            box-shadow: 0 10px 30px rgba(1, 16, 26, 0.45), inset 0 0 15px rgba(56, 189, 248, 0.08); 
             display: flex; 
             flex-direction: column; 
             height: 370px;
-            transition: border-color 0.2s ease, transform 0.2s ease;
+            transition: all 0.25s ease;
         }
 
         .milestone-card:hover { 
-            transform: translateY(-2px); 
-            border-color: var(--ios-border-specular); 
+            transform: translateY(-3px); 
+            border-color: var(--water-border-specular); 
+            box-shadow: 0 14px 40px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(45, 212, 191, 0.15);
         }
 
         .time-slot-card {
-            background: var(--ios-card-glass); 
-            backdrop-filter: blur(20px);
+            background: var(--water-card-glass); 
+            backdrop-filter: blur(22px);
             border-radius: 16px; 
             padding: 14px 16px; 
-            border: 0.5px solid var(--ios-border-subtle);
+            border: 1px solid var(--water-border);
             display: flex; 
             flex-direction: column; 
             gap: 4px; 
             position: relative; 
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-            transition: all 0.2s ease;
+            box-shadow: 0 8px 24px rgba(1, 16, 26, 0.4);
+            transition: all 0.25s ease;
         }
 
-        .time-slot-card .time-range { font-size: 0.78rem; color: var(--text-secondary); font-weight: 600; }
+        .time-slot-card:hover {
+            border-color: var(--water-border-specular);
+            transform: translateY(-2px);
+        }
+
+        .time-slot-card .time-range { font-size: 0.78rem; color: #5eead4; font-weight: 600; }
         .time-slot-card .subject-name { font-size: 1.05rem; font-weight: 700; }
 
         .live-dot {
             position: absolute; top: 12px; right: 12px; width: 8px; height: 8px;
             background-color: var(--success-color); border-radius: 50%;
-            box-shadow: 0 0 10px var(--success-color); display: none;
+            box-shadow: 0 0 12px var(--success-color); display: none;
             animation: pulseGlow 1.5s infinite;
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
-            70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); }
+            70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(45, 212, 191, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
         }
 
         .coding-item-card, .ssc-item-card {
-            background: var(--ios-card-glass); 
-            backdrop-filter: blur(20px);
+            background: var(--water-card-glass); 
+            backdrop-filter: blur(22px);
             border-radius: 16px; 
             padding: 16px 18px; 
-            border: 0.5px solid var(--ios-border-subtle);
+            border: 1px solid var(--water-border);
             display: flex; 
             align-items: center; 
             justify-content: space-between;
             cursor: pointer; 
             user-select: none; 
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(1, 16, 26, 0.4);
+            transition: all 0.25s ease;
         }
 
         .coding-item-card:hover, .ssc-item-card:hover { 
             transform: translateY(-2px); 
-            border-color: var(--ios-border-specular); 
+            border-color: var(--water-border-specular); 
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
         }
 
         .card-header {
             font-size: 1.1rem; font-weight: 700; padding-bottom: 8px; margin-bottom: 8px;
-            border-bottom: 0.5px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.25); 
+            display: flex; justify-content: space-between; align-items: center;
+            color: #7dd3fc;
         }
 
-        .class-counter { font-size: 0.72rem; padding: 3px 8px; border-radius: 12px; font-weight: 600; background: rgba(255, 255, 255, 0.05); }
+        .class-counter { 
+            font-size: 0.72rem; 
+            padding: 3px 8px; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            background: rgba(6, 182, 212, 0.18); 
+            color: #e0f2fe;
+            border: 1px solid var(--water-border);
+        }
 
         .list-container { 
             overflow-y: auto; 
@@ -451,52 +526,61 @@
 
         .list-container::-webkit-scrollbar { width: 4px; }
         .list-container::-webkit-scrollbar-track { background: transparent; }
-        .list-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.18); border-radius: 10px; }
+        .list-container::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.35); border-radius: 10px; }
 
         .item {
             display: flex; align-items: center; justify-content: space-between;
             padding: 9px 11px; margin-bottom: 6px; border-radius: 10px;
-            background: rgba(255, 255, 255, 0.02); border: 0.5px solid rgba(255, 255, 255, 0.04);
-            cursor: pointer; user-select: none; transition: background 0.15s ease;
+            background: rgba(6, 40, 56, 0.28); 
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            cursor: pointer; user-select: none; transition: all 0.2s ease;
         }
 
-        .item:hover { background: rgba(255, 255, 255, 0.05); }
-        .item span { font-size: 0.88rem; font-weight: 500; }
-        .item .sub-desc { font-size: 0.72rem; color: var(--text-secondary); font-weight: 600; }
+        .item:hover { 
+            background: rgba(56, 189, 248, 0.18); 
+            border-color: rgba(56, 189, 248, 0.45);
+        }
+        
+        .item span { font-size: 0.88rem; font-weight: 500; color: #f0fdfa; }
+        .item .sub-desc { font-size: 0.72rem; color: #5eead4; font-weight: 600; }
 
-        /* iOS Checkbox */
+        /* Liquid Checkbox */
         .checkbox-wrapper { position: relative; display: block; width: 20px; height: 20px; }
         .checkbox-wrapper input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
         .checkmark {
             position: absolute; top: 0; left: 0; height: 20px; width: 20px;
-            background-color: rgba(255, 255, 255, 0.05); border: 1.5px solid rgba(255, 255, 255, 0.25); border-radius: 6px;
+            background-color: rgba(2, 20, 31, 0.6); 
+            border: 1.5px solid rgba(56, 189, 248, 0.5); 
+            border-radius: 6px;
             transition: all 0.2s ease;
         }
         
         .checkbox-wrapper input:checked ~ .checkmark {
-            background-color: var(--success-color); border-color: var(--success-color);
-            box-shadow: 0 0 10px rgba(52, 211, 153, 0.4);
+            background-color: var(--success-color); 
+            border-color: var(--success-color);
+            box-shadow: 0 0 12px rgba(45, 212, 191, 0.75);
         }
 
         .checkmark:after { content: ""; position: absolute; display: none; }
         .checkbox-wrapper input:checked ~ .checkmark:after { display: block; }
         .checkbox-wrapper .checkmark:after {
             left: 6px; top: 2.5px; width: 4px; height: 9px;
-            border: solid #030712; border-width: 0 2px 2px 0; transform: rotate(45deg);
+            border: solid #021a24; border-width: 0 2px 2px 0; transform: rotate(45deg);
         }
 
-        /* COMPLETED STYLE */
         .item.completed, .coding-item-card.completed, .ssc-item-card.completed { 
             background: var(--success-bg) !important; 
-            border-color: rgba(52, 211, 153, 0.4) !important; 
+            border-color: rgba(45, 212, 191, 0.7) !important; 
+            box-shadow: 0 0 16px rgba(45, 212, 191, 0.3);
         }
 
         .item.completed span, .coding-item-card.completed span, .ssc-item-card.completed span { 
             text-decoration: none !important;
             opacity: 0.95; 
+            color: #ccfbf1 !important;
         }
 
-        /* ================= GRAPHS & ANALYTICS STYLES ================= */
+        /* ================= GRAPHS & ANALYTICS ================= */
         .graphs-container-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -506,25 +590,25 @@
         }
 
         .graph-panel-card {
-            background: var(--ios-card-glass);
-            border: 1px solid var(--ios-border-subtle);
+            background: var(--water-card-glass);
+            border: 1px solid var(--water-border);
             border-radius: 24px;
             padding: 24px;
             display: flex;
             flex-direction: column;
             gap: 14px;
             backdrop-filter: blur(25px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.55);
         }
 
         .graph-panel-title {
             font-size: 1.25rem;
             font-weight: 800;
-            color: #fff;
+            color: #7dd3fc;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 0.5px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.25);
             padding-bottom: 10px;
             margin: 0;
         }
@@ -535,7 +619,7 @@
             height: 340px;
         }
 
-        /* ================= EXAM COUNTDOWN STYLES ================= */
+        /* ================= EXAM COUNTDOWN ================= */
         .countdown-view-container {
             width: 100%;
             display: flex;
@@ -548,32 +632,32 @@
         .countdown-section-card {
             width: 100%;
             max-width: 820px;
-            background: rgba(13, 20, 36, 0.65);
-            border: 1px solid var(--ios-border-subtle);
+            background: var(--water-card-glass);
+            border: 1px solid var(--water-border);
             border-radius: 24px;
             padding: 24px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 18px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(20px);
+            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.5);
+            backdrop-filter: blur(25px);
         }
 
         .countdown-main-heading {
             font-size: 2rem;
             font-weight: 900;
-            color: #48e5a3;
+            color: #2dd4bf;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-align: center;
             margin: 0;
-            text-shadow: 0 0 20px rgba(72, 229, 163, 0.45);
+            text-shadow: 0 0 25px rgba(45, 212, 191, 0.55);
         }
 
         .countdown-sub-heading {
             font-size: 0.85rem;
-            color: #94a3b8;
+            color: #5eead4;
             font-weight: 700;
             letter-spacing: 2.5px;
             text-transform: uppercase;
@@ -582,8 +666,8 @@
         }
 
         .countdown-glass-panel {
-            background: rgba(6, 10, 18, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(3, 27, 40, 0.6);
+            border: 1px solid var(--water-border);
             border-radius: 20px;
             padding: 16px 20px;
             display: flex;
@@ -591,28 +675,27 @@
             justify-content: center;
             gap: 14px;
             flex-wrap: wrap;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 30px rgba(1, 16, 26, 0.6);
+            backdrop-filter: blur(22px);
             width: 100%;
             max-width: 760px;
         }
 
         .countdown-input-field {
-            background: #030712;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #ffffff;
+            background: rgba(1, 19, 30, 0.7);
+            border: 1px solid var(--water-border);
+            color: #e0f2fe;
             padding: 12px 18px;
             border-radius: 12px;
             font-size: 0.95rem;
             font-weight: 600;
             outline: none;
             transition: all 0.2s ease;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
         }
 
         .countdown-input-field:focus {
-            border-color: #48e5a3;
-            box-shadow: 0 0 12px rgba(72, 229, 163, 0.35);
+            border-color: #2dd4bf;
+            box-shadow: 0 0 16px rgba(45, 212, 191, 0.5);
         }
 
         .countdown-input-name {
@@ -627,16 +710,16 @@
         }
 
         .countdown-submit-btn {
-            background: linear-gradient(135deg, #10b981, #2dd4bf);
-            color: #03130e;
+            background: linear-gradient(135deg, #0d9488, #2dd4bf);
+            color: #022027;
             border: none;
             padding: 12px 24px;
             border-radius: 12px;
             font-weight: 800;
             font-size: 0.92rem;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 20px rgba(45, 212, 191, 0.45);
+            transition: all 0.25s ease;
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.5);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -645,7 +728,7 @@
 
         .countdown-submit-btn:hover {
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 0 28px rgba(72, 229, 163, 0.7);
+            box-shadow: 0 0 28px rgba(56, 189, 248, 0.7);
         }
 
         .countdown-cards-grid {
@@ -657,7 +740,7 @@
         }
 
         .countdown-unit-box {
-            background: #09101d;
+            background: rgba(2, 26, 38, 0.55);
             border: 1.5px solid #2dd4bf;
             border-radius: 20px;
             padding: 22px 10px 16px 10px;
@@ -665,28 +748,28 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 25px rgba(45, 212, 191, 0.25), inset 0 0 15px rgba(45, 212, 191, 0.04);
+            box-shadow: 0 0 25px rgba(45, 212, 191, 0.25), inset 0 0 15px rgba(45, 212, 191, 0.1);
             transition: all 0.25s ease;
         }
 
         .countdown-unit-box:hover {
             transform: translateY(-4px);
-            border-color: #48e5a3;
-            box-shadow: 0 0 35px rgba(72, 229, 163, 0.5), inset 0 0 20px rgba(72, 229, 163, 0.1);
+            border-color: #38bdf8;
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.55), inset 0 0 20px rgba(56, 189, 248, 0.2);
         }
 
         .unit-num {
             font-size: 3rem;
             font-weight: 900;
-            color: #48e5a3;
+            color: #2dd4bf;
             font-family: ui-monospace, "SF Pro Display", monospace;
-            text-shadow: 0 0 18px rgba(72, 229, 163, 0.65);
+            text-shadow: 0 0 20px rgba(45, 212, 191, 0.75);
             line-height: 1;
         }
 
         .unit-lbl {
             font-size: 0.75rem;
-            color: #f1f5f9;
+            color: #e0f2fe;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -698,22 +781,21 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            color: #48e5a3;
+            color: #2dd4bf;
             font-size: 0.9rem;
             font-weight: 700;
-            text-shadow: 0 0 12px rgba(72, 229, 163, 0.5);
+            text-shadow: 0 0 12px rgba(45, 212, 191, 0.5);
             text-align: center;
         }
 
-        /* Countdown 2 Custom Color Themes */
-        .countdown-theme-blue .countdown-main-heading { color: #38bdf8; text-shadow: 0 0 20px rgba(56, 189, 248, 0.45); }
+        .countdown-theme-blue .countdown-main-heading { color: #38bdf8; text-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }
         .countdown-theme-blue .countdown-unit-box { border-color: #38bdf8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.25); }
-        .countdown-theme-blue .unit-num { color: #38bdf8; text-shadow: 0 0 18px rgba(56, 189, 248, 0.65); }
-        .countdown-theme-blue .countdown-submit-btn { background: linear-gradient(135deg, #0284c7, #38bdf8); box-shadow: 0 0 20px rgba(56, 189, 248, 0.45); color: #021427; }
+        .countdown-theme-blue .unit-num { color: #38bdf8; text-shadow: 0 0 18px rgba(56, 189, 248, 0.75); }
+        .countdown-theme-blue .countdown-submit-btn { background: linear-gradient(135deg, #0284c7, #38bdf8); box-shadow: 0 0 20px rgba(56, 189, 248, 0.5); color: #021a24; }
         .countdown-theme-blue .countdown-status-badge { color: #38bdf8; text-shadow: 0 0 12px rgba(56, 189, 248, 0.5); }
-        .countdown-theme-blue .countdown-input-field:focus { border-color: #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.35); }
+        .countdown-theme-blue .countdown-input-field:focus { border-color: #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.4); }
 
-        /* ================= STUDENT PROFILE STYLES ================= */
+        /* ================= STUDENT PROFILE ================= */
         .profile-container-grid {
             display: grid;
             grid-template-columns: 340px 1fr;
@@ -724,15 +806,15 @@
         }
 
         .profile-card-preview {
-            background: var(--ios-card-glass);
-            border: 1px solid var(--ios-border-subtle);
+            background: var(--water-card-glass);
+            border: 1px solid var(--water-border);
             border-radius: 24px;
             padding: 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
             backdrop-filter: blur(25px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.55);
             position: relative;
             overflow: hidden;
         }
@@ -741,8 +823,8 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; height: 90px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(52, 211, 153, 0.25));
-            border-bottom: 0.5px solid var(--ios-border-subtle);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.35), rgba(16, 185, 129, 0.35));
+            border-bottom: 1px solid var(--water-border);
         }
 
         .profile-avatar-wrapper {
@@ -751,9 +833,9 @@
             height: 120px;
             border-radius: 50%;
             border: 3px solid #38bdf8;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.55);
             margin-top: 25px;
-            background: #0b1329;
+            background: #021a29;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -770,8 +852,8 @@
         .profile-avatar-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: #38bdf8;
+            background: rgba(2, 22, 33, 0.85);
+            color: #7dd3fc;
             font-size: 0.65rem;
             text-align: center;
             padding: 4px 0;
@@ -782,14 +864,15 @@
             font-size: 1.4rem;
             font-weight: 800;
             margin: 14px 0 2px 0;
-            color: #fff;
+            color: #7dd3fc;
             text-align: center;
+            text-shadow: 0 0 15px rgba(125, 211, 252, 0.4);
         }
 
         .profile-dream-tag {
-            background: rgba(52, 211, 153, 0.15);
-            color: var(--success-color);
-            border: 0.5px solid rgba(52, 211, 153, 0.35);
+            background: rgba(45, 212, 191, 0.15);
+            color: #5eead4;
+            border: 1px solid rgba(45, 212, 191, 0.4);
             border-radius: 20px;
             padding: 4px 14px;
             font-size: 0.8rem;
@@ -802,7 +885,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(45, 212, 191, 0.25);
             padding-top: 14px;
         }
 
@@ -813,23 +896,23 @@
         }
 
         .profile-meta-label {
-            color: var(--text-secondary);
+            color: #5eead4;
             font-weight: 600;
         }
 
         .profile-meta-val {
-            color: #fff;
+            color: #e0f2fe;
             font-weight: 700;
             text-align: right;
         }
 
         .profile-form-card {
-            background: var(--ios-card-glass);
-            border: 1px solid var(--ios-border-subtle);
+            background: var(--water-card-glass);
+            border: 1px solid var(--water-border);
             border-radius: 24px;
             padding: 26px;
             backdrop-filter: blur(25px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.55);
             display: flex;
             flex-direction: column;
             gap: 18px;
@@ -850,15 +933,15 @@
         .form-field-label {
             font-size: 0.8rem;
             font-weight: 700;
-            color: var(--text-secondary);
+            color: #5eead4;
             text-transform: uppercase;
             letter-spacing: 0.8px;
         }
 
         .form-input-control {
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #fff;
+            background: rgba(2, 23, 34, 0.6);
+            border: 1px solid var(--water-border);
+            color: #e0f2fe;
             padding: 11px 14px;
             border-radius: 12px;
             font-size: 0.9rem;
@@ -869,7 +952,7 @@
 
         .form-input-control:focus {
             border-color: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
         }
 
         .exam-prep-chips-grid {
@@ -880,45 +963,45 @@
         }
 
         .exam-chip {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(45, 212, 191, 0.3);
             padding: 7px 14px;
             border-radius: 18px;
             font-size: 0.8rem;
             font-weight: 600;
-            color: #e2e8f0;
+            color: #e0f2fe;
             cursor: pointer;
             user-select: none;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
         .exam-chip:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--profile-color);
+            background: rgba(45, 212, 191, 0.2);
+            border-color: #38bdf8;
         }
 
         .exam-chip.active {
-            background: rgba(56, 189, 248, 0.2);
+            background: rgba(56, 189, 248, 0.25);
             border-color: #38bdf8;
-            color: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+            color: #7dd3fc;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
             font-weight: 700;
         }
 
         .profile-save-btn {
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
-            color: #030712;
+            background: linear-gradient(135deg, #0891b2, #2dd4bf);
+            color: #022026;
             border: none;
             padding: 14px 24px;
             border-radius: 14px;
             font-weight: 800;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 20px rgba(45, 212, 191, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -928,22 +1011,22 @@
 
         .profile-save-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.65);
         }
 
-        /* AI CAMERA FOCUS TRACKER STYLES */
+        /* ================= AI CAMERA ================= */
         .camera-container-card {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             max-width: 800px;
-            background: var(--ios-card-glass);
-            border: 0.5px solid var(--ios-border-subtle);
+            background: var(--water-card-glass);
+            border: 1px solid var(--water-border);
             border-radius: 24px;
             padding: 24px;
             backdrop-filter: blur(25px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.55);
             gap: 20px;
         }
 
@@ -952,10 +1035,10 @@
             width: 100%;
             max-width: 640px;
             height: 380px;
-            background: #000;
+            background: #011420;
             border-radius: 18px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1.5px solid var(--water-border);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -969,10 +1052,8 @@
 
         .cam-canvas-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
         }
 
@@ -985,8 +1066,8 @@
         }
 
         .cam-btn-start {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: #fff;
+            background: linear-gradient(135deg, #0d9488, #10b981);
+            color: #022019;
             border: none;
             padding: 12px 24px;
             border-radius: 14px;
@@ -997,14 +1078,14 @@
         }
 
         .cam-btn-stop {
-            background: linear-gradient(135deg, #f43f5e, #dc2626);
-            color: #fff;
+            background: linear-gradient(135deg, #0284c7, #06b6d4);
+            color: #021a24;
             border: none;
             padding: 12px 24px;
             border-radius: 14px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 16px rgba(244, 63, 94, 0.4);
+            box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4);
             transition: all 0.2s ease;
         }
 
@@ -1021,8 +1102,8 @@
         }
 
         .cam-stat-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 0.5px solid var(--ios-border-subtle);
+            background: rgba(6, 40, 56, 0.3);
+            border: 1px solid var(--water-border);
             border-radius: 16px;
             padding: 14px;
             display: flex;
@@ -1041,7 +1122,7 @@
 
         .cam-stat-lbl {
             font-size: 0.75rem;
-            color: var(--text-secondary);
+            color: #5eead4;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -1054,40 +1135,71 @@
             font-weight: 800;
             letter-spacing: 0.5px;
             display: inline-block;
+            border: 1px solid var(--water-border);
         }
 
-        /* OMR iOS Styles */
-        .omr-card-stats { font-size: 0.72rem; color: var(--omr-color); font-weight: 700; background: rgba(129, 140, 248, 0.1); padding: 2px 7px; border-radius: 6px; }
+        /* OMR Styles */
+        .omr-card-stats { 
+            font-size: 0.72rem; 
+            color: #38bdf8; 
+            font-weight: 700; 
+            background: rgba(56, 189, 248, 0.15); 
+            padding: 2px 7px; 
+            border-radius: 6px; 
+            border: 1px solid var(--water-border);
+        }
+        
         .omr-row {
-            background: rgba(255, 255, 255, 0.02); border: 0.5px solid rgba(255, 255, 255, 0.04);
-            border-radius: 8px; padding: 6px 9px; margin-bottom: 6px;
-            display: flex; align-items: center; justify-content: space-between; gap: 5px;
+            background: rgba(6, 40, 56, 0.3); 
+            border: 1px solid rgba(45, 212, 191, 0.18);
+            border-radius: 8px; 
+            padding: 6px 9px; 
+            margin-bottom: 6px;
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 5px;
         }
 
-        .omr-q-num { font-weight: 800; font-size: 0.78rem; min-width: 28px; }
+        .omr-q-num { font-weight: 800; font-size: 0.78rem; min-width: 28px; color: #e0f2fe; }
         .omr-bubbles { display: flex; gap: 4px; }
+        
         .omr-bubble-label {
-            width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.22);
-            display: flex; align-items: center; justify-content: center; font-size: 0.66rem; font-weight: 700;
+            width: 20px; height: 20px; border-radius: 50%; 
+            border: 1.5px solid rgba(56, 189, 248, 0.45);
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 0.66rem; font-weight: 700;
             cursor: pointer; user-select: none;
+            color: #7dd3fc;
         }
 
         .omr-bubble-label input { display: none; }
         .omr-bubble-label:has(input:checked) {
-            background-color: #3b82f6; border-color: #60a5fa; color: #ffffff; box-shadow: 0 0 6px rgba(59, 130, 246, 0.6);
+            background-color: #06b6d4; 
+            border-color: #38bdf8; 
+            color: #021a24; 
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.7);
         }
 
-        .omr-eval-boxes { display: flex; gap: 5px; align-items: center; border-left: 0.5px solid rgba(255, 255, 255, 0.12); padding-left: 5px; }
+        .omr-eval-boxes { 
+            display: flex; 
+            gap: 5px; 
+            align-items: center; 
+            border-left: 1px solid rgba(45, 212, 191, 0.25); 
+            padding-left: 5px; 
+        }
+        
         .eval-box {
-            width: 19px; height: 19px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-size: 0.65rem; user-select: none; border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 19px; height: 19px; border-radius: 4px; 
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 0.65rem; user-select: none; 
+            border: 1px solid rgba(45, 212, 191, 0.35);
         }
 
         .eval-box input { display: none; }
-        .eval-box-right:has(input:checked) { background-color: #16a34a; border-color: #4ade80; color: #fff; }
-        .eval-box-wrong:has(input:checked) { background-color: #dc2626; border-color: #f87171; color: #fff; }
+        .eval-box-right:has(input:checked) { background-color: #10b981; border-color: #34d399; color: #022019; }
+        .eval-box-wrong:has(input:checked) { background-color: #0891b2; border-color: #22d3ee; color: #021a24; }
 
-        /* iPhone Bottom Home Indicator Bar */
         .ios-home-indicator {
             position: fixed;
             bottom: 8px;
@@ -1095,13 +1207,12 @@
             transform: translateX(-50%);
             width: 140px;
             height: 5px;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(56, 189, 248, 0.45);
             border-radius: 10px;
             z-index: 1001;
             backdrop-filter: blur(10px);
         }
 
-        /* Responsive Breakpoints */
         @media (max-width: 1024px) {
             :root { --sidebar-width: 220px; }
             .main-app-area { padding-top: 150px; }
@@ -1110,27 +1221,12 @@
         }
 
         @media (max-width: 768px) {
-            .ios-sidebar {
-                transform: translateX(-100%);
-                width: 260px;
-            }
-            .ios-sidebar.open {
-                transform: translateX(0);
-            }
-            .sidebar-overlay.active {
-                display: block;
-            }
-            .main-app-area {
-                margin-left: 0;
-                width: 100%;
-                padding: 160px 16px 70px 16px;
-            }
-            .ios-top-bar {
-                left: 0;
-            }
-            .mobile-hamburger-btn {
-                display: block;
-            }
+            .ios-sidebar { transform: translateX(-100%); width: 260px; }
+            .ios-sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.active { display: block; }
+            .main-app-area { margin-left: 0; width: 100%; padding: 160px 16px 70px 16px; }
+            .ios-top-bar { left: 0; }
+            .mobile-hamburger-btn { display: block; }
             .main-title { font-size: 2.1rem; }
             .countdown-main-heading { font-size: 1.4rem; }
             .countdown-cards-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1149,14 +1245,17 @@
 </head>
 <body>
 
+    <!-- ================= 60FPS REAL-TIME WATER CANVAS BACKGROUND ================= -->
+    <canvas id="waterCanvas"></canvas>
+
     <!-- SIDEBAR OVERLAY FOR MOBILE -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
     <!-- ================= LEFT SIDEBAR NAVIGATION ================= -->
     <aside class="ios-sidebar" id="iosSidebar">
         <div class="sidebar-brand">
-            <span style="font-size: 1.3rem;">📱</span>
-            <div class="sidebar-brand-title">LIVE TRACKER</div>
+            <span style="font-size: 1.3rem;">💧</span>
+            <div class="sidebar-brand-title">AQUA FLOW</div>
         </div>
 
         <div class="sidebar-nav-list">
@@ -1217,7 +1316,7 @@
         </div>
     </aside>
 
-    <!-- ================= FIXED TOP STATUS & WIDGET BAR ================= -->
+    <!-- ================= FIXED TOP BAR ================= -->
     <header class="ios-top-bar">
         <div class="ios-status-row">
             <div style="display: flex; align-items: center; gap: 8px;">
@@ -1227,21 +1326,19 @@
             
             <div class="dynamic-island">
                 <div class="island-pulse"></div>
-                <span id="island-active-text">AI Study Suite 17 Pro Max</span>
+                <span id="island-active-text">Flowing Aqua Suite</span>
             </div>
 
-            <span>5G 📶 100% 🔋</span>
+            <span style="color: #5eead4;">5G 📶 100% 🔋</span>
         </div>
 
         <div class="control-row">
-            <!-- Left Side Control Widgets -->
             <div class="widget-group">
                 <div class="clock-widget" id="live-clock-box">🕒 Syncing System Time...</div>
                 <div class="ai-greetings-widget" id="ai-greetings-box">🤖 AI Mentor: Active</div>
                 <div class="ai-score-widget" id="ai-score-box">⭐ Study Score: 600</div>
             </div>
 
-            <!-- Right Side Shifted Control Widgets (Goal & Tasks) -->
             <div class="widget-group-right">
                 <div class="goal-widget">
                     <span>🎯 <strong>Goal:</strong></span>
@@ -1266,7 +1363,7 @@
             <div class="quote-banner"><p class="quote-text">"If you want to become a king, learn by working hard like a slave."</p></div>
         </div>
 
-        <!-- NEW TAB: PERFORMANCE & MONTHLY PROGRESS GRAPHS -->
+        <!-- TAB: PERFORMANCE & MONTHLY PROGRESS GRAPHS -->
         <div class="tab-view" id="tab-graphs">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--chart-color);">Progress & Analytics</h1>
@@ -1296,7 +1393,7 @@
             </div>
         </div>
 
-        <!-- TAB 0: STUDENT PROFILE -->
+        <!-- TAB: STUDENT PROFILE -->
         <div class="tab-view" id="tab-profile">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--profile-color);">Student Profile</h1>
@@ -1307,7 +1404,7 @@
                 <div class="profile-card-preview">
                     <input type="file" id="student-photo-input" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
                     <div class="profile-avatar-wrapper" onclick="document.getElementById('student-photo-input').click()" title="Click to Upload Photo">
-                        <img id="profile-display-img" class="profile-avatar-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='%239ca3af'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>" alt="Student Photo">
+                        <img id="profile-display-img" class="profile-avatar-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='%2338bdf8'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>" alt="Student Photo">
                         <div class="profile-avatar-overlay">📷 UPLOAD</div>
                     </div>
 
@@ -1347,7 +1444,7 @@
                 </div>
 
                 <div class="profile-form-card">
-                    <h3 style="margin: 0; font-size: 1.2rem; color: #fff; border-bottom: 0.5px solid rgba(255,255,255,0.1); padding-bottom: 8px;">Edit Profile Information</h3>
+                    <h3 style="margin: 0; font-size: 1.2rem; color: #7dd3fc; border-bottom: 1px solid rgba(45, 212, 191, 0.25); padding-bottom: 8px;">Edit Profile Information</h3>
                     
                     <div class="form-grid-2col">
                         <div class="form-field-group">
@@ -1416,7 +1513,7 @@
             </div>
         </div>
 
-        <!-- TAB 1: DAILY TIMETABLE -->
+        <!-- TAB: DAILY TIMETABLE -->
         <div class="tab-view active-tab" id="tab-schedule">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--timetable-color);">Daily Timetable</h1>
@@ -1426,13 +1523,13 @@
                 <div class="time-slot-card" data-title="Math" data-start="20:00" data-end="21:20"><div class="live-dot"></div><span class="time-range">08:00 PM - 09:20 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
                 <div class="time-slot-card" data-title="English" data-start="21:20" data-end="22:30"><div class="live-dot"></div><span class="time-range">09:20 PM - 10:30 PM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
                 <div class="time-slot-card" data-title="Reasoning" data-start="22:30" data-end="23:00"><div class="live-dot"></div><span class="time-range">10:30 PM - 11:00 PM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
-                <div class="time-slot-card" data-title="Self Study" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: #e2e8f0;">Self Study</span></div>
+                <div class="time-slot-card" data-title="Self Study" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: #7dd3fc;">Self Study</span></div>
                 <div class="time-slot-card" data-title="Programming" data-start="00:00" data-end="02:00"><div class="live-dot"></div><span class="time-range">12:00 AM - 02:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming</span></div>
                 <div class="time-slot-card" data-title="College Work" data-start="02:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">02:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--calendar-color);">College Work</span></div>
             </div>
         </div>
 
-        <!-- TAB 2: AI CAMERA FOCUS TRACKER -->
+        <!-- TAB: AI CAMERA FOCUS TRACKER -->
         <div class="tab-view" id="tab-camera">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--camera-color);">AI Camera Focus Tracker</h1>
@@ -1441,7 +1538,7 @@
 
             <div style="display: flex; justify-content: center; width: 100%;">
                 <div class="camera-container-card">
-                    <div id="ai-status-badge" class="status-badge-focus" style="background: rgba(148, 163, 184, 0.2); color: var(--text-secondary);">
+                    <div id="ai-status-badge" class="status-badge-focus" style="background: rgba(6, 40, 56, 0.3); color: var(--text-secondary);">
                         📷 Camera Inactive - Click "Start Camera" Below
                     </div>
 
@@ -1477,7 +1574,7 @@
             </div>
         </div>
 
-        <!-- TAB 3: DUAL EXAM COUNTDOWN -->
+        <!-- TAB: DUAL EXAM COUNTDOWN -->
         <div class="tab-view" id="tab-countdown">
             <div class="countdown-view-container">
                 <div class="countdown-section-card">
@@ -1562,7 +1659,7 @@
             </div>
         </div>
 
-        <!-- TAB 4: NIGHT ROUTINE -->
+        <!-- TAB: NIGHT ROUTINE -->
         <div class="tab-view" id="tab-night">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--timetable-color);">Night Study Timetable</h1>
@@ -1575,11 +1672,11 @@
                 <div class="time-slot-card" data-title="English" data-start="00:00" data-end="01:30"><div class="live-dot"></div><span class="time-range">12:00 AM - 01:30 AM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
                 <div class="time-slot-card" data-title="Math" data-start="01:30" data-end="03:00"><div class="live-dot"></div><span class="time-range">01:30 AM - 03:00 AM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
                 <div class="time-slot-card" data-title="Reasoning" data-start="03:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">03:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
-                <div class="time-slot-card" data-title="BYPASS Reasoning" data-start="07:00" data-end="09:00"><div class="live-dot"></div><span class="time-range">07:00 AM - 09:00 AM</span><span class="subject-name" style="color: var(--ssc-color);">BYPASS Reasoning</span></div>
+                <div class="time-slot-card" data-title="BYPASS Reasoning" data-start="07:00" data-end="09:00"><div class="live-dot"></div><span class="time-range">07:00 AM - 09:00 AM</span><span class="subject-name" style="color: #2dd4bf;">BYPASS Reasoning</span></div>
             </div>
         </div>
 
-        <!-- TAB 5: SPECIAL DAY (SUNDAY) -->
+        <!-- TAB: SPECIAL DAY (SUNDAY) -->
         <div class="tab-view" id="tab-special">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--special-color);">Special Day Schedule</h1>
@@ -1588,7 +1685,7 @@
             <div class="timetable-grid" id="special-day-grid">
                 <div class="time-slot-card special-slot" data-title="Special Math" data-start="09:30" data-end="12:00"><div class="live-dot"></div><span class="time-range">09:30 AM - 12:00 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
                 <div class="time-slot-card special-slot" data-title="Special Reasoning" data-start="12:00" data-end="14:30"><div class="live-dot"></div><span class="time-range">12:00 PM - 02:30 PM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
-                <div class="time-slot-card special-slot" data-title="Special BYPASS" data-start="15:30" data-end="17:00"><div class="live-dot"></div><span class="time-range">03:30 PM - 05:00 PM</span><span class="subject-name" style="color: var(--ssc-color);">BYPASS</span></div>
+                <div class="time-slot-card special-slot" data-title="Special BYPASS" data-start="15:30" data-end="17:00"><div class="live-dot"></div><span class="time-range">03:30 PM - 05:00 PM</span><span class="subject-name" style="color: #2dd4bf;">BYPASS</span></div>
                 <div class="time-slot-card special-slot" data-title="Special Math Evening" data-start="17:30" data-end="19:30"><div class="live-dot"></div><span class="time-range">05:30 PM - 07:30 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
                 <div class="time-slot-card special-slot" data-title="Special OS" data-start="19:30" data-end="21:00"><div class="live-dot"></div><span class="time-range">07:30 PM - 09:00 PM</span><span class="subject-name" style="color: #38bdf8;">Operating System</span></div>
                 <div class="time-slot-card special-slot" data-title="Special Programming" data-start="21:30" data-end="00:00"><div class="live-dot"></div><span class="time-range">09:30 PM - 12:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming Language</span></div>
@@ -1598,7 +1695,7 @@
             </div>
         </div>
 
-        <!-- TAB 6: ENGLISH -->
+        <!-- TAB: ENGLISH -->
         <div class="tab-view" id="tab-english">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--english-color);">English Classes</h1>
@@ -1608,7 +1705,7 @@
             <div class="tracker-grid" id="english-grid"></div>
         </div>
 
-        <!-- TAB 7: ARITHMETIC MATH -->
+        <!-- TAB: ARITHMETIC MATH -->
         <div class="tab-view" id="tab-math">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--math-color);">Arithmetic Math Classes</h1>
@@ -1618,7 +1715,7 @@
             <div class="tracker-grid" id="math-grid"></div>
         </div>
 
-        <!-- TAB 7B: ADVANCE MATH -->
+        <!-- TAB: ADVANCE MATH -->
         <div class="tab-view" id="tab-advmath">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--adv-math-color);">Advance Math Classes</h1>
@@ -1628,7 +1725,7 @@
             <div class="tracker-grid" id="advmath-grid"></div>
         </div>
 
-        <!-- TAB 8: REASONING -->
+        <!-- TAB: REASONING -->
         <div class="tab-view" id="tab-reasoning">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--reasoning-color);">Reasoning Classes</h1>
@@ -1638,7 +1735,7 @@
             <div class="tracker-grid" id="reasoning-grid"></div>
         </div>
 
-        <!-- TAB 9: CODING -->
+        <!-- TAB: CODING -->
         <div class="tab-view" id="tab-coding">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--coding-color);">Coding & Tech</h1>
@@ -1648,7 +1745,7 @@
             <div class="coding-grid-special" id="coding-grid"></div>
         </div>
 
-        <!-- TAB 10: 2026-2027 FULL CALENDAR TRACKER -->
+        <!-- TAB: 2026-2027 TRACKER -->
         <div class="tab-view" id="tab-tracker">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--calendar-color);">Monthly Tracker (2026 - 2027)</h1>
@@ -1656,14 +1753,14 @@
                 <span class="progress-text" id="progress-text-calendar">Progress: 0%</span>
             </div>
 
-            <h3 class="ssc-subtitle" style="color: var(--ssc-color);">📌 Remaining 2026 Months (August - December)</h3>
+            <h3 class="ssc-subtitle" style="color: var(--special-color);">📌 Remaining 2026 Months (August - December)</h3>
             <div class="tracker-grid" id="calendar-2026-grid"></div>
 
             <h3 class="ssc-subtitle" style="color: var(--calendar-color);">📌 Full Year 2027 Tracker (Jan - Dec)</h3>
             <div class="tracker-grid" id="calendar-2027-grid"></div>
         </div>
 
-        <!-- TAB 11: SSC GD 2027 -->
+        <!-- TAB: SSC GD 2027 -->
         <div class="tab-view" id="tab-ssc">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--ssc-color);">SSC GD 2027 Syllabus</h1>
@@ -1678,7 +1775,7 @@
             <div class="coding-grid-special" id="ssc-hindi-grid"></div>
         </div>
 
-        <!-- TAB 12: MATH BOOK -->
+        <!-- TAB: MATH BOOK -->
         <div class="tab-view" id="tab-mbook">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--book-color);">Math Book Tracker</h1>
@@ -1688,7 +1785,7 @@
             <div class="tracker-grid" id="book-grid"></div>
         </div>
 
-        <!-- TAB 13: REASONING BOOK -->
+        <!-- TAB: REASONING BOOK -->
         <div class="tab-view" id="tab-rbook">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--rbook-color);">Reasoning Book Tracker</h1>
@@ -1698,7 +1795,7 @@
             <div class="tracker-grid" id="rbook-grid"></div>
         </div>
 
-        <!-- TAB 14: OMR SHEETS -->
+        <!-- TAB: OMR PRACTICE SHEETS -->
         <div class="tab-view" id="tab-omr">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--omr-color);">OMR Practice Sheets</h1>
@@ -1711,7 +1808,7 @@
             <div class="tracker-grid" id="omr-reasoning-grid"></div>
         </div>
 
-        <!-- TAB 15: VOCABULARY SERIES (20 WORDS / DAY) -->
+        <!-- TAB: VOCABULARY SERIES -->
         <div class="tab-view" id="tab-vocab">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--vocab-color);">Vocabulary Series</h1>
@@ -1724,11 +1821,158 @@
 
     </main>
 
-    <!-- iOS Home Indicator Swipe Bar -->
     <div class="ios-home-indicator"></div>
 
-    <!-- JAVASCRIPT ENGINE -->
     <script>
+        // ================= 60FPS FLOWING WATER PHYSICS ENGINE =================
+        const canvas = document.getElementById('waterCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Water Wave Stream Layers
+        let step = 0;
+        const waves = [
+            { y: height * 0.28, length: 0.003, amplitude: 55, speed: 0.016, color: 'rgba(56, 189, 248, 0.22)', lineWidth: 38 },
+            { y: height * 0.32, length: 0.004, amplitude: 40, speed: -0.019, color: 'rgba(45, 212, 191, 0.26)', lineWidth: 22 },
+            { y: height * 0.60, length: 0.0025, amplitude: 65, speed: 0.012, color: 'rgba(6, 182, 212, 0.24)', lineWidth: 45 },
+            { y: height * 0.65, length: 0.0035, amplitude: 45, speed: -0.015, color: 'rgba(56, 189, 248, 0.2)', lineWidth: 26 },
+            { y: height * 0.85, length: 0.002, amplitude: 50, speed: 0.02, color: 'rgba(16, 185, 129, 0.18)', lineWidth: 30 }
+        ];
+
+        // Ambient Rising Water Bubbles & Caustic Droplets
+        const bubbleCount = 42;
+        const bubbles = [];
+        for (let i = 0; i < bubbleCount; i++) {
+            bubbles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 8 + 3,
+                speedY: Math.random() * 1.8 + 0.8,
+                speedX: (Math.random() - 0.5) * 0.8,
+                wobble: Math.random() * Math.PI * 2,
+                opacity: Math.random() * 0.6 + 0.25
+            });
+        }
+
+        // Interactive Ripples on Mouse Move / Touch
+        const ripples = [];
+        window.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.25) {
+                ripples.push({ x: e.clientX, y: e.clientY, r: 2, maxR: Math.random() * 45 + 30, alpha: 0.7 });
+            }
+        });
+        window.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            if (touch && Math.random() < 0.3) {
+                ripples.push({ x: touch.clientX, y: touch.clientY, r: 2, maxR: 45, alpha: 0.7 });
+            }
+        });
+
+        function animateWater() {
+            ctx.clearRect(0, 0, width, height);
+
+            // 1. Deep Ocean Fluid Base Gradient
+            const grad = ctx.createLinearGradient(0, 0, width, height);
+            grad.addColorStop(0, '#02121d');
+            grad.addColorStop(0.5, '#032336');
+            grad.addColorStop(1, '#011322');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+
+            step += 0.035;
+
+            // 2. Render Real-Time Flowing Water Wave Ribbons
+            waves.forEach((w) => {
+                ctx.save();
+                ctx.beginPath();
+                ctx.lineWidth = w.lineWidth;
+                ctx.strokeStyle = w.color;
+                ctx.lineCap = 'round';
+
+                for (let x = 0; x <= width; x += 15) {
+                    const yOffset = Math.sin(x * w.length + step * (w.speed * 60)) * w.amplitude +
+                                    Math.cos((x * 0.5) * w.length + step) * (w.amplitude * 0.4);
+                    const y = w.y + yOffset;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // Fluid Specular Highlight Line (Water Glint)
+                ctx.beginPath();
+                ctx.lineWidth = 2.5;
+                ctx.strokeStyle = 'rgba(224, 242, 254, 0.45)';
+                for (let x = 0; x <= width; x += 20) {
+                    const yOffset = Math.sin(x * w.length + step * (w.speed * 60)) * w.amplitude +
+                                    Math.cos((x * 0.5) * w.length + step) * (w.amplitude * 0.4);
+                    const y = w.y + yOffset - 4;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+                ctx.restore();
+            });
+
+            // 3. Render Floating & Rising Water Bubbles
+            bubbles.forEach(b => {
+                b.y -= b.speedY;
+                b.wobble += 0.04;
+                b.x += Math.sin(b.wobble) * 0.7 + b.speedX;
+
+                if (b.y < -30) {
+                    b.y = height + 20;
+                    b.x = Math.random() * width;
+                }
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(125, 211, 252, ${b.opacity * 0.35})`;
+                ctx.fill();
+                ctx.lineWidth = 1.2;
+                ctx.strokeStyle = `rgba(224, 242, 254, ${b.opacity})`;
+                ctx.stroke();
+
+                // Bubble Specular Dot
+                ctx.beginPath();
+                ctx.arc(b.x - b.radius * 0.3, b.y - b.radius * 0.3, b.radius * 0.25, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.8})`;
+                ctx.fill();
+                ctx.restore();
+            });
+
+            // 4. Interactive Splashing Ripples
+            for (let i = ripples.length - 1; i >= 0; i--) {
+                const rip = ripples[i];
+                rip.r += 1.6;
+                rip.alpha -= 0.016;
+
+                if (rip.alpha <= 0) {
+                    ripples.splice(i, 1);
+                    continue;
+                }
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(rip.x, rip.y, rip.r, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(56, 189, 248, ${rip.alpha})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            requestAnimationFrame(animateWater);
+        }
+        animateWater();
+
+        // ================= STUDY DATA ENGINE =================
         window.STUDY_DATA = {
             english: [
                 { name: "Basic Grammar", classes: 16 }, { name: "Subject Verb Agreement", classes: 12 },
@@ -1901,7 +2145,7 @@
             ]
         };
 
-        // ================= CHART.JS LIVE ENGINE =================
+        // ================= CHART ENGINE =================
         let overallChartInstance = null;
         let monthlyChartInstance = null;
 
@@ -1916,8 +2160,8 @@
                             label: 'Completion %',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                             backgroundColor: [
-                                '#a78bfa', '#38bdf8', '#06b6d4', '#34d399', '#2dd4bf', 
-                                '#f59e0b', '#a3e635', '#06b6d4', '#818cf8', '#38bdf8'
+                                '#38bdf8', '#22d3ee', '#06b6d4', '#34d399', '#2dd4bf', 
+                                '#14b8a6', '#4ade80', '#06b6d4', '#38bdf8', '#22d3ee'
                             ],
                             borderRadius: 8,
                             borderWidth: 0
@@ -1933,11 +2177,11 @@
                             y: {
                                 beginAtZero: true,
                                 max: 100,
-                                ticks: { color: '#9ca3af', callback: val => `${val}%` },
-                                grid: { color: 'rgba(255, 255, 255, 0.06)' }
+                                ticks: { color: '#7dd3fc', callback: val => `${val}%` },
+                                grid: { color: 'rgba(56, 189, 248, 0.15)' }
                             },
                             x: {
-                                ticks: { color: '#9ca3af', font: { size: 10 } },
+                                ticks: { color: '#7dd3fc', font: { size: 10 } },
                                 grid: { display: false }
                             }
                         }
@@ -1960,12 +2204,12 @@
                         datasets: [{
                             label: 'Monthly Days Completed',
                             data: new Array(17).fill(0),
-                            borderColor: '#fb923c',
-                            backgroundColor: 'rgba(251, 146, 60, 0.15)',
+                            borderColor: '#2dd4bf',
+                            backgroundColor: 'rgba(45, 212, 191, 0.22)',
                             fill: true,
                             tension: 0.35,
                             borderWidth: 2.5,
-                            pointBackgroundColor: '#fb923c',
+                            pointBackgroundColor: '#2dd4bf',
                             pointRadius: 4,
                             pointHoverRadius: 6
                         }]
@@ -1980,11 +2224,11 @@
                             y: {
                                 beginAtZero: true,
                                 max: 31,
-                                ticks: { color: '#9ca3af' },
-                                grid: { color: 'rgba(255, 255, 255, 0.06)' }
+                                ticks: { color: '#7dd3fc' },
+                                grid: { color: 'rgba(56, 189, 248, 0.15)' }
                             },
                             x: {
-                                ticks: { color: '#9ca3af', font: { size: 9.5 } },
+                                ticks: { color: '#7dd3fc', font: { size: 9.5 } },
                                 grid: { display: false }
                             }
                         }
@@ -2039,7 +2283,7 @@
             }
         }
 
-        // ================= STUDENT PROFILE ENGINE =================
+        // ================= STUDENT PROFILE =================
         let selectedExamPrepOptions = [];
 
         function toggleExamChip(element, examName) {
@@ -2167,7 +2411,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ================= DUAL EXAM COUNTDOWN ENGINE =================
+        // ================= DUAL COUNTDOWN =================
         const countdownIntervals = { 1: null, 2: null };
 
         function saveExamTarget(id) {
@@ -2214,7 +2458,7 @@
                     document.getElementById(`cd-hours-${id}`).innerText = '00';
                     document.getElementById(`cd-mins-${id}`).innerText = '00';
                     document.getElementById(`cd-secs-${id}`).innerText = '00';
-                    if (statusMsg) statusMsg.innerText = `Target Exam Reached or Passed! Pick a new date.`;
+                    if (statusMsg) statusMsg.innerText = `Target Exam Reached or Passed!`;
                     return;
                 }
 
@@ -2234,7 +2478,7 @@
             countdownIntervals[id] = setInterval(updateTimer, 1000);
         }
 
-        // ================= AI CAMERA FOCUS TRACKER LOGIC =================
+        // ================= AI CAMERA LOGIC =================
         let cocoModel = null;
         let camStream = null;
         let isCamRunning = false;
@@ -2249,8 +2493,8 @@
         async function startAiCamera() {
             const badge = document.getElementById('ai-status-badge');
             badge.innerText = "⏳ Loading AI Vision Model...";
-            badge.style.background = "rgba(245, 158, 11, 0.2)";
-            badge.style.color = "var(--ssc-color)";
+            badge.style.background = "rgba(6, 182, 212, 0.25)";
+            badge.style.color = "#7dd3fc";
 
             try {
                 if (!cocoModel) {
@@ -2267,8 +2511,8 @@
 
                 isCamRunning = true;
                 badge.innerText = "🟢 AI Camera Active - Monitoring Focus";
-                badge.style.background = "rgba(52, 211, 153, 0.2)";
-                badge.style.color = "var(--success-color)";
+                badge.style.background = "rgba(45, 212, 191, 0.25)";
+                badge.style.color = "#2dd4bf";
 
                 if (camTimerInterval) clearInterval(camTimerInterval);
                 camTimerInterval = setInterval(runCamSecondTick, 1000);
@@ -2277,8 +2521,8 @@
             } catch (err) {
                 console.error("Camera Access Error:", err);
                 badge.innerText = "❌ Camera Error: Permission Denied or Device Unavailable";
-                badge.style.background = "rgba(52, 211, 153, 0.2)";
-                badge.style.color = "var(--countdown-color)";
+                badge.style.background = "rgba(6, 182, 212, 0.25)";
+                badge.style.color = "#5eead4";
             }
         }
 
@@ -2292,7 +2536,7 @@
 
             const badge = document.getElementById('ai-status-badge');
             badge.innerText = "📷 Camera Stopped";
-            badge.style.background = "rgba(148, 163, 184, 0.2)";
+            badge.style.background = "rgba(6, 40, 56, 0.35)";
             badge.style.color = "var(--text-secondary)";
 
             const canvas = document.getElementById('webcam-canvas');
@@ -2329,22 +2573,22 @@
 
                     if (pred.class === 'person') {
                         personFound = true;
-                        ctx.strokeStyle = '#10b981';
+                        ctx.strokeStyle = '#2dd4bf';
                         ctx.lineWidth = 3;
                         ctx.strokeRect(x, y, width, height);
 
-                        ctx.fillStyle = '#10b981';
+                        ctx.fillStyle = '#2dd4bf';
                         ctx.font = 'bold 14px sans-serif';
                         ctx.fillText(`👤 Student Focused (${Math.round(pred.score * 100)}%)`, x, y > 20 ? y - 6 : 15);
                     }
 
                     if (pred.class === 'cell phone') {
                         phoneFound = true;
-                        ctx.strokeStyle = '#34d399';
+                        ctx.strokeStyle = '#38bdf8';
                         ctx.lineWidth = 3;
                         ctx.strokeRect(x, y, width, height);
 
-                        ctx.fillStyle = '#34d399';
+                        ctx.fillStyle = '#38bdf8';
                         ctx.font = 'bold 14px sans-serif';
                         ctx.fillText(`📱 Phone Distraction! (${Math.round(pred.score * 100)}%)`, x, y > 20 ? y - 6 : 15);
                     }
@@ -2364,15 +2608,15 @@
             const badge = document.getElementById('ai-status-badge');
             if (phoneFound) {
                 badge.innerText = "⚠️ Phone Detected! Stay Focused!";
-                badge.style.background = "rgba(52, 211, 153, 0.25)";
-                badge.style.color = "#34d399";
+                badge.style.background = "rgba(56, 189, 248, 0.3)";
+                badge.style.color = "#38bdf8";
             } else if (!personFound) {
                 badge.innerText = "🚪 Away From Chair";
-                badge.style.background = "rgba(251, 146, 60, 0.25)";
-                badge.style.color = "var(--calendar-color)";
+                badge.style.background = "rgba(6, 182, 212, 0.3)";
+                badge.style.color = "#22d3ee";
             } else {
                 badge.innerText = "🟢 Student Focused at Desk";
-                badge.style.background = "rgba(52, 211, 153, 0.2)";
+                badge.style.background = "rgba(45, 212, 191, 0.25)";
                 badge.style.color = "var(--success-color)";
             }
 
@@ -2651,7 +2895,6 @@
             }
         }
 
-        // Live Real-Time Date & Time Clock
         function updateLiveClock() {
             const now = new Date();
             const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -2680,7 +2923,6 @@
             }
         }
 
-        // State Machine
         let classesDoneToday = 0;
         let activeSlotTitle = null;
 
@@ -2770,7 +3012,6 @@
             }
         }
 
-        // Live Timetable Checker
         function runTimetableRealtimeEngine() {
             const now = new Date();
             const currentDay = now.getDay();
@@ -2795,8 +3036,8 @@
 
             cards.forEach(card => {
                 if (card.classList.contains('special-slot') && !isSunday) {
-                    card.style.borderColor = 'var(--ios-border-subtle)';
-                    card.style.background = 'var(--ios-card-glass)';
+                    card.style.borderColor = 'var(--water-border)';
+                    card.style.background = 'var(--water-card-glass)';
                     const dot = card.querySelector('.live-dot');
                     if(dot) dot.style.display = 'none';
                     return;
@@ -2822,14 +3063,14 @@
                 const dot = card.querySelector('.live-dot');
                 if (isActive) {
                     card.style.borderColor = 'var(--success-color)';
-                    card.style.background = 'rgba(52, 211, 153, 0.08)';
-                    card.style.boxShadow = '0 0 16px rgba(52, 211, 153, 0.25)';
+                    card.style.background = 'rgba(45, 212, 191, 0.28)';
+                    card.style.boxShadow = '0 0 18px rgba(45, 212, 191, 0.5)';
                     if(dot) dot.style.display = 'block';
                     detectedActiveSlot = title;
                 } else {
-                    card.style.borderColor = 'var(--ios-border-subtle)';
-                    card.style.background = 'var(--ios-card-glass)';
-                    card.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.25)';
+                    card.style.borderColor = 'var(--water-border)';
+                    card.style.background = 'var(--water-card-glass)';
+                    card.style.boxShadow = '0 8px 24px rgba(1, 16, 26, 0.4)';
                     if(dot) dot.style.display = 'none';
                 }
             });
@@ -2846,7 +3087,7 @@
             } else {
                 activeSlotTitle = null;
                 mentorBox.innerText = `🤖 Best of luck! Focus mode ready.`;
-                if(islandText) islandText.innerText = `Study Suite 17 Pro Max`;
+                if(islandText) islandText.innerText = `Flowing Aqua Suite`;
             }
         }
 
@@ -2873,7 +3114,6 @@
             restoreStudentProfile();
         }
 
-        // Initialize on DOM Ready
         document.addEventListener("DOMContentLoaded", () => {
             buildStandardGrid('english-grid', window.STUDY_DATA.english, 'english');
             buildStandardGrid('math-grid', window.STUDY_DATA.math, 'math');
