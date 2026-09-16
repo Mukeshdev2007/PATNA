@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Realistic Flowing Water Study Suite</title>
+    <title>Live Tracker</title>
     <!-- Chart.js Live Graph Visualizer Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- TensorFlow.js & COCO-SSD AI Computer Vision Libraries -->
@@ -11,42 +11,43 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"></script>
     <style>
         :root {
-            /* 100% Water Glassmorphism Theme (Zero Solid White) */
-            --water-card-glass: rgba(6, 38, 58, 0.22);
-            --water-border: rgba(56, 189, 248, 0.35);
-            --water-border-specular: rgba(45, 212, 191, 0.85);
+            /* iOS 27 Liquid Glass Navigation & Card Styling */
+            --glass-bg-primary: rgba(12, 24, 38, 0.55);
+            --glass-bg-sidebar: rgba(8, 18, 30, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.22);
+            --glass-border-specular: rgba(56, 189, 248, 0.85);
+            --glass-highlight: rgba(255, 255, 255, 0.12);
             
             /* High Luminance Aqua Text & Glows */
-            --text-primary: #e0f2fe;
-            --text-secondary: #7dd3fc;
+            --text-primary: #f0fdfa;
+            --text-secondary: #bae6fd;
             --text-glow: #38bdf8;
-            --water-bar-blur: rgba(3, 20, 32, 0.45);
             --sidebar-width: 250px;
             
-            /* Pure Neon Water Accents */
+            /* Pure Neon Accents */
             --english-color: #38bdf8;
             --math-color: #22d3ee;
             --adv-math-color: #06b6d4;
             --reasoning-color: #34d399;
-            --coding-color: #2dd4bf;
+            --coding-color: #5819be;
             --calendar-color: #14b8a6;
             --ssc-color: #38bdf8;
-            --hindi-color: #2dd4bf;
-            --book-color: #4ade80;
+            --hindi-color: #20d27f;
+            --book-color: #d41665;
             --rbook-color: #06b6d4;
             --omr-color: #38bdf8;
             --special-color: #10b981;
             --vocab-color: #22d3ee;
-            --countdown-color: #34d399;
-            --countdown-color-2: #38bdf8;
+            --countdown-color: #2ad671;
             --camera-color: #10b981;
-            --success-color: #2dd4bf;
-            --success-bg: rgba(45, 212, 191, 0.28);
+            --success-color: #f4f6f8;
+            --success-bg: rgba(45, 212, 191, 0.3);
             --timetable-color: #34d399;
-            --quote-color: #2dd4bf;
-            --ai-mentor-color: #38bdf8;
-            --profile-color: #22d3ee;
+            --profile-color: #0b27b7;
             --chart-color: #14b8a6;
+
+            /* Stopwatch Dynamic Accent */
+            --stopwatch-color: #22c55e;
         }
 
         * {
@@ -56,7 +57,9 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-            background-color: #02121d;
+            background: linear-gradient(rgba(12, 22, 34, 0.7), rgba(8, 15, 24, 0.85)), 
+                        url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=2000&q=80') no-repeat center center fixed;
+            background-size: cover;
             color: var(--text-primary);
             margin: 0;
             padding: 0;
@@ -66,35 +69,24 @@
             position: relative;
         }
 
-        /* ================= REAL-TIME FLOWING WATER CANVAS ================= */
-        #waterCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* ================= SIDEBAR (LIQUID GLASS) ================= */
+        /* ================= iOS 27 LIQUID GLASS SIDEBAR ================= */
         .ios-sidebar {
             position: fixed;
             top: 0;
             left: 0;
             bottom: 0;
             width: var(--sidebar-width);
-            background: var(--water-bar-blur);
-            backdrop-filter: blur(28px) saturate(210%);
-            -webkit-backdrop-filter: blur(28px) saturate(210%);
-            border-right: 1px solid var(--water-border);
+            background: var(--glass-bg-sidebar);
+            backdrop-filter: blur(35px) saturate(240%);
+            -webkit-backdrop-filter: blur(35px) saturate(240%);
+            border-right: 1px solid var(--glass-border);
             z-index: 1100;
             padding: 24px 16px 40px 16px;
             display: flex;
             flex-direction: column;
             gap: 12px;
             overflow-y: auto;
-            box-shadow: 10px 0 35px rgba(1, 16, 26, 0.7);
+            box-shadow: 15px 0 45px rgba(0, 8, 15, 0.75), inset -1px 0 0 rgba(255, 255, 255, 0.1);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -103,7 +95,7 @@
             align-items: center;
             gap: 10px;
             padding: 8px 12px 14px 12px;
-            border-bottom: 1px solid var(--water-border);
+            border-bottom: 1px solid var(--glass-border);
             margin-bottom: 6px;
         }
 
@@ -123,11 +115,11 @@
         }
 
         .nav-sidebar-btn {
-            background: rgba(6, 182, 212, 0.08);
+            background: rgba(6, 182, 212, 0.1);
             color: var(--text-secondary);
-            border: 1px solid rgba(56, 189, 248, 0.22);
+            border: 1px solid rgba(56, 189, 248, 0.2);
             padding: 10px 14px;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             font-size: 0.86rem;
             font-weight: 600;
@@ -136,54 +128,41 @@
             align-items: center;
             gap: 10px;
             transition: all 0.25s ease;
-            backdrop-filter: blur(14px);
+            backdrop-filter: blur(16px);
             width: 100%;
         }
 
         .nav-sidebar-btn:hover {
             color: #f0fdfa;
-            border-color: var(--water-border-specular);
-            background: rgba(45, 212, 191, 0.2);
-            box-shadow: 0 0 16px rgba(45, 212, 191, 0.4);
+            border-color: var(--glass-border-specular);
+            background: rgba(45, 212, 191, 0.25);
+            box-shadow: 0 0 18px rgba(45, 212, 191, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.15);
             transform: translateX(4px);
         }
 
         .nav-sidebar-btn.active {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.5), rgba(16, 185, 129, 0.45));
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.6), rgba(16, 185, 129, 0.5));
             color: #ccfbf1;
-            border-color: var(--water-border-specular);
-            box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+            border-color: var(--glass-border-specular);
+            box-shadow: 0 0 22px rgba(34, 211, 238, 0.55), inset 0 0 12px rgba(255, 255, 255, 0.25);
         }
 
-        /* ================= MAIN CONTENT ================= */
-        .main-app-area {
-            margin-left: var(--sidebar-width);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 140px 24px 70px 24px;
-            width: calc(100% - var(--sidebar-width));
-            position: relative;
-            z-index: 1;
-        }
-
+        /* ================= iOS 27 LIQUID GLASS TOP BAR ================= */
         .ios-top-bar {
             position: fixed;
             top: 0;
             left: var(--sidebar-width);
             right: 0;
-            background: var(--water-bar-blur);
-            backdrop-filter: blur(30px) saturate(220%);
-            -webkit-backdrop-filter: blur(30px) saturate(220%);
-            border-bottom: 1px solid var(--water-border);
+            background: var(--glass-bg-primary);
+            backdrop-filter: blur(35px) saturate(240%);
+            -webkit-backdrop-filter: blur(35px) saturate(240%);
+            border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
-            padding: 8px 24px 10px 24px;
+            padding: 10px 24px 12px 24px;
             display: flex;
             flex-direction: column;
             gap: 8px;
-            box-shadow: 0 10px 35px rgba(2, 16, 26, 0.7);
+            box-shadow: 0 15px 40px rgba(1, 8, 15, 0.75), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
             transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -199,14 +178,14 @@
         }
 
         .dynamic-island {
-            background: rgba(2, 22, 34, 0.85);
-            border: 1px solid var(--water-border);
+            background: rgba(2, 16, 26, 0.85);
+            border: 1px solid var(--glass-border);
             border-radius: 26px;
             padding: 5px 18px;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             font-size: 0.78rem;
             letter-spacing: 0.3px;
             color: #7dd3fc;
@@ -255,28 +234,29 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(8, 45, 68, 0.35);
+            background: rgba(8, 30, 46, 0.5);
             padding: 6px 14px;
             border-radius: 20px;
-            border: 1px solid var(--water-border);
+            border: 1px solid var(--glass-border);
             font-size: 0.82rem;
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(18px);
             color: var(--text-primary);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
         .clock-widget {
             border-color: #38bdf8;
-            color: #7dd3fc;
+            color: #bae6fd;
             font-weight: 700;
             font-family: ui-monospace, monospace;
             font-size: 0.86rem;
-            box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .ai-greetings-widget { 
             border-color: var(--coding-color); 
             color: #a7f3d0; 
-            background: rgba(45, 212, 191, 0.15); 
+            background: rgba(45, 212, 191, 0.2); 
             font-weight: 600; 
         }
         
@@ -284,14 +264,14 @@
             border-color: #38bdf8; 
             color: #38bdf8; 
             font-weight: 800; 
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .goal-input {
             width: 42px; 
-            background: rgba(2, 20, 31, 0.75); 
-            border: 1px solid var(--water-border);
-            color: #7dd3fc; 
+            background: rgba(2, 12, 20, 0.85); 
+            border: 1px solid var(--glass-border);
+            color: #bae6fd; 
             text-align: center; 
             border-radius: 8px; 
             font-weight: 700; 
@@ -301,9 +281,9 @@
 
         .mobile-hamburger-btn {
             display: none;
-            background: rgba(6, 182, 212, 0.18);
-            border: 1px solid var(--water-border);
-            color: #7dd3fc;
+            background: rgba(6, 182, 212, 0.25);
+            border: 1px solid var(--glass-border);
+            color: #bae6fd;
             padding: 6px 12px;
             border-radius: 12px;
             font-size: 1.1rem;
@@ -314,9 +294,23 @@
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(2, 18, 28, 0.75);
+            background: rgba(2, 10, 18, 0.8);
             z-index: 1050;
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
+        }
+
+        /* ================= MAIN CONTENT AREA ================= */
+        .main-app-area {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 140px 24px 70px 24px;
+            width: calc(100% - var(--sidebar-width));
+            position: relative;
+            z-index: 1;
         }
 
         /* Quotes Banner */
@@ -331,13 +325,13 @@
 
         .quote-banner {
             width: 100%; 
-            background: rgba(8, 45, 68, 0.25); 
+            background: rgba(8, 30, 46, 0.4); 
             backdrop-filter: blur(25px);
-            border: 1px solid rgba(45, 212, 191, 0.4); 
+            border: 1px solid rgba(45, 212, 191, 0.5); 
             border-radius: 16px; 
             padding: 12px 18px; 
             text-align: center;
-            box-shadow: 0 8px 30px rgba(6, 182, 212, 0.2);
+            box-shadow: 0 8px 30px rgba(6, 182, 212, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .quote-text { 
@@ -394,13 +388,13 @@
         .subject-progress-container {
             width: 100%; 
             max-width: 380px; 
-            background: rgba(3, 27, 40, 0.5);
+            background: rgba(2, 16, 26, 0.65);
             border-radius: 20px; 
             height: 7px; 
             margin: 8px auto 0 auto; 
             overflow: hidden;
-            border: 1px solid var(--water-border);
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
+            border: 1px solid var(--glass-border);
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
         }
 
         .subject-progress-bar { 
@@ -423,15 +417,114 @@
         .coding-grid-special { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; padding: 6px 0; }
         .timetable-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; padding: 6px 0; }
 
-        /* Liquid 100% Transparent Frosted Cards */
+        /* ================= GIANT STOPWATCH COMPONENT ================= */
+        .giant-stopwatch-container {
+            margin-top: 25px;
+            background: rgba(4, 12, 20, 0.85);
+            border: 2px solid var(--stopwatch-color);
+            border-radius: 24px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0,0,0,0.5);
+            width: 100%;
+        }
+
+        .stopwatch-theme-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .theme-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .theme-dot:hover {
+            transform: scale(1.15);
+        }
+
+        .giant-time-display {
+            font-size: clamp(4rem, 12vw, 9rem);
+            font-weight: 900;
+            font-family: ui-monospace, "SF Pro Display", monospace;
+            color: var(--stopwatch-color);
+            text-shadow: 0 0 30px var(--stopwatch-color), 0 0 60px var(--stopwatch-color);
+            letter-spacing: 2px;
+            text-align: center;
+            line-height: 1.1;
+            margin: 10px 0 25px 0;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .stopwatch-controls-row {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            max-width: 500px;
+            justify-content: center;
+        }
+
+        .stopwatch-btn {
+            flex: 1;
+            background: transparent;
+            border: 2px solid var(--stopwatch-color);
+            color: var(--stopwatch-color);
+            padding: 14px 20px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .stopwatch-btn:hover {
+            background: var(--stopwatch-color);
+            color: #020b12;
+            box-shadow: 0 0 25px var(--stopwatch-color);
+        }
+
+        .stopwatch-laps-box {
+            width: 100%;
+            max-width: 500px;
+            max-height: 140px;
+            overflow-y: auto;
+            margin-top: 20px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.2);
+            padding-top: 10px;
+            font-family: ui-monospace, monospace;
+            font-size: 0.9rem;
+            color: var(--stopwatch-color);
+        }
+
+        .lap-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Liquid Frosted Glass Cards */
         .milestone-card {
-            background: var(--water-card-glass); 
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            background: rgba(12, 26, 40, 0.45); 
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
             border-radius: 20px; 
             padding: 16px; 
-            border: 1px solid var(--water-border);
-            box-shadow: 0 10px 30px rgba(1, 16, 26, 0.45), inset 0 0 15px rgba(56, 189, 248, 0.08); 
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 12px 35px rgba(1, 8, 15, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.15); 
             display: flex; 
             flex-direction: column; 
             height: 370px;
@@ -440,26 +533,26 @@
 
         .milestone-card:hover { 
             transform: translateY(-3px); 
-            border-color: var(--water-border-specular); 
-            box-shadow: 0 14px 40px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(45, 212, 191, 0.15);
+            border-color: var(--glass-border-specular); 
+            box-shadow: 0 16px 45px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
         }
 
         .time-slot-card {
-            background: var(--water-card-glass); 
-            backdrop-filter: blur(22px);
+            background: rgba(12, 26, 40, 0.45); 
+            backdrop-filter: blur(25px);
             border-radius: 16px; 
             padding: 14px 16px; 
-            border: 1px solid var(--water-border);
+            border: 1px solid var(--glass-border);
             display: flex; 
             flex-direction: column; 
             gap: 4px; 
             position: relative; 
-            box-shadow: 0 8px 24px rgba(1, 16, 26, 0.4);
+            box-shadow: 0 8px 25px rgba(1, 8, 15, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
             transition: all 0.25s ease;
         }
 
         .time-slot-card:hover {
-            border-color: var(--water-border-specular);
+            border-color: var(--glass-border-specular);
             transform: translateY(-2px);
         }
 
@@ -480,31 +573,31 @@
         }
 
         .coding-item-card, .ssc-item-card {
-            background: var(--water-card-glass); 
-            backdrop-filter: blur(22px);
+            background: rgba(12, 26, 40, 0.45); 
+            backdrop-filter: blur(25px);
             border-radius: 16px; 
             padding: 16px 18px; 
-            border: 1px solid var(--water-border);
+            border: 1px solid var(--glass-border);
             display: flex; 
             align-items: center; 
             justify-content: space-between;
             cursor: pointer; 
             user-select: none; 
-            box-shadow: 0 6px 20px rgba(1, 16, 26, 0.4);
+            box-shadow: 0 6px 20px rgba(1, 8, 15, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
             transition: all 0.25s ease;
         }
 
         .coding-item-card:hover, .ssc-item-card:hover { 
             transform: translateY(-2px); 
-            border-color: var(--water-border-specular); 
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            border-color: var(--glass-border-specular); 
+            box-shadow: 0 0 22px rgba(56, 189, 248, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .card-header {
             font-size: 1.1rem; font-weight: 700; padding-bottom: 8px; margin-bottom: 8px;
             border-bottom: 1px solid rgba(45, 212, 191, 0.25); 
             display: flex; justify-content: space-between; align-items: center;
-            color: #7dd3fc;
+            color: #bae6fd;
         }
 
         .class-counter { 
@@ -512,9 +605,9 @@
             padding: 3px 8px; 
             border-radius: 12px; 
             font-weight: 600; 
-            background: rgba(6, 182, 212, 0.18); 
+            background: rgba(6, 182, 212, 0.25); 
             color: #e0f2fe;
-            border: 1px solid var(--water-border);
+            border: 1px solid var(--glass-border);
         }
 
         .list-container { 
@@ -531,14 +624,14 @@
         .item {
             display: flex; align-items: center; justify-content: space-between;
             padding: 9px 11px; margin-bottom: 6px; border-radius: 10px;
-            background: rgba(6, 40, 56, 0.28); 
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            background: rgba(6, 30, 46, 0.4); 
+            border: 1px solid rgba(56, 189, 248, 0.18);
             cursor: pointer; user-select: none; transition: all 0.2s ease;
         }
 
         .item:hover { 
-            background: rgba(56, 189, 248, 0.18); 
-            border-color: rgba(56, 189, 248, 0.45);
+            background: rgba(56, 189, 248, 0.22); 
+            border-color: rgba(56, 189, 248, 0.55);
         }
         
         .item span { font-size: 0.88rem; font-weight: 500; color: #f0fdfa; }
@@ -549,8 +642,8 @@
         .checkbox-wrapper input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
         .checkmark {
             position: absolute; top: 0; left: 0; height: 20px; width: 20px;
-            background-color: rgba(2, 20, 31, 0.6); 
-            border: 1.5px solid rgba(56, 189, 248, 0.5); 
+            background-color: rgba(2, 12, 20, 0.75); 
+            border: 1.5px solid rgba(56, 189, 248, 0.6); 
             border-radius: 6px;
             transition: all 0.2s ease;
         }
@@ -570,8 +663,8 @@
 
         .item.completed, .coding-item-card.completed, .ssc-item-card.completed { 
             background: var(--success-bg) !important; 
-            border-color: rgba(45, 212, 191, 0.7) !important; 
-            box-shadow: 0 0 16px rgba(45, 212, 191, 0.3);
+            border-color: rgba(45, 212, 191, 0.8) !important; 
+            box-shadow: 0 0 18px rgba(45, 212, 191, 0.4);
         }
 
         .item.completed span, .coding-item-card.completed span, .ssc-item-card.completed span { 
@@ -590,21 +683,21 @@
         }
 
         .graph-panel-card {
-            background: var(--water-card-glass);
-            border: 1px solid var(--water-border);
+            background: rgba(12, 26, 40, 0.45);
+            border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 24px;
             display: flex;
             flex-direction: column;
             gap: 14px;
-            backdrop-filter: blur(25px);
-            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.55);
+            backdrop-filter: blur(28px);
+            box-shadow: 0 12px 40px rgba(1, 8, 15, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
         .graph-panel-title {
             font-size: 1.25rem;
             font-weight: 800;
-            color: #7dd3fc;
+            color: #bae6fd;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -632,16 +725,16 @@
         .countdown-section-card {
             width: 100%;
             max-width: 820px;
-            background: var(--water-card-glass);
-            border: 1px solid var(--water-border);
+            background: rgba(12, 26, 40, 0.45);
+            border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 24px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 18px;
-            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.5);
-            backdrop-filter: blur(25px);
+            box-shadow: 0 12px 40px rgba(1, 8, 15, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(28px);
         }
 
         .countdown-main-heading {
@@ -666,8 +759,8 @@
         }
 
         .countdown-glass-panel {
-            background: rgba(3, 27, 40, 0.6);
-            border: 1px solid var(--water-border);
+            background: rgba(3, 18, 30, 0.7);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 16px 20px;
             display: flex;
@@ -675,15 +768,15 @@
             justify-content: center;
             gap: 14px;
             flex-wrap: wrap;
-            box-shadow: 0 8px 30px rgba(1, 16, 26, 0.6);
+            box-shadow: 0 8px 30px rgba(1, 8, 15, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(22px);
             width: 100%;
             max-width: 760px;
         }
 
         .countdown-input-field {
-            background: rgba(1, 19, 30, 0.7);
-            border: 1px solid var(--water-border);
+            background: rgba(1, 12, 20, 0.8);
+            border: 1px solid var(--glass-border);
             color: #e0f2fe;
             padding: 12px 18px;
             border-radius: 12px;
@@ -740,7 +833,7 @@
         }
 
         .countdown-unit-box {
-            background: rgba(2, 26, 38, 0.55);
+            background: rgba(2, 20, 32, 0.65);
             border: 1.5px solid #2dd4bf;
             border-radius: 20px;
             padding: 22px 10px 16px 10px;
@@ -748,14 +841,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 25px rgba(45, 212, 191, 0.25), inset 0 0 15px rgba(45, 212, 191, 0.1);
+            box-shadow: 0 0 25px rgba(45, 212, 191, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transition: all 0.25s ease;
         }
 
         .countdown-unit-box:hover {
             transform: translateY(-4px);
             border-color: #38bdf8;
-            box-shadow: 0 0 35px rgba(56, 189, 248, 0.55), inset 0 0 20px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         .unit-num {
@@ -806,15 +899,15 @@
         }
 
         .profile-card-preview {
-            background: var(--water-card-glass);
-            border: 1px solid var(--water-border);
+            background: rgba(12, 26, 40, 0.45);
+            border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            backdrop-filter: blur(25px);
-            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.55);
+            backdrop-filter: blur(28px);
+            box-shadow: 0 12px 40px rgba(1, 8, 15, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
             position: relative;
             overflow: hidden;
         }
@@ -823,8 +916,8 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; height: 90px;
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.35), rgba(16, 185, 129, 0.35));
-            border-bottom: 1px solid var(--water-border);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.4), rgba(16, 185, 129, 0.4));
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .profile-avatar-wrapper {
@@ -852,8 +945,8 @@
         .profile-avatar-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            background: rgba(2, 22, 33, 0.85);
-            color: #7dd3fc;
+            background: rgba(2, 16, 26, 0.88);
+            color: #bae6fd;
             font-size: 0.65rem;
             text-align: center;
             padding: 4px 0;
@@ -864,15 +957,15 @@
             font-size: 1.4rem;
             font-weight: 800;
             margin: 14px 0 2px 0;
-            color: #7dd3fc;
+            color: #bae6fd;
             text-align: center;
             text-shadow: 0 0 15px rgba(125, 211, 252, 0.4);
         }
 
         .profile-dream-tag {
-            background: rgba(45, 212, 191, 0.15);
+            background: rgba(45, 212, 191, 0.2);
             color: #5eead4;
-            border: 1px solid rgba(45, 212, 191, 0.4);
+            border: 1px solid rgba(45, 212, 191, 0.45);
             border-radius: 20px;
             padding: 4px 14px;
             font-size: 0.8rem;
@@ -907,12 +1000,12 @@
         }
 
         .profile-form-card {
-            background: var(--water-card-glass);
-            border: 1px solid var(--water-border);
+            background: rgba(12, 26, 40, 0.45);
+            border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 26px;
-            backdrop-filter: blur(25px);
-            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.55);
+            backdrop-filter: blur(28px);
+            box-shadow: 0 12px 40px rgba(1, 8, 15, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
             display: flex;
             flex-direction: column;
             gap: 18px;
@@ -939,8 +1032,8 @@
         }
 
         .form-input-control {
-            background: rgba(2, 23, 34, 0.6);
-            border: 1px solid var(--water-border);
+            background: rgba(2, 16, 26, 0.7);
+            border: 1px solid var(--glass-border);
             color: #e0f2fe;
             padding: 11px 14px;
             border-radius: 12px;
@@ -963,8 +1056,8 @@
         }
 
         .exam-chip {
-            background: rgba(6, 182, 212, 0.08);
-            border: 1px solid rgba(45, 212, 191, 0.3);
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(45, 212, 191, 0.35);
             padding: 7px 14px;
             border-radius: 18px;
             font-size: 0.8rem;
@@ -979,14 +1072,14 @@
         }
 
         .exam-chip:hover {
-            background: rgba(45, 212, 191, 0.2);
+            background: rgba(45, 212, 191, 0.25);
             border-color: #38bdf8;
         }
 
         .exam-chip.active {
-            background: rgba(56, 189, 248, 0.25);
+            background: rgba(56, 189, 248, 0.35);
             border-color: #38bdf8;
-            color: #7dd3fc;
+            color: #bae6fd;
             box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
             font-weight: 700;
         }
@@ -1021,12 +1114,12 @@
             align-items: center;
             width: 100%;
             max-width: 800px;
-            background: var(--water-card-glass);
-            border: 1px solid var(--water-border);
+            background: rgba(12, 26, 40, 0.45);
+            border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 24px;
-            backdrop-filter: blur(25px);
-            box-shadow: 0 12px 40px rgba(1, 16, 26, 0.55);
+            backdrop-filter: blur(28px);
+            box-shadow: 0 12px 40px rgba(1, 8, 15, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
             gap: 20px;
         }
 
@@ -1035,10 +1128,10 @@
             width: 100%;
             max-width: 640px;
             height: 380px;
-            background: #011420;
+            background: #01101a;
             border-radius: 18px;
             overflow: hidden;
-            border: 1.5px solid var(--water-border);
+            border: 1.5px solid var(--glass-border);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1102,8 +1195,8 @@
         }
 
         .cam-stat-card {
-            background: rgba(6, 40, 56, 0.3);
-            border: 1px solid var(--water-border);
+            background: rgba(6, 30, 46, 0.4);
+            border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 14px;
             display: flex;
@@ -1111,6 +1204,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .cam-stat-val {
@@ -1135,7 +1229,7 @@
             font-weight: 800;
             letter-spacing: 0.5px;
             display: inline-block;
-            border: 1px solid var(--water-border);
+            border: 1px solid var(--glass-border);
         }
 
         /* OMR Styles */
@@ -1143,14 +1237,14 @@
             font-size: 0.72rem; 
             color: #38bdf8; 
             font-weight: 700; 
-            background: rgba(56, 189, 248, 0.15); 
+            background: rgba(56, 189, 248, 0.2); 
             padding: 2px 7px; 
             border-radius: 6px; 
-            border: 1px solid var(--water-border);
+            border: 1px solid var(--glass-border);
         }
         
         .omr-row {
-            background: rgba(6, 40, 56, 0.3); 
+            background: rgba(6, 30, 46, 0.4); 
             border: 1px solid rgba(45, 212, 191, 0.18);
             border-radius: 8px; 
             padding: 6px 9px; 
@@ -1170,7 +1264,7 @@
             display: flex; align-items: center; justify-content: center; 
             font-size: 0.66rem; font-weight: 700;
             cursor: pointer; user-select: none;
-            color: #7dd3fc;
+            color: #bae6fd;
         }
 
         .omr-bubble-label input { display: none; }
@@ -1245,17 +1339,14 @@
 </head>
 <body>
 
-    <!-- ================= 60FPS REAL-TIME WATER CANVAS BACKGROUND ================= -->
-    <canvas id="waterCanvas"></canvas>
-
     <!-- SIDEBAR OVERLAY FOR MOBILE -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- ================= LEFT SIDEBAR NAVIGATION ================= -->
+    <!-- ================= iOS 27 LIQUID GLASS LEFT SIDEBAR ================= -->
     <aside class="ios-sidebar" id="iosSidebar">
         <div class="sidebar-brand">
-            <span style="font-size: 1.3rem;">💧</span>
-            <div class="sidebar-brand-title">AQUA FLOW</div>
+            <span style="font-size: 1.3rem;"></span>
+            <div class="sidebar-brand-title">Live Tracker</div>
         </div>
 
         <div class="sidebar-nav-list">
@@ -1316,7 +1407,7 @@
         </div>
     </aside>
 
-    <!-- ================= FIXED TOP BAR ================= -->
+    <!-- ================= iOS 27 LIQUID GLASS TOP BAR ================= -->
     <header class="ios-top-bar">
         <div class="ios-status-row">
             <div style="display: flex; align-items: center; gap: 8px;">
@@ -1326,7 +1417,7 @@
             
             <div class="dynamic-island">
                 <div class="island-pulse"></div>
-                <span id="island-active-text">Flowing Aqua Suite</span>
+                <span id="island-active-text">iOS 27 Liquid Glass Suite</span>
             </div>
 
             <span style="color: #5eead4;">5G 📶 100% 🔋</span>
@@ -1444,7 +1535,7 @@
                 </div>
 
                 <div class="profile-form-card">
-                    <h3 style="margin: 0; font-size: 1.2rem; color: #7dd3fc; border-bottom: 1px solid rgba(45, 212, 191, 0.25); padding-bottom: 8px;">Edit Profile Information</h3>
+                    <h3 style="margin: 0; font-size: 1.2rem; color: #bae6fd; border-bottom: 1px solid rgba(45, 212, 191, 0.25); padding-bottom: 8px;">Edit Profile Information</h3>
                     
                     <div class="form-grid-2col">
                         <div class="form-field-group">
@@ -1523,9 +1614,33 @@
                 <div class="time-slot-card" data-title="Math" data-start="20:00" data-end="21:20"><div class="live-dot"></div><span class="time-range">08:00 PM - 09:20 PM</span><span class="subject-name" style="color: var(--math-color);">Math</span></div>
                 <div class="time-slot-card" data-title="English" data-start="21:20" data-end="22:30"><div class="live-dot"></div><span class="time-range">09:20 PM - 10:30 PM</span><span class="subject-name" style="color: var(--english-color);">English</span></div>
                 <div class="time-slot-card" data-title="Reasoning" data-start="22:30" data-end="23:00"><div class="live-dot"></div><span class="time-range">10:30 PM - 11:00 PM</span><span class="subject-name" style="color: var(--reasoning-color);">Reasoning</span></div>
-                <div class="time-slot-card" data-title="Self Study" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: #7dd3fc;">Self Study</span></div>
+                <div class="time-slot-card" data-title="Self Study" data-start="23:00" data-end="00:00"><div class="live-dot"></div><span class="time-range">11:00 PM - 12:00 AM</span><span class="subject-name" style="color: #bae6fd;">Self Study</span></div>
                 <div class="time-slot-card" data-title="Programming" data-start="00:00" data-end="02:00"><div class="live-dot"></div><span class="time-range">12:00 AM - 02:00 AM</span><span class="subject-name" style="color: var(--coding-color);">Programming</span></div>
                 <div class="time-slot-card" data-title="College Work" data-start="02:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">02:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--calendar-color);">College Work</span></div>
+            </div>
+
+            <!-- GIANT STOPWATCH MODULE (PLACED BELOW DAILY TIMETABLE) -->
+            <div class="giant-stopwatch-container" id="giantStopwatchBox">
+                <div class="stopwatch-theme-row">
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #bae6fd; text-transform: uppercase; letter-spacing: 1px;">🎨 Choose Color:</span>
+                    <div class="theme-dot" style="background: #22c55e;" onclick="setStopwatchColor('#22c55e')" title="Neon Green"></div>
+                    <div class="theme-dot" style="background: #38bdf8;" onclick="setStopwatchColor('#38bdf8')" title="Electric Blue"></div>
+                    <div class="theme-dot" style="background: #f59e0b;" onclick="setStopwatchColor('#f59e0b')" title="Hot Amber"></div>
+                    <div class="theme-dot" style="background: #ffffff;" onclick="setStopwatchColor('#ffffff')" title="Pure White"></div>
+                    <div class="theme-dot" style="background: #ec4899;" onclick="setStopwatchColor('#ec4899')" title="Vibrant Magenta"></div>
+                </div>
+
+                <div class="giant-time-display" id="stopwatchDisplay">0:00:00</div>
+
+                <div class="stopwatch-controls-row">
+                    <button class="stopwatch-btn" id="swToggleBtn" onclick="toggleStopwatch()">Start</button>
+                    <button class="stopwatch-btn" onclick="recordLap()">Lap</button>
+                    <button class="stopwatch-btn" onclick="resetStopwatch()">Reset</button>
+                </div>
+
+                <div class="stopwatch-laps-box" id="stopwatchLapsList">
+                    <!-- Lap items will appear here -->
+                </div>
             </div>
         </div>
 
@@ -1538,7 +1653,7 @@
 
             <div style="display: flex; justify-content: center; width: 100%;">
                 <div class="camera-container-card">
-                    <div id="ai-status-badge" class="status-badge-focus" style="background: rgba(6, 40, 56, 0.3); color: var(--text-secondary);">
+                    <div id="ai-status-badge" class="status-badge-focus" style="background: rgba(6, 30, 46, 0.4); color: var(--text-secondary);">
                         📷 Camera Inactive - Click "Start Camera" Below
                     </div>
 
@@ -1824,154 +1939,6 @@
     <div class="ios-home-indicator"></div>
 
     <script>
-        // ================= 60FPS FLOWING WATER PHYSICS ENGINE =================
-        const canvas = document.getElementById('waterCanvas');
-        const ctx = canvas.getContext('2d');
-
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        // Water Wave Stream Layers
-        let step = 0;
-        const waves = [
-            { y: height * 0.28, length: 0.003, amplitude: 55, speed: 0.016, color: 'rgba(56, 189, 248, 0.22)', lineWidth: 38 },
-            { y: height * 0.32, length: 0.004, amplitude: 40, speed: -0.019, color: 'rgba(45, 212, 191, 0.26)', lineWidth: 22 },
-            { y: height * 0.60, length: 0.0025, amplitude: 65, speed: 0.012, color: 'rgba(6, 182, 212, 0.24)', lineWidth: 45 },
-            { y: height * 0.65, length: 0.0035, amplitude: 45, speed: -0.015, color: 'rgba(56, 189, 248, 0.2)', lineWidth: 26 },
-            { y: height * 0.85, length: 0.002, amplitude: 50, speed: 0.02, color: 'rgba(16, 185, 129, 0.18)', lineWidth: 30 }
-        ];
-
-        // Ambient Rising Water Bubbles & Caustic Droplets
-        const bubbleCount = 42;
-        const bubbles = [];
-        for (let i = 0; i < bubbleCount; i++) {
-            bubbles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                radius: Math.random() * 8 + 3,
-                speedY: Math.random() * 1.8 + 0.8,
-                speedX: (Math.random() - 0.5) * 0.8,
-                wobble: Math.random() * Math.PI * 2,
-                opacity: Math.random() * 0.6 + 0.25
-            });
-        }
-
-        // Interactive Ripples on Mouse Move / Touch
-        const ripples = [];
-        window.addEventListener('mousemove', (e) => {
-            if (Math.random() < 0.25) {
-                ripples.push({ x: e.clientX, y: e.clientY, r: 2, maxR: Math.random() * 45 + 30, alpha: 0.7 });
-            }
-        });
-        window.addEventListener('touchmove', (e) => {
-            const touch = e.touches[0];
-            if (touch && Math.random() < 0.3) {
-                ripples.push({ x: touch.clientX, y: touch.clientY, r: 2, maxR: 45, alpha: 0.7 });
-            }
-        });
-
-        function animateWater() {
-            ctx.clearRect(0, 0, width, height);
-
-            // 1. Deep Ocean Fluid Base Gradient
-            const grad = ctx.createLinearGradient(0, 0, width, height);
-            grad.addColorStop(0, '#02121d');
-            grad.addColorStop(0.5, '#032336');
-            grad.addColorStop(1, '#011322');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, width, height);
-
-            step += 0.035;
-
-            // 2. Render Real-Time Flowing Water Wave Ribbons
-            waves.forEach((w) => {
-                ctx.save();
-                ctx.beginPath();
-                ctx.lineWidth = w.lineWidth;
-                ctx.strokeStyle = w.color;
-                ctx.lineCap = 'round';
-
-                for (let x = 0; x <= width; x += 15) {
-                    const yOffset = Math.sin(x * w.length + step * (w.speed * 60)) * w.amplitude +
-                                    Math.cos((x * 0.5) * w.length + step) * (w.amplitude * 0.4);
-                    const y = w.y + yOffset;
-                    if (x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-
-                // Fluid Specular Highlight Line (Water Glint)
-                ctx.beginPath();
-                ctx.lineWidth = 2.5;
-                ctx.strokeStyle = 'rgba(224, 242, 254, 0.45)';
-                for (let x = 0; x <= width; x += 20) {
-                    const yOffset = Math.sin(x * w.length + step * (w.speed * 60)) * w.amplitude +
-                                    Math.cos((x * 0.5) * w.length + step) * (w.amplitude * 0.4);
-                    const y = w.y + yOffset - 4;
-                    if (x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-                ctx.restore();
-            });
-
-            // 3. Render Floating & Rising Water Bubbles
-            bubbles.forEach(b => {
-                b.y -= b.speedY;
-                b.wobble += 0.04;
-                b.x += Math.sin(b.wobble) * 0.7 + b.speedX;
-
-                if (b.y < -30) {
-                    b.y = height + 20;
-                    b.x = Math.random() * width;
-                }
-
-                ctx.save();
-                ctx.beginPath();
-                ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(125, 211, 252, ${b.opacity * 0.35})`;
-                ctx.fill();
-                ctx.lineWidth = 1.2;
-                ctx.strokeStyle = `rgba(224, 242, 254, ${b.opacity})`;
-                ctx.stroke();
-
-                // Bubble Specular Dot
-                ctx.beginPath();
-                ctx.arc(b.x - b.radius * 0.3, b.y - b.radius * 0.3, b.radius * 0.25, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.8})`;
-                ctx.fill();
-                ctx.restore();
-            });
-
-            // 4. Interactive Splashing Ripples
-            for (let i = ripples.length - 1; i >= 0; i--) {
-                const rip = ripples[i];
-                rip.r += 1.6;
-                rip.alpha -= 0.016;
-
-                if (rip.alpha <= 0) {
-                    ripples.splice(i, 1);
-                    continue;
-                }
-
-                ctx.save();
-                ctx.beginPath();
-                ctx.arc(rip.x, rip.y, rip.r, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(56, 189, 248, ${rip.alpha})`;
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                ctx.restore();
-            }
-
-            requestAnimationFrame(animateWater);
-        }
-        animateWater();
-
         // ================= STUDY DATA ENGINE =================
         window.STUDY_DATA = {
             english: [
@@ -2145,6 +2112,75 @@
             ]
         };
 
+        // ================= GIANT STOPWATCH LOGIC =================
+        let swStartTime = 0;
+        let swElapsedTime = 0;
+        let swTimerInterval = null;
+        let swIsRunning = false;
+        let swLaps = [];
+
+        function setStopwatchColor(hexColor) {
+            document.documentElement.style.setProperty('--stopwatch-color', hexColor);
+        }
+
+        function toggleStopwatch() {
+            const toggleBtn = document.getElementById('swToggleBtn');
+            if (!swIsRunning) {
+                swIsRunning = true;
+                swStartTime = Date.now() - swElapsedTime;
+                swTimerInterval = setInterval(updateStopwatchDisplay, 10);
+                toggleBtn.innerText = "Stop";
+            } else {
+                swIsRunning = false;
+                clearInterval(swTimerInterval);
+                toggleBtn.innerText = "Start";
+            }
+        }
+
+        function updateStopwatchDisplay() {
+            swElapsedTime = Date.now() - swStartTime;
+            const totalMs = swElapsedTime;
+            
+            const hours = Math.floor(totalMs / 3600000);
+            const minutes = Math.floor((totalMs % 3600000) / 60000);
+            const seconds = Math.floor((totalMs % 60000) / 1000);
+            const centiseconds = Math.floor((totalMs % 1000) / 10);
+
+            let timeStr = "";
+            if (hours > 0) {
+                timeStr = `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(centiseconds).padStart(2, '0')}`;
+            } else {
+                timeStr = `${minutes}:${String(seconds).padStart(2, '0')}.${String(centiseconds).padStart(2, '0')}`;
+            }
+
+            document.getElementById('stopwatchDisplay').innerText = timeStr;
+        }
+
+        function recordLap() {
+            if (swElapsedTime === 0) return;
+            swLaps.unshift({
+                num: swLaps.length + 1,
+                time: document.getElementById('stopwatchDisplay').innerText
+            });
+
+            const lapsContainer = document.getElementById('stopwatchLapsList');
+            let buffer = '';
+            swLaps.forEach(l => {
+                buffer += `<div class="lap-item"><span>Lap #${l.num}</span><span>${l.time}</span></div>`;
+            });
+            lapsContainer.innerHTML = buffer;
+        }
+
+        function resetStopwatch() {
+            swIsRunning = false;
+            clearInterval(swTimerInterval);
+            swElapsedTime = 0;
+            swLaps = [];
+            document.getElementById('stopwatchDisplay').innerText = "0:00.00";
+            document.getElementById('swToggleBtn').innerText = "Start";
+            document.getElementById('stopwatchLapsList').innerHTML = "";
+        }
+
         // ================= CHART ENGINE =================
         let overallChartInstance = null;
         let monthlyChartInstance = null;
@@ -2177,11 +2213,11 @@
                             y: {
                                 beginAtZero: true,
                                 max: 100,
-                                ticks: { color: '#7dd3fc', callback: val => `${val}%` },
+                                ticks: { color: '#bae6fd', callback: val => `${val}%` },
                                 grid: { color: 'rgba(56, 189, 248, 0.15)' }
                             },
                             x: {
-                                ticks: { color: '#7dd3fc', font: { size: 10 } },
+                                ticks: { color: '#bae6fd', font: { size: 10 } },
                                 grid: { display: false }
                             }
                         }
@@ -2224,11 +2260,11 @@
                             y: {
                                 beginAtZero: true,
                                 max: 31,
-                                ticks: { color: '#7dd3fc' },
+                                ticks: { color: '#bae6fd' },
                                 grid: { color: 'rgba(56, 189, 248, 0.15)' }
                             },
                             x: {
-                                ticks: { color: '#7dd3fc', font: { size: 9.5 } },
+                                ticks: { color: '#bae6fd', font: { size: 9.5 } },
                                 grid: { display: false }
                             }
                         }
@@ -2536,7 +2572,7 @@
 
             const badge = document.getElementById('ai-status-badge');
             badge.innerText = "📷 Camera Stopped";
-            badge.style.background = "rgba(6, 40, 56, 0.35)";
+            badge.style.background = "rgba(6, 30, 46, 0.4)";
             badge.style.color = "var(--text-secondary)";
 
             const canvas = document.getElementById('webcam-canvas');
@@ -3036,8 +3072,8 @@
 
             cards.forEach(card => {
                 if (card.classList.contains('special-slot') && !isSunday) {
-                    card.style.borderColor = 'var(--water-border)';
-                    card.style.background = 'var(--water-card-glass)';
+                    card.style.borderColor = 'var(--glass-border)';
+                    card.style.background = 'rgba(12, 26, 40, 0.45)';
                     const dot = card.querySelector('.live-dot');
                     if(dot) dot.style.display = 'none';
                     return;
@@ -3063,14 +3099,14 @@
                 const dot = card.querySelector('.live-dot');
                 if (isActive) {
                     card.style.borderColor = 'var(--success-color)';
-                    card.style.background = 'rgba(45, 212, 191, 0.28)';
-                    card.style.boxShadow = '0 0 18px rgba(45, 212, 191, 0.5)';
+                    card.style.background = 'rgba(45, 212, 191, 0.3)';
+                    card.style.boxShadow = '0 0 18px rgba(45, 212, 191, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
                     if(dot) dot.style.display = 'block';
                     detectedActiveSlot = title;
                 } else {
-                    card.style.borderColor = 'var(--water-border)';
-                    card.style.background = 'var(--water-card-glass)';
-                    card.style.boxShadow = '0 8px 24px rgba(1, 16, 26, 0.4)';
+                    card.style.borderColor = 'var(--glass-border)';
+                    card.style.background = 'rgba(12, 26, 40, 0.45)';
+                    card.style.boxShadow = '0 8px 25px rgba(1, 8, 15, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
                     if(dot) dot.style.display = 'none';
                 }
             });
@@ -3087,7 +3123,7 @@
             } else {
                 activeSlotTitle = null;
                 mentorBox.innerText = `🤖 Best of luck! Focus mode ready.`;
-                if(islandText) islandText.innerText = `Flowing Aqua Suite`;
+                if(islandText) islandText.innerText = `iOS 27 Liquid Glass Suite`;
             }
         }
 
