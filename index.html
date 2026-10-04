@@ -454,7 +454,7 @@
         }
 
         .giant-time-display {
-            font-size: clamp(4rem, 12vw, 9rem);
+            font-size: clamp(3.5rem, 10vw, 8rem);
             font-weight: 900;
             font-family: ui-monospace, "SF Pro Display", monospace;
             color: var(--stopwatch-color);
@@ -468,20 +468,22 @@
 
         .stopwatch-controls-row {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .stopwatch-btn {
             flex: 1;
+            min-width: 100px;
             background: transparent;
             border: 2px solid var(--stopwatch-color);
             color: var(--stopwatch-color);
-            padding: 14px 20px;
+            padding: 12px 16px;
             border-radius: 40px;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             text-transform: uppercase;
             cursor: pointer;
@@ -673,7 +675,7 @@
             color: #ccfbf1 !important;
         }
 
-        /* ================= GRAPHS & ANALYTICS ================= */
+        /* ================= GRAPHS & ARCHIVE VIEWER ================= */
         .graphs-container-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -704,12 +706,64 @@
             border-bottom: 1px solid rgba(45, 212, 191, 0.25);
             padding-bottom: 10px;
             margin: 0;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .chart-wrapper-box {
             position: relative;
             width: 100%;
             height: 340px;
+        }
+
+        .archive-toolbar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .archive-date-picker {
+            background: rgba(2, 16, 26, 0.8);
+            border: 1px solid var(--glass-border);
+            color: #e0f2fe;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            outline: none;
+            color-scheme: dark;
+        }
+
+        .archive-view-btn {
+            background: linear-gradient(135deg, #0d9488, #2dd4bf);
+            color: #022027;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .archive-view-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 22px rgba(56, 189, 248, 0.6);
+        }
+
+        .archive-result-box {
+            background: rgba(2, 12, 20, 0.6);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 14px;
+            padding: 14px 18px;
+            font-family: ui-monospace, monospace;
+            font-size: 0.95rem;
+            color: #5eead4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         /* ================= EXAM COUNTDOWN ================= */
@@ -1307,6 +1361,7 @@
             backdrop-filter: blur(10px);
         }
 
+        /* ================= MOBILE RESPONSIVENESS OVERHAUL ================= */
         @media (max-width: 1024px) {
             :root { --sidebar-width: 220px; }
             .main-app-area { padding-top: 150px; }
@@ -1315,25 +1370,32 @@
         }
 
         @media (max-width: 768px) {
-            .ios-sidebar { transform: translateX(-100%); width: 260px; }
+            .ios-sidebar { transform: translateX(-100%); width: 280px; }
             .ios-sidebar.open { transform: translateX(0); }
             .sidebar-overlay.active { display: block; }
-            .main-app-area { margin-left: 0; width: 100%; padding: 160px 16px 70px 16px; }
-            .ios-top-bar { left: 0; }
+            .main-app-area { margin-left: 0; width: 100%; padding: 165px 12px 60px 12px; }
+            .ios-top-bar { left: 0; padding: 8px 14px 10px 14px; }
             .mobile-hamburger-btn { display: block; }
-            .main-title { font-size: 2.1rem; }
-            .countdown-main-heading { font-size: 1.4rem; }
+            .main-title { font-size: 1.8rem; letter-spacing: 1px; }
+            .sub-title { font-size: 0.8rem; }
+            .countdown-main-heading { font-size: 1.2rem; }
             .countdown-cards-grid { grid-template-columns: repeat(2, 1fr); }
-            .cam-preview-wrapper { height: 260px; }
+            .cam-preview-wrapper { height: 240px; }
             .form-grid-2col { grid-template-columns: 1fr; }
+            .giant-time-display { font-size: 3.5rem; }
+            .control-row { gap: 6px; }
+            .widget-group, .widget-group-right { font-size: 0.75rem; }
+            .clock-widget, .ai-greetings-widget, .ai-score-widget, .analytics-widget, .goal-widget { padding: 4px 10px; font-size: 0.75rem; }
         }
 
-        @media (max-width: 600px) {
-            .main-app-area { padding-top: 175px; }
+        @media (max-width: 480px) {
+            .main-app-area { padding-top: 185px; }
             .tracker-grid, .coding-grid-special { grid-template-columns: 1fr; }
             .countdown-glass-panel { flex-direction: column; align-items: stretch; }
             .countdown-submit-btn { justify-content: center; }
             .widget-group-right { margin-left: 0; width: 100%; justify-content: flex-start; }
+            .giant-stopwatch-container { padding: 20px 12px; }
+            .stopwatch-btn { padding: 10px 12px; font-size: 0.85rem; min-width: 80px; }
         }
     </style>
 </head>
@@ -1425,20 +1487,19 @@
 
         <div class="control-row">
             <div class="widget-group">
-                <div class="clock-widget" id="live-clock-box">🕒 Syncing System Time...</div>
-                <div class="ai-greetings-widget" id="ai-greetings-box">🤖 AI Mentor: Active</div>
-                <div class="ai-score-widget" id="ai-score-box">⭐ Study Score: 600</div>
+                <div class="clock-widget" id="live-clock-box">🕒 Syncing...</div>
+                <div class="ai-greetings-widget" id="ai-greetings-box">🤖 AI Mentor</div>
+                <div class="ai-score-widget" id="ai-score-box">⭐ Score: 600</div>
             </div>
 
             <div class="widget-group-right">
                 <div class="goal-widget">
-                    <span>🎯 <strong>Goal:</strong></span>
+                    <span>🎯</span>
                     <input type="number" id="daily-goal-input" class="goal-input" value="5" min="1" onchange="updateDailyGoal()">
-                    <span id="goal-progress-text">Classes (0/5)</span>
+                    <span id="goal-progress-text">(0/5)</span>
                 </div>
                 <div class="analytics-widget">
-                    <span>📊 <strong>Tasks:</strong></span>
-                    <span style="color:var(--english-color)" id="global-total">Total: 0</span> | 
+                    <span>📊</span>
                     <span style="color:var(--success-color)" id="global-done">Done: 0</span> | 
                     <span style="color:var(--reasoning-color)" id="global-pending">Left: 0</span>
                 </div>
@@ -1458,14 +1519,40 @@
         <div class="tab-view" id="tab-graphs">
             <div class="header-container">
                 <h1 class="main-title" style="color: var(--chart-color);">Progress & Analytics</h1>
-                <h2 class="sub-title">Live Task Completion & Monthly Target Trends</h2>
+                <h2 class="sub-title">Live Task Completion & Study Records</h2>
             </div>
 
             <div class="graphs-container-grid">
+                <!-- PAST 1 YEAR DATA ARCHIVE VIEWER CARD -->
+                <div class="graph-panel-card">
+                    <h3 class="graph-panel-title">
+                        <span>📜 Past 1 Year Study History Archive</span>
+                        <span style="font-size: 0.8rem; color: var(--success-color);">Select Date to Review</span>
+                    </h3>
+                    <div class="archive-toolbar">
+                        <input type="date" id="archiveDatePicker" class="archive-date-picker">
+                        <button class="archive-view-btn" onclick="lookupArchiveData()">View Study Record 🔍</button>
+                    </div>
+                    <div class="archive-result-box" id="archiveResultBox">
+                        <span>📅 Select any past date above to check recorded hours.</span>
+                        <strong id="archiveResultVal">-- h</strong>
+                    </div>
+                </div>
+
+                <div class="graph-panel-card">
+                    <h3 class="graph-panel-title">
+                        <span>📈 Daily Study Hours Trend (Last 7 Days)</span>
+                        <span style="font-size: 0.8rem; color: var(--success-color);" id="study-hours-growth-tag">Active Track</span>
+                    </h3>
+                    <div class="chart-wrapper-box">
+                        <canvas id="studyHoursChart"></canvas>
+                    </div>
+                </div>
+
                 <div class="graph-panel-card">
                     <h3 class="graph-panel-title">
                         <span>📈 Live Subject Completion (%)</span>
-                        <span style="font-size: 0.8rem; color: var(--success-color);" id="overall-growth-tag">Real-Time Sync Active</span>
+                        <span style="font-size: 0.8rem; color: var(--success-color);">Real-Time Sync</span>
                     </h3>
                     <div class="chart-wrapper-box">
                         <canvas id="overallProgressChart"></canvas>
@@ -1475,7 +1562,7 @@
                 <div class="graph-panel-card">
                     <h3 class="graph-panel-title">
                         <span>📅 Monthly Completion Graph (2026 - 2027)</span>
-                        <span style="font-size: 0.8rem; color: var(--calendar-color);">Days Checked / Month</span>
+                        <span style="font-size: 0.8rem; color: var(--calendar-color);">Days / Month</span>
                     </h3>
                     <div class="chart-wrapper-box">
                         <canvas id="monthlyProgressChart"></canvas>
@@ -1619,7 +1706,7 @@
                 <div class="time-slot-card" data-title="College Work" data-start="02:00" data-end="04:00"><div class="live-dot"></div><span class="time-range">02:00 AM - 04:00 AM</span><span class="subject-name" style="color: var(--calendar-color);">College Work</span></div>
             </div>
 
-            <!-- GIANT STOPWATCH MODULE (PLACED BELOW DAILY TIMETABLE) -->
+            <!-- GIANT STOPWATCH MODULE WITH ACCUMULATIVE SAVE STUDY HOURS -->
             <div class="giant-stopwatch-container" id="giantStopwatchBox">
                 <div class="stopwatch-theme-row">
                     <span style="font-size: 0.85rem; font-weight: 700; color: #bae6fd; text-transform: uppercase; letter-spacing: 1px;">🎨 Choose Color:</span>
@@ -1635,6 +1722,7 @@
                 <div class="stopwatch-controls-row">
                     <button class="stopwatch-btn" id="swToggleBtn" onclick="toggleStopwatch()">Start</button>
                     <button class="stopwatch-btn" onclick="recordLap()">Lap</button>
+                    <button class="stopwatch-btn" onclick="saveTodayStudyTime()" style="border-color: #2dd4bf; color: #2dd4bf;">Save Hours 📊</button>
                     <button class="stopwatch-btn" onclick="resetStopwatch()">Reset</button>
                 </div>
 
@@ -2112,7 +2200,7 @@
             ]
         };
 
-        // ================= GIANT STOPWATCH LOGIC =================
+        // ================= GIANT STOPWATCH & STUDY HOURS LOGIC =================
         let swStartTime = 0;
         let swElapsedTime = 0;
         let swTimerInterval = null;
@@ -2171,6 +2259,24 @@
             lapsContainer.innerHTML = buffer;
         }
 
+        function saveTodayStudyTime() {
+            if (swElapsedTime <= 0) {
+                alert("Pehle Stopwatch start karke kuch padhai karo tab save hoga!");
+                return;
+            }
+            const hoursStudied = parseFloat((swElapsedTime / (1000 * 60 * 60)).toFixed(2));
+            const todayKey = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+            
+            let storedLog = JSON.parse(localStorage.getItem('daily_study_hours_log') || '{}');
+            storedLog[todayKey] = parseFloat(((storedLog[todayKey] || 0) + hoursStudied).toFixed(2));
+            localStorage.setItem('daily_study_hours_log', JSON.stringify(storedLog));
+
+            alert(`✅ Current session ka ${hoursStudied} ghante (hours) add ho gaya! Aaj ka total study time update ho gaya hai.`);
+            
+            resetStopwatch();
+            updateChartsData();
+        }
+
         function resetStopwatch() {
             swIsRunning = false;
             clearInterval(swTimerInterval);
@@ -2181,17 +2287,88 @@
             document.getElementById('stopwatchLapsList').innerHTML = "";
         }
 
+        // ================= ARCHIVE LOOKUP FUNCTION =================
+        function lookupArchiveData() {
+            const picker = document.getElementById('archiveDatePicker').value;
+            const resVal = document.getElementById('archiveResultVal');
+            if (!picker) {
+                alert("Please select a date from the calendar!");
+                return;
+            }
+            const storedLog = JSON.parse(localStorage.getItem('daily_study_hours_log') || '{}');
+            const recordedHours = storedLog[picker] || 0;
+            resVal.innerText = `${recordedHours} Hours Studied`;
+        }
+
         // ================= CHART ENGINE =================
         let overallChartInstance = null;
         let monthlyChartInstance = null;
+        let studyHoursChartInstance = null;
 
         function initCharts() {
+            // 1. Study Hours Daily Chart (Y-Axis scaled up to 18h with 2h step intervals)
+            const ctxHours = document.getElementById('studyHoursChart');
+            if (ctxHours) {
+                const last7DaysLabels = [];
+                const last7DaysData = [];
+                const storedLog = JSON.parse(localStorage.getItem('daily_study_hours_log') || '{}');
+
+                for (let i = 6; i >= 0; i--) {
+                    const d = new Date();
+                    d.setDate(d.getDate() - i);
+                    const key = d.toISOString().split('T')[0];
+                    const shortDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    last7DaysLabels.push(shortDate);
+                    last7DaysData.push(storedLog[key] || 0);
+                }
+
+                studyHoursChartInstance = new Chart(ctxHours.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: last7DaysLabels,
+                        datasets: [{
+                            label: 'Study Hours',
+                            data: last7DaysData,
+                            borderColor: '#22c55e',
+                            backgroundColor: 'rgba(34, 197, 94, 0.2)',
+                            fill: true,
+                            tension: 0.35,
+                            borderWidth: 3,
+                            pointBackgroundColor: '#22c55e',
+                            pointRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 18,
+                                ticks: {
+                                    stepSize: 2,
+                                    color: '#bae6fd',
+                                    callback: val => `${val}h`
+                                },
+                                grid: { color: 'rgba(56, 189, 248, 0.15)' }
+                            },
+                            x: {
+                                ticks: { color: '#bae6fd', font: { size: 10 } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 2. Overall Progress Chart
             const ctxOverall = document.getElementById('overallProgressChart');
             if (ctxOverall) {
                 overallChartInstance = new Chart(ctxOverall.getContext('2d'), {
                     type: 'bar',
                     data: {
-                        labels: ['English', 'Arithmetic Math', 'Advance Math', 'Reasoning', 'Coding', 'SSC GD', 'Math Book', 'Reasoning Book', 'OMR Sheets', 'Vocab'],
+                        labels: ['English', 'Math', 'Adv Math', 'Reasoning', 'Coding', 'SSC GD', 'Math Book', 'Reasoning Book', 'OMR', 'Vocab'],
                         datasets: [{
                             label: 'Completion %',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -2206,9 +2383,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
+                        plugins: { legend: { display: false } },
                         scales: {
                             y: {
                                 beginAtZero: true,
@@ -2217,7 +2392,7 @@
                                 grid: { color: 'rgba(56, 189, 248, 0.15)' }
                             },
                             x: {
-                                ticks: { color: '#bae6fd', font: { size: 10 } },
+                                ticks: { color: '#bae6fd', font: { size: 9.5 } },
                                 grid: { display: false }
                             }
                         }
@@ -2225,6 +2400,7 @@
                 });
             }
 
+            // 3. Monthly Progress Chart
             const ctxMonthly = document.getElementById('monthlyProgressChart');
             if (ctxMonthly) {
                 const monthLabels = [
@@ -2253,9 +2429,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
+                        plugins: { legend: { display: false } },
                         scales: {
                             y: {
                                 beginAtZero: true,
@@ -2316,6 +2490,24 @@
                 });
                 monthlyChartInstance.data.datasets[0].data = dataPoints;
                 monthlyChartInstance.update();
+            }
+
+            if (studyHoursChartInstance) {
+                const last7DaysLabels = [];
+                const last7DaysData = [];
+                const storedLog = JSON.parse(localStorage.getItem('daily_study_hours_log') || '{}');
+
+                for (let i = 6; i >= 0; i--) {
+                    const d = new Date();
+                    d.setDate(d.getDate() - i);
+                    const key = d.toISOString().split('T')[0];
+                    const shortDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    last7DaysLabels.push(shortDate);
+                    last7DaysData.push(storedLog[key] || 0);
+                }
+                studyHoursChartInstance.data.labels = last7DaysLabels;
+                studyHoursChartInstance.data.datasets[0].data = last7DaysData;
+                studyHoursChartInstance.update();
             }
         }
 
@@ -2978,7 +3170,7 @@
                 studyScore = Math.max(studyScore - 5, 0);
             }
             localStorage.setItem('ai_study_score', studyScore);
-            document.getElementById('ai-score-box').innerText = `⭐ Study Score: ${studyScore}`;
+            document.getElementById('ai-score-box').innerText = `⭐ Score: ${studyScore}`;
 
             updateSubjectProgress(sectionPrefix);
             calculateGlobalAnalytics();
@@ -3026,7 +3218,6 @@
             let done = 0;
             allCheckboxes.forEach(cb => { if(cb.checked) done++; });
             
-            document.getElementById('global-total').innerText = `Total: ${total}`;
             document.getElementById('global-done').innerText = `Done: ${done}`;
             document.getElementById('global-pending').innerText = `Left: ${total - done}`;
         }
@@ -3039,7 +3230,7 @@
         function updateDailyGoalText() {
             const goalVal = parseInt(document.getElementById('daily-goal-input').value) || 5;
             const textElement = document.getElementById('goal-progress-text');
-            textElement.innerText = `Classes (${classesDoneToday}/${goalVal})`;
+            textElement.innerText = `(${classesDoneToday}/${goalVal})`;
             
             if(classesDoneToday >= goalVal) {
                 textElement.style.color = 'var(--success-color)';
@@ -3117,12 +3308,12 @@
             if (detectedActiveSlot) {
                 if (activeSlotTitle !== detectedActiveSlot) {
                     activeSlotTitle = detectedActiveSlot;
-                    mentorBox.innerText = `🤖 Active: [${activeSlotTitle}] slot live.`;
+                    mentorBox.innerText = `🤖 [${activeSlotTitle}]`;
                     if(islandText) islandText.innerText = `Active Slot: ${activeSlotTitle}`;
                 }
             } else {
                 activeSlotTitle = null;
-                mentorBox.innerText = `🤖 Best of luck! Focus mode ready.`;
+                mentorBox.innerText = `🤖 AI Mentor`;
                 if(islandText) islandText.innerText = `iOS 27 Liquid Glass Suite`;
             }
         }
@@ -3132,7 +3323,7 @@
             document.getElementById('daily-goal-input').value = savedGoal;
 
             const studyScore = localStorage.getItem('ai_study_score') || '600';
-            document.getElementById('ai-score-box').innerText = `⭐ Study Score: ${studyScore}`;
+            document.getElementById('ai-score-box').innerText = `⭐ Score: ${studyScore}`;
 
             const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
             allCheckboxes.forEach(cb => {
